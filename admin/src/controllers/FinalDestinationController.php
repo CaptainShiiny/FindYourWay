@@ -103,11 +103,7 @@ class FinalDestinationController extends AbstractController{
             return $this->responseJSON(404, "Bad Request", $mess);
 
         }
-<<<<<<< HEAD
-    } 
-=======
     }
->>>>>>> f4a3589d95cda77b87c71d63b0630fe5a01552fc
 
     function listClues($req, $resp, $args){
         try {
@@ -178,7 +174,6 @@ class FinalDestinationController extends AbstractController{
         }
 
     }
-<<<<<<< HEAD
 
 
 
@@ -189,7 +184,7 @@ class FinalDestinationController extends AbstractController{
               $clue = Clue::findOrfail($id);
 
               foreach($requestbody as $key=>$value){
-                
+
                 if(in_array($key,$clue->getFillable()))
                     {
                         $clue->$key = filter_var($value, FILTER_SANITIZE_STRING);
@@ -210,10 +205,8 @@ class FinalDestinationController extends AbstractController{
               $mess =  ["Error" => "L'indice $id est introuvable"];
                 return $this->responseJSON(404,"Bad Request", $mess);
           }
-        
+
 
     }
 
-=======
->>>>>>> f4a3589d95cda77b87c71d63b0630fe5a01552fc
 }
