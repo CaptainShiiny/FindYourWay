@@ -171,6 +171,8 @@ $app->delete("/players/{id}[/]",
 $app->delete("/games/{id}[/]",
     function(Request $req, Response $resp, $args){
       return (new GameController($this))->deleteGame($req, $resp, $args);
+  }
+);
 
 // On modifie un joueur
 $app->put("/players/{id}[/]",
@@ -185,6 +187,13 @@ $app->get("/games/{id}[/]",
     function(Request $req, Response $resp, $args){
         return (new GameController($this))->gameById($req, $resp, $args);
 
+    }
+);
+
+//on liste les parties d'un joueur
+$app->get("/players/{id}/games[/]",
+    function(Request $req, Response $resp, $args){
+        return (new GameController($this))->gamesFromPlayer($req, $resp, $args);
     }
 );
 

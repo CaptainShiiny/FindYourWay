@@ -42,7 +42,7 @@ class GameController extends AbstractController{
 
             return $this->responseJSON(404, "Not found", NULL);
 
-            
+
         }
     }
 
@@ -66,5 +66,31 @@ class GameController extends AbstractController{
         }
     }
 
+    function gamesFromPlayer($req, $resp, $args){
+        try{
+            $player = Player::findOrFail($args['id']);
+            $games = $player->games()->get();
+            $games_number = $games->count();
+            $games_tab = [];
+            foreach($games as $game){
+                $destination = FinalDestination::findOrFail($game->destination_id);
+                $data = [
+                            "destination" => $destination->name,
+                            "links" => ["self" => DIR."/games/".$game->id]
+                        ];
+                array_push($games_tab, $data);
+            }
+
+            $data = [
+                        "games_number" => $games_number,
+                        "games" => $games_tab
+                    ];
+
+            return $this->responseJSON(200, "ok", $data);
+
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Player not found.", NULL);
+        }
+    }
 
 }
