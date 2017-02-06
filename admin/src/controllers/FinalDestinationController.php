@@ -75,7 +75,7 @@ class FinalDestinationController extends AbstractController{
         try{
             $destination = FinalDestination::findOrFail($args['id']);
             $destination->delete();
-            return $this->responseJSON(200, "Success", $data);
+            return $this->responseJSON(200, "Success", NULL);
         }catch(Exception $e){
             return $this->responseJSON(404, "Destination not found", NULL);
         }
