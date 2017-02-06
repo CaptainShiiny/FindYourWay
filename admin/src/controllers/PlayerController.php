@@ -77,6 +77,8 @@ class PlayerController extends AbstractController{
                 return $this->responseJSON(400, "Une erreur est survenue.", NULL);
         }
 
+    }
+
     function deletePlayer($req, $resp, $args){
         try{
             $player = Player::findOrFail($args['id']);
