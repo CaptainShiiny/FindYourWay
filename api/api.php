@@ -10,6 +10,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use \Slim\Extras\Middleware\HttpBasicAuth;
 use src\controllers\FinalDestinationController as FinalDestinationController;
 use src\controllers\PlaceController as PlaceController;
+use src\controllers\PlayerController as PlayerController;
 
 $conf = ['settings' => ['displayErrorDetails' => true, 'tmpl_dir' => '..\templates'],
           'view' => function($c){
@@ -61,12 +62,11 @@ $app->post("/destinations[/]",
 );
 
 //On affiche une destination avec son id
-$app->get('/destinations/{id}',
+$app->get('/destinations/{id}[/]',
 	function(Request $req, Response $resp, $args){
 		return (new FinalDestinationController($this))->afficheDestinationId($req, $resp, $args);
 	}
 );
-
 
 
 //on modfie une destination
@@ -82,6 +82,13 @@ $app->put("/destinations/{id}[/]",
 $app->get("/destinations/{id}/clues[/]",
     function(Request $req, Response $resp, $args){
         return (new FinalDestinationController($this))->listClues($req, $resp, $args);
+    }
+);
+
+// On affiche un indice
+$app->get("/clues/{id}[/]",
+    function(Request $req, Response $resp, $args){
+        return (new FinalDestinationController($this))->detailClue($req, $resp, $args);
     }
 );
 
@@ -107,10 +114,17 @@ $app->put("/clue/{id}[/]",
     }
 );
 
+
+//on ajoute un player
+$app->post("/players[/]",
+    function(Request $req, Response $resp, $args){
+        return (new PlayerController($this))->addPlayer($req, $resp, $args);
+
 // On supprime le lieu {id}
 $app->delete("/places/{id}[/]",
     function(Request $req, Response $resp, $args){
       return (new PlaceController($this))->deletePlace($req, $resp, $args);
+
     }
 );
 
