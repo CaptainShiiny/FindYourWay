@@ -158,5 +158,12 @@ $app->delete("/players/{id}[/]",
     }
 );
 
+//on liste les parties
+$app->get("/games/{id}[/]",
+    function(Request $req, Response $resp, $args){
+        return (new GameController($this))->gameById($req, $resp, $args);
+    }
+);
+
 
 $app->run();

@@ -11,8 +11,4 @@ class Game extends Model{
     protected $fillable = ['score', 'player_id', 'destination_id', 'status'];
     public $timestamps = false;
 
-    public function player(){
-        return $this->belongsTo('src\models\Player', 'player_id');
-    }
-
 }
