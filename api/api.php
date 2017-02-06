@@ -107,13 +107,19 @@ $app->delete("/destinations/{id}[/]",
 );
 
 //on modifie un indice
-$app->put("/clue/{id}[/]",
+$app->put("/clues/{id}[/]",
     function(Request $req, Response $resp, $args){
       $requestbody = $req->getParsedBody();
       return (new FinalDestinationController($this))->updateClue($req, $resp, $args, $requestbody);
     }
 );
 
+// On supprime l'indince
+$app->delete("/clues/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new FinalDestinationController($this))->deleteClue($req, $resp, $args);
+    }
+);
 
 //on ajoute un player
 $app->post("/players[/]",

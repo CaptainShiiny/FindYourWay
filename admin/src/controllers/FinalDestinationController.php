@@ -114,15 +114,6 @@ class FinalDestinationController extends AbstractController{
 
         }
 
-
-    } 
-
-    
-
-
-    }
-
-
     function listClues($req, $resp, $args){
         try {
             $clues_tab = [];
@@ -229,6 +220,16 @@ class FinalDestinationController extends AbstractController{
         }catch(Exception $e){
             $mess =  ["Error" => "L'indice $id est introuvable"];
             return $this->responseJSON(404,"Bad Request", $mess);
+        }
+    }
+
+    function deleteClue($req, $resp, $args){
+        try{
+            $clue = Clue::findOrFail($args['id']);
+            $clue->delete();
+            return $this->responseJSON(200, "Success", NULL);
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Clue not found", NULL);
         }
     }
 
