@@ -171,6 +171,8 @@ $app->delete("/players/{id}[/]",
 $app->delete("/games/{id}[/]",
     function(Request $req, Response $resp, $args){
       return (new GameController($this))->deleteGame($req, $resp, $args);
+  }
+);
 
 // On modifie un joueur
 $app->put("/players/{id}[/]",
