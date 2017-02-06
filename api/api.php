@@ -92,6 +92,12 @@ $app->post("/destinations/{id}/clues[/]",
     }
 );
 
+// On supprime la destination {id}
+$app->delete("/destinations/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new FinalDestinationController($this))->deleteDestination($req, $resp, $args);
+    }
+);
 
 //on modifie un indice
 $app->put("/clue/{id}[/]",
