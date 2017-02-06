@@ -166,10 +166,25 @@ $app->delete("/players/{id}[/]",
     }
 );
 
+
+// On supprime une partie
+$app->delete("/games/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new GameController($this))->deleteGame($req, $resp, $args);
+
+// On modifie un joueur
+$app->put("/players/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      $requestbody = $req->getParsedBody();
+      return (new PlayerController($this))->updatePlayer($req, $resp, $args, $requestbody);
+    }
+);
+
 //on liste les parties
 $app->get("/games/{id}[/]",
     function(Request $req, Response $resp, $args){
         return (new GameController($this))->gameById($req, $resp, $args);
+
     }
 );
 
@@ -179,7 +194,6 @@ $app->get("/players/{id}/games[/]",
         return (new GameController($this))->gamesFromPlayer($req, $resp, $args);
     }
 );
-
 
 
 $app->run();
