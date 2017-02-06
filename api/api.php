@@ -119,6 +119,9 @@ $app->put("/clue/{id}[/]",
 $app->post("/players[/]",
     function(Request $req, Response $resp, $args){
         return (new PlayerController($this))->addPlayer($req, $resp, $args);
+    }
+);
+
 
 // On supprime le lieu {id}
 $app->delete("/places/{id}[/]",
@@ -127,7 +130,6 @@ $app->delete("/places/{id}[/]",
 
     }
 );
-
 
 
 $app->run();
