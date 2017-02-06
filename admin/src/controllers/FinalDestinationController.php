@@ -103,11 +103,7 @@ class FinalDestinationController extends AbstractController{
             return $this->responseJSON(404, "Bad Request", $mess);
 
         }
-<<<<<<< HEAD
-    } 
-=======
     }
->>>>>>> f4a3589d95cda77b87c71d63b0630fe5a01552fc
 
     function listClues($req, $resp, $args){
         try {
@@ -145,7 +141,13 @@ class FinalDestinationController extends AbstractController{
             $id = $args['id'];
             $destination = FinalDestination::findOrFail($id);
             $clues = Clue::where('destination_id', $id)->get();
+
             if ($clues->count() < 5) {
+                foreach ($clues as $value) {
+                    if ($value->position == $req->getParams()['position']) {
+                        return $this->responseJSON(400, "Bad Request", ["Error" => "La position existe déjà"]);
+                    }
+                }
                 $clue = new Clue();
                 $clue->label = $label = $req->getParams()["label"];
                 $clue->position = $position = $req->getParams()['position'];
@@ -166,13 +168,12 @@ class FinalDestinationController extends AbstractController{
             }
         } catch (Exception $e) {
             $data = [
-                "Error" => "Ressource Inconnue"
+                "Error" => "Ressource inconnue"
             ];
             return $this->responseJSON(404, "Not Found", $data);
         }
 
     }
-<<<<<<< HEAD
 
 
 
@@ -183,7 +184,7 @@ class FinalDestinationController extends AbstractController{
               $clue = Clue::findOrfail($id);
 
               foreach($requestbody as $key=>$value){
-                
+
                 if(in_array($key,$clue->getFillable()))
                     {
                         $clue->$key = filter_var($value, FILTER_SANITIZE_STRING);
@@ -204,10 +205,8 @@ class FinalDestinationController extends AbstractController{
               $mess =  ["Error" => "L'indice $id est introuvable"];
                 return $this->responseJSON(404,"Bad Request", $mess);
           }
-        
+
 
     }
 
-=======
->>>>>>> f4a3589d95cda77b87c71d63b0630fe5a01552fc
 }
