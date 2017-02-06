@@ -72,14 +72,14 @@
 *    }
 *   }
 *
-* @apiError (Erreur : 404) Not Found Destination inexistante
+* @apiError (Erreur : 400) Bad Request
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
-*     HTTP/1.1 404 Not Found
+*     HTTP/1.1 400 Bad Request
 *
 *  {
 *    "status": {
-*      "404": "Destination not found."
+*      "400": "Veuillez bien compléter les champs suivants: label, longitude, latitude, name."
 *    }
 *  }
 */
