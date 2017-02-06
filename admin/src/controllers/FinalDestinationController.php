@@ -61,6 +61,17 @@ class FinalDestinationController extends AbstractController{
         }
     }
 
+     function afficheDestinationId($req, $resp, $args){
+      try{
+        $dest = FinalDestination::where('id', '=', $args['id'])->firstorfail();
+        $resp = $resp->withHeader('Content-type', 'application/json');
+        $resp->getBody()->write(json_encode([$dest->toArray(), "links "=>["label"=>["href"=>DIR."/destinations/".$dest->id]]]));
+      }catch(\Exception $e)
+      {
+        $resp = $resp->withStatus(404)->withHeader('Content-type', 'application/json');
+        $resp->getBody()->write(json_encode(["error"=>"ressource not found : ".$this->c['router']->pathfor('name',['id'=>$args['id']])]));
+      }
+    }
 
     function updateDestination($req, $resp, $args, $requestbody){
 

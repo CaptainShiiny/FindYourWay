@@ -53,15 +53,14 @@ $app->post("/destinations[/]",
     }
 );
 
-<<<<<<< HEAD
+//On affiche une destination avec son id
 $app->get('/destinations/{id}',
 	function(Request $req, Response $resp, $args){
 		return (new FinalDestinationController($this))->afficheDestinationId($req, $resp, $args);
 	}
 );
 
-=======
-<<<<<<< HEAD
+
 //on modfie une destination
 $app->put("/destinations/{id}[/]",
     function(Request $req, Response $resp, $args){
@@ -70,7 +69,7 @@ $app->put("/destinations/{id}[/]",
     }
 );
 
-=======
+
 // On affiche les indices d'un destination finale
 $app->get("/destinations/{id}/clues[/]",
     function(Request $req, Response $resp, $args){
@@ -84,7 +83,5 @@ $app->post("/destinations/{id}/clues[/]",
         return (new FinalDestinationController($this))->addClue($req, $resp, $args);
     }
 );
->>>>>>> e5603ae20b2cddf69e5237391b3541edd92a00c3
 
->>>>>>> 3d1493a56ef5d325bab39569a805bc6b5e92b64b
 $app->run();
