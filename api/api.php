@@ -33,6 +33,13 @@ $app->get("/places[/]",
     }
 );
 
+// On affiche le lieu {id}
+$app->get("/places/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->placeById($req, $resp, $args);
+    }
+);
+
 // On affiche les lieux
 $app->post("/places[/]",
     function(Request $req, Response $resp, $args){
@@ -79,6 +86,13 @@ $app->get("/destinations/{id}/clues[/]",
     }
 );
 
+// On affiche un indice
+$app->get("/clues/{id}[/]",
+    function(Request $req, Response $resp, $args){
+        return (new FinalDestinationController($this))->detailClue($req, $resp, $args);
+    }
+);
+
 // On affiche les indices d'un destination finale
 $app->post("/destinations/{id}/clues[/]",
     function(Request $req, Response $resp, $args){
@@ -86,6 +100,12 @@ $app->post("/destinations/{id}/clues[/]",
     }
 );
 
+// On supprime la destination {id}
+$app->delete("/destinations/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new FinalDestinationController($this))->deleteDestination($req, $resp, $args);
+    }
+);
 
 //on modifie un indice
 $app->put("/clue/{id}[/]",
@@ -95,10 +115,17 @@ $app->put("/clue/{id}[/]",
     }
 );
 
+
 //on ajoute un player
 $app->post("/players[/]",
     function(Request $req, Response $resp, $args){
         return (new PlayerController($this))->addPlayer($req, $resp, $args);
+
+// On supprime le lieu {id}
+$app->delete("/places/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->deletePlace($req, $resp, $args);
+
     }
 );
 
