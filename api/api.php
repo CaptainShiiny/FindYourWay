@@ -173,6 +173,13 @@ $app->get("/games/{id}[/]",
     }
 );
 
+//on liste les parties d'un joueur
+$app->get("/players/{id}/games[/]",
+    function(Request $req, Response $resp, $args){
+        return (new GameController($this))->gamesFromPlayer($req, $resp, $args);
+    }
+);
+
 
 
 $app->run();
