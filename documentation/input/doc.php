@@ -27,7 +27,7 @@
 *        {
 *          "name": "Nancy",
 *          "links": {
-*            "self": "/destinations/1"
+*            "self": "/api.php/destinations/1"
 *          }
 *        },
 *        {
@@ -67,7 +67,7 @@
 *    "data": {
 *      "name": "Nancy",
 *      "links": {
-*        "self": "/destination/4"
+*        "self": "/api.php/destination/4"
 *      }
 *    }
 *   }
@@ -118,7 +118,7 @@
 *      },
 *      "links ": {
 *        "label": {
-*          "href": "/destinations/1"
+*          "href": "/api.php/destinations/1"
 *        }
 *      }
 *    }
@@ -148,10 +148,10 @@
 * Un label, des coordonnées ainsi qu'un nom doivent être fournis
 *
 *
-* @apiParam  (Paramètres requis) {String} label Label de la destination
-* @apiParam  (Paramètres requis) {Float} latitude Latitude de la destination
-* @apiParam  (Paramètres requis) {Float} longitude Longitude de la destination
-* @apiParam  (Paramètres requis) {String} name Nom de la destination
+* @apiParam  (Paramètres possible) {String} label Label de la destination
+* @apiParam  (Paramètres possible) {Float} latitude Latitude de la destination
+* @apiParam  (Paramètres possible) {Float} longitude Longitude de la destination
+* @apiParam  (Paramètres possible) {String} name Nom de la destination
 *
 *
 * @apiSuccess (Succès : 200) {String} name Nom de la destination
@@ -164,7 +164,7 @@
 *    "data": {
 *      "name": "Nancy",
 *      "links": {
-*        "self": "/destination/4"
+*        "self": "/api.php/destination/4"
 *      }
 *    }
 *   }
@@ -201,7 +201,7 @@
 *    }
 *  }
 *
-* @apiError (Erreur : 404) Not Found Destination not found
+* @apiError (Erreur : 404) Not found Destination not found
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found

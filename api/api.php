@@ -24,8 +24,38 @@ $app = new \Slim\App($errorDetails);
 $app->get("/destinations[/]",
 function(Request $req, Response $resp, $args){
     return (new FinalDestinationController($this))->listDestinations($req, $resp, $args);
-}
+});
+
+// On ajoute une destination finale
+$app->post("/destinations[/]",
+function(Request $req, Response $resp, $args){
+    return (new FinalDestinationController($this))->addDestination($req, $resp, $args);
+});
+
+//On affiche une destination avec son id
+$app->get('/destinations/{id}[/]',
+function(Request $req, Response $resp, $args){
+    return (new FinalDestinationController($this))->afficheDestinationId($req, $resp, $args);
+});
+
+//on modfie une destination
+$app->put("/destinations/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args);
+    }
 );
+
+// On supprime la destination {id}
+$app->delete("/destinations/{id}[/]",
+function(Request $req, Response $resp, $args){
+    return (new FinalDestinationController($this))->deleteDestination($req, $resp, $args);
+});
+
+// On affiche les indices d'un destination finale
+$app->get("/destinations/{id}/clues[/]",
+function(Request $req, Response $resp, $args){
+    return (new FinalDestinationController($this))->listClues($req, $resp, $args);
+});
 
 // On affiche les lieux
 $app->get("/places[/]",
@@ -55,35 +85,7 @@ function(Request $req, Response $resp, $args){
 }
 );
 
-// On ajoute une destination finale
-$app->post("/destinations[/]",
-function(Request $req, Response $resp, $args){
-    return (new FinalDestinationController($this))->addDestination($req, $resp, $args);
-}
-);
 
-//On affiche une destination avec son id
-$app->get('/destinations/{id}[/]',
-function(Request $req, Response $resp, $args){
-    return (new FinalDestinationController($this))->afficheDestinationId($req, $resp, $args);
-}
-);
-
-
-//on modfie une destination
-$app->put("/destinations/{id}[/]",
-    function(Request $req, Response $resp, $args){
-      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args);
-    }
-);
-
-
-// On affiche les indices d'un destination finale
-$app->get("/destinations/{id}/clues[/]",
-function(Request $req, Response $resp, $args){
-    return (new FinalDestinationController($this))->listClues($req, $resp, $args);
-}
-);
 
 // On affiche un indice
 $app->get("/clues/{id}[/]",
@@ -96,13 +98,6 @@ function(Request $req, Response $resp, $args){
 $app->post("/destinations/{id}/clues[/]",
 function(Request $req, Response $resp, $args){
     return (new FinalDestinationController($this))->addClue($req, $resp, $args);
-}
-);
-
-// On supprime la destination {id}
-$app->delete("/destinations/{id}[/]",
-function(Request $req, Response $resp, $args){
-    return (new FinalDestinationController($this))->deleteDestination($req, $resp, $args);
 }
 );
 
