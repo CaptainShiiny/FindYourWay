@@ -32,6 +32,13 @@ $app->get("/places[/]",
     }
 );
 
+// On affiche le lieu {id}
+$app->get("/places/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->placeById($req, $resp, $args);
+    }
+);
+
 // On affiche les lieux
 $app->post("/places[/]",
     function(Request $req, Response $resp, $args){
@@ -61,6 +68,7 @@ $app->get('/destinations/{id}',
 );
 
 
+
 //on modfie une destination
 $app->put("/destinations/{id}[/]",
     function(Request $req, Response $resp, $args){
@@ -77,11 +85,42 @@ $app->get("/destinations/{id}/clues[/]",
     }
 );
 
+// On affiche un indice
+$app->get("/clues/{id}[/]",
+    function(Request $req, Response $resp, $args){
+        return (new FinalDestinationController($this))->detailClue($req, $resp, $args);
+    }
+);
+
 // On affiche les indices d'un destination finale
 $app->post("/destinations/{id}/clues[/]",
     function(Request $req, Response $resp, $args){
         return (new FinalDestinationController($this))->addClue($req, $resp, $args);
     }
 );
+
+// On supprime la destination {id}
+$app->delete("/destinations/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new FinalDestinationController($this))->deleteDestination($req, $resp, $args);
+    }
+);
+
+//on modifie un indice
+$app->put("/clue/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      $requestbody = $req->getParsedBody();
+      return (new FinalDestinationController($this))->updateClue($req, $resp, $args, $requestbody);
+    }
+);
+
+// On supprime le lieu {id}
+$app->delete("/places/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->deletePlace($req, $resp, $args);
+    }
+);
+
+
 
 $app->run();

@@ -71,6 +71,16 @@ class FinalDestinationController extends AbstractController{
       }
     }
 
+    function deleteDestination($req, $resp, $args){
+        try{
+            $destination = FinalDestination::findOrFail($args['id']);
+            $destination->delete();
+            return $this->responseJSON(200, "Success", $data);
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Destination not found", NULL);
+        }
+    }
+
     function updateDestination($req, $resp, $args, $requestbody){
 
         $mess = [];
@@ -92,13 +102,13 @@ class FinalDestinationController extends AbstractController{
             }
             $dest->save();
              if(!empty($mess))
-                return $this->responseJSON(200, $mess);
-                return $this->responseJSON(204, NULL);
+                return $this->responseJSON(200,"succès de  la requête", $mess);
+                return $this->responseJSON(204,"No content", NULL);
 
-        }catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+        }catch(Exception $e){
 
             $mess =  ["Error" => "La destination $id est introuvable"];
-            return $this->responseJSON(404, $mess);
+            return $this->responseJSON(404, "Bad Request", $mess);
 
         }
     }
@@ -123,9 +133,23 @@ class FinalDestinationController extends AbstractController{
             ];
             return $this->responseJSON(200, "OK", $data);
         } catch (Exception $e) {
+            $data = ["Error" => "Ressource Inconnue"];
+            return $this->responseJSON(404, "Not Found", $data);
+        }
+    }
+
+    function detailClue($req, $resp, $args){
+        try {
+            $id = $args['id'];
+            $clue = Clue::findOrFail($id);
             $data = [
-                "Error" => "Ressource Inconnue"
+                "label" => $clue->label,
+                "position" => $clue->position,
+                "id_destination" => $clue->destination_id
             ];
+            return $this->responseJSON(200, "OK", $data);
+        } catch (Exception $e) {
+            $data = ["Error" => "Ressource Inconnue"];
             return $this->responseJSON(404, "Not Found", $data);
         }
     }
@@ -139,7 +163,13 @@ class FinalDestinationController extends AbstractController{
             $id = $args['id'];
             $destination = FinalDestination::findOrFail($id);
             $clues = Clue::where('destination_id', $id)->get();
+
             if ($clues->count() < 5) {
+                foreach ($clues as $value) {
+                    if ($value->position == $req->getParams()['position']) {
+                        return $this->responseJSON(400, "Bad Request", ["Error" => "La position existe déjà"]);
+                    }
+                }
                 $clue = new Clue();
                 $clue->label = $label = $req->getParams()["label"];
                 $clue->position = $position = $req->getParams()['position'];
@@ -160,10 +190,35 @@ class FinalDestinationController extends AbstractController{
             }
         } catch (Exception $e) {
             $data = [
-                "Error" => "Ressource Inconnue"
+                "Error" => "Ressource inconnue"
             ];
             return $this->responseJSON(404, "Not Found", $data);
         }
 
     }
+
+    function updateClue($req, $resp, $args, $requestbody){
+        try{
+            $id = $args['id'];
+            $clue = Clue::findOrfail($id);
+
+            foreach($requestbody as $key=>$value){
+                if(in_array($key,$clue->getFillable())){
+                    $clue->$key = filter_var($value, FILTER_SANITIZE_STRING);
+                }else{
+                    $mess[] =  ["Warning" => "Il manque une valeur à $key"];
+                }
+            }
+            $clue->save();
+            if(!empty($mess)){
+                return $this->responseJSON(200, "succès de  la requête", $mess);
+            }else{
+                return $this->responseJSON(204,"No content", NULL);
+            }
+        }catch(Exception $e){
+            $mess =  ["Error" => "L'indice $id est introuvable"];
+            return $this->responseJSON(404,"Bad Request", $mess);
+        }
+    }
+
 }
