@@ -111,7 +111,15 @@ class FinalDestinationController extends AbstractController{
             return $this->responseJSON(404, "Bad Request", $mess);
 
         }
+
+
+    } 
+
+    
+
+
     }
+
 
     function listClues($req, $resp, $args){
         try {
@@ -196,6 +204,7 @@ class FinalDestinationController extends AbstractController{
         }
 
     }
+
 
     function updateClue($req, $resp, $args, $requestbody){
         try{
