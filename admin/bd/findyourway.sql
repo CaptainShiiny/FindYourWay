@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 06 Février 2017 à 09:33
+-- Généré le :  Lun 06 Février 2017 à 11:22
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.4
 
@@ -29,9 +29,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `clue` (
   `id` int(11) NOT NULL,
   `label` text NOT NULL,
-  `latitude` varchar(255) NOT NULL,
-  `longitude` varchar(255) NOT NULL,
-  `position` int(11) NOT NULL,
   `destination_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -61,6 +58,19 @@ CREATE TABLE `game` (
   `player_id` int(11) NOT NULL,
   `destination_id` int(11) NOT NULL,
   `status` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `place`
+--
+
+CREATE TABLE `place` (
+  `id` int(11) NOT NULL,
+  `longitude` varchar(255) NOT NULL,
+  `latitude` varchar(255) NOT NULL,
+  `label` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -97,6 +107,12 @@ ALTER TABLE `game`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `place`
+--
+ALTER TABLE `place`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `player`
 --
 ALTER TABLE `player`
@@ -120,6 +136,11 @@ ALTER TABLE `final_destination`
 -- AUTO_INCREMENT pour la table `game`
 --
 ALTER TABLE `game`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `place`
+--
+ALTER TABLE `place`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `player`

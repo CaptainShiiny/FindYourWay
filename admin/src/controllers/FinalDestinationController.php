@@ -26,11 +26,24 @@ class FinalDestinationController extends AbstractController{
                 "data" =>
                     [
                         "destinations_number" => $destinations_number,
-                        "destiations" => $destinations_tab
+                        "destinations" => $destinations_tab
                     ]
               ];
       return $this->responseJSON(200, [$status, $data]);
 
+    }
+
+    function addDestination($req, $resp, $args){
+        try{
+            $destination = new FinalDestination();
+
+            $destination->label = $label = $req->getParams()["label"];
+            $destination->label = $label = $req->getParams()["label"];
+            $destination->label = $label = $req->getParams()["label"];
+            $destination->label = $label = $req->getParams()["label"];
+        }catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+
+        }
     }
 
 }

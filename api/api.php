@@ -24,4 +24,11 @@ $app->get("/destinations[/]",
     }
 );
 
+// On ajoute une destination finale
+$app->post("/destinations[/]",
+    function(Request $req, Response $resp, $args){
+      return (new FinalDestinationController($this))->addDestination($req, $resp, $args);
+    }
+);
+
 $app->run();
