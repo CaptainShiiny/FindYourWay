@@ -58,7 +58,29 @@ class PlaceController extends AbstractController{
         }
     }
 
-    
+    function modifyPlace($req, $resp, $args){
+        try{
+            $place = Place::findOrFail($args['id']);
+            if(isset($req->getParams()['longitude'])){
+                $place->longitude = $req->getParams()['longitude'];
+            }
+            if(isset($req->getParams()['latitude'])){
+                $place->latitude = $req->getParams()['latitude'];
+            }
+            if(isset($req->getParams()['label'])){
+                $place->label = $req->getParams()['label'];
+            }
+            $place->save();
+
+            $data = [
+                        "name" => $place->label,
+                        "links" => ["self" => DIR."/places/".$place->id]
+                    ];
+            return $this->responseJSON(200, "Success", $data);
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Place not found.", NULL);
+        }
+    }
 
 
 }

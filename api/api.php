@@ -40,7 +40,7 @@ $app->post("/places[/]",
 );
 
 // On modifie un lieu
-$app->post("/places[/]",
+$app->put("/places/{id}[/]",
     function(Request $req, Response $resp, $args){
       return (new PlaceController($this))->modifyPlace($req, $resp, $args);
     }
@@ -52,6 +52,14 @@ $app->post("/destinations[/]",
       return (new FinalDestinationController($this))->addDestination($req, $resp, $args);
     }
 );
+
+//On affiche une destination avec son id
+$app->get('/destinations/{id}',
+	function(Request $req, Response $resp, $args){
+		return (new FinalDestinationController($this))->afficheDestinationId($req, $resp, $args);
+	}
+);
+
 
 
 //on modfie une destination
@@ -77,6 +85,7 @@ $app->post("/destinations/{id}/clues[/]",
     }
 );
 
+
 //on modifie un indice
 $app->put("/clue/{id}[/]",
     function(Request $req, Response $resp, $args){
@@ -84,6 +93,7 @@ $app->put("/clue/{id}[/]",
       return (new FinalDestinationController($this))->updateClue($req, $resp, $args, $requestbody);
     }
 );
+
 
 
 $app->run();
