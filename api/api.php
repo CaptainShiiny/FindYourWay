@@ -10,6 +10,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use \Slim\Extras\Middleware\HttpBasicAuth;
 use src\controllers\FinalDestinationController as FinalDestinationController;
 use src\controllers\PlaceController as PlaceController;
+use src\controllers\PlayerController as PlayerController;
 
 $conf = ['settings' => ['displayErrorDetails' => true, 'tmpl_dir' => '..\templates'],
           'view' => function($c){
@@ -91,6 +92,13 @@ $app->put("/clue/{id}[/]",
     function(Request $req, Response $resp, $args){
       $requestbody = $req->getParsedBody();
       return (new FinalDestinationController($this))->updateClue($req, $resp, $args, $requestbody);
+    }
+);
+
+//on ajoute un player
+$app->post("/players[/]",
+    function(Request $req, Response $resp, $args){
+        return (new PlayerController($this))->addPlayer($req, $resp, $args);
     }
 );
 
