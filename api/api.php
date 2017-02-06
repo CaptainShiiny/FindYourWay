@@ -40,7 +40,7 @@ $app->post("/places[/]",
 );
 
 // On modifie un lieu
-$app->post("/places[/]",
+$app->put("/places/{id}[/]",
     function(Request $req, Response $resp, $args){
       return (new PlaceController($this))->modifyPlace($req, $resp, $args);
     }
