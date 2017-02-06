@@ -9,6 +9,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \Slim\Extras\Middleware\HttpBasicAuth;
 use src\controllers\FinalDestinationController as FinalDestinationController;
+use src\controllers\PlaceController as PlaceController;
 
 $conf = ['settings' => ['displayErrorDetails' => true, 'tmpl_dir' => '..\templates'],
           'view' => function($c){
@@ -21,6 +22,13 @@ $app = new \Slim\App($errorDetails);
 $app->get("/destinations[/]",
     function(Request $req, Response $resp, $args){
       return (new FinalDestinationController($this))->listDestinations($req, $resp, $args);
+    }
+);
+
+// On affiche les lieux
+$app->get("/places[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->listPlaces($req, $resp, $args);
     }
 );
 
