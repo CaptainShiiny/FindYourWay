@@ -101,6 +101,13 @@ $app->put("/clue/{id}[/]",
     }
 );
 
+// On supprime le lieu {id}
+$app->delete("/places/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->deletePlace($req, $resp, $args);
+    }
+);
+
 
 
 $app->run();
