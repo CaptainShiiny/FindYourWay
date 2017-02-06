@@ -109,8 +109,7 @@ function(Request $req, Response $resp, $args){
 //on modifie un indice
 $app->put("/clues/{id}[/]",
 function(Request $req, Response $resp, $args){
-    $requestbody = $req->getParsedBody();
-    return (new FinalDestinationController($this))->updateClue($req, $resp, $args, $requestbody);
+    return (new FinalDestinationController($this))->updateClue($req, $resp, $args);
 }
 );
 

@@ -127,7 +127,8 @@ class FinalDestinationController extends AbstractController{
             foreach ($clues as $clue) {
                 $data = [
                     "label" => $clue->label,
-                    "position" => $clue->position
+                    "position" => $clue->position,
+                    "links" => ["self" => DIR."/clues/".$clue->id]
                 ];
                 array_push($clues_tab, $data);
             }
@@ -146,10 +147,14 @@ class FinalDestinationController extends AbstractController{
         try {
             $id = $args['id'];
             $clue = Clue::findOrFail($id);
+            $destination = FinalDestination::findOrFail($clue->destination_id);
             $data = [
                 "label" => $clue->label,
                 "position" => $clue->position,
-                "id_destination" => $clue->destination_id
+                "destination" => [
+                                    "name" => $destination->name,
+                                    "link" => DIR."/destinations/".$destination->id
+                                 ]
             ];
             return $this->responseJSON(200, "OK", $data);
         } catch (Exception $e) {
@@ -184,7 +189,7 @@ class FinalDestinationController extends AbstractController{
                 if ($clue->save()) {
                     $status = 200;
                     $message = "OK";
-                    $data = ["Success" => "Ajout de l'indice dans la base de données"];
+                    $data = ["links" => ["self" => DIR."/clues/".$clue->id]];
                 } else {
                     $status = 400;
                     $message = "Bad Request";
@@ -205,27 +210,24 @@ class FinalDestinationController extends AbstractController{
     }
 
 
-    function updateClue($req, $resp, $args, $requestbody){
+    function updateClue($req, $resp, $args){
         try{
-            $id = $args['id'];
-            $clue = Clue::findOrfail($id);
-
-            foreach($requestbody as $key=>$value){
-                if(in_array($key,$clue->getFillable())){
-                    $clue->$key = filter_var($value, FILTER_SANITIZE_STRING);
-                }else{
-                    $mess[] =  ["Warning" => "Il manque une valeur à $key"];
-                }
+            $clue = Clue::findOrFail($args['id']);
+            if(isset($req->getParams()['label'])){
+                $clue->label = $req->getParams()['label'];
+            }
+            if(isset($req->getParams()['position'])){
+                $clue->position = $req->getParams()['position'];
             }
             $clue->save();
-            if(!empty($mess)){
-                return $this->responseJSON(200, "succès de  la requête", $mess);
-            }else{
-                return $this->responseJSON(204,"No content", NULL);
-            }
+
+            $data = [
+                        "name" => $clue->label,
+                        "links" => ["self" => DIR."/clues/".$clue->id]
+                    ];
+            return $this->responseJSON(200, "Success", $data);
         }catch(Exception $e){
-            $mess =  ["Error" => "L'indice $id est introuvable"];
-            return $this->responseJSON(404,"Bad Request", $mess);
+            return $this->responseJSON(404, "Clue not found.", NULL);
         }
     }
 
