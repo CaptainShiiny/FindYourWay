@@ -166,6 +166,12 @@ $app->delete("/players/{id}[/]",
     }
 );
 
+// On supprime une partie
+$app->delete("/games/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new GameController($this))->deleteGame($req, $resp, $args);
+    }
+);
 
 
 $app->run();
