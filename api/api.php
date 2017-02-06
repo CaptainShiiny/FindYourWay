@@ -39,4 +39,18 @@ $app->post("/destinations[/]",
     }
 );
 
+// On affiche les indices d'un destination finale
+$app->get("/destinations/{id}/clues[/]",
+    function(Request $req, Response $resp, $args){
+        return (new FinalDestinationController($this))->listClues($req, $resp, $args);
+    }
+);
+
+// On affiche les indices d'un destination finale
+$app->post("/destinations/{id}/clues[/]",
+    function(Request $req, Response $resp, $args){
+        return (new FinalDestinationController($this))->addClue($req, $resp, $args);
+    }
+);
+
 $app->run();

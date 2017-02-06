@@ -3,8 +3,10 @@
 namespace src\controllers;
 
 use src\models\FinalDestination as FinalDestination;
+use src\models\Clue as Clue;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use src\utils\Authentification ;
+use \Illuminate\Database\Eloquent\ModelNotFoundException as Exception;
 
 class FinalDestinationController extends AbstractController{
 
@@ -49,15 +51,43 @@ class FinalDestinationController extends AbstractController{
             $destination->name = $name = $req->getParams()["name"];
             $destination->save();
 
-            $status = ["status" => [200 => "La destination a bien été crée"]];
             $data = [
                         "name" => $destination->name,
                         "links" => ["self" => DIR."/destination/".$destination->id]
                     ];
             return $this->responseJSON(200, "ok", $data);
-        }catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+        }catch(Exception $e){
             return $this->responseJSON(400, "Une erreur est survenue.", NULL);
         }
+    }
+
+    function listClues($req, $resp, $args){
+        try {
+            $clues_tab = [];
+            $id = $args['id'];
+            $destination = FinalDestination::findOrFail($id);
+            $clues =  Clue::where('destination_id', $id)->OrderBy('position')->get();
+            $clue_number = $clues->count();
+            foreach ($clues as $clue) {
+                $data = [
+                    "label" => $clue->label,
+                    "position" => $clue->position
+                ];
+                array_push($clues_tab, $data);
+            }
+            $data = [
+                "clue_number" => $clue_number,
+                "clues" => $clues_tab
+            ];
+            return $this->responseJSON(200, "OK", $data);
+        } catch (Exception $e) {
+            $data = [
+                "Error" => "Impossible de se connecter à la base de données"
+            ];
+            return $this->responseJSON(400, "Bad Request", $data);
+        }
+
+
     }
 
 }
