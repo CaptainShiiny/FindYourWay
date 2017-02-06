@@ -32,6 +32,13 @@ $app->get("/places[/]",
     }
 );
 
+// On affiche le lieu {id}
+$app->get("/places/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->placeById($req, $resp, $args);
+    }
+);
+
 // On affiche les lieux
 $app->post("/places[/]",
     function(Request $req, Response $resp, $args){

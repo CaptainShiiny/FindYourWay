@@ -82,5 +82,19 @@ class PlaceController extends AbstractController{
         }
     }
 
+    function placeById($req, $resp, $args){
+        try{
+            $place = Place::findOrFail($args['id']);
+            $data = [
+                        "name" => $place->label,
+                        "latitude" => $place->latitude,
+                        "longitude" => $place->longitude,
+                        "links" => ["places" => DIR."/places/"]
+                    ];
+            return $this->responseJSON(200, "ok", $data);
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Place not found.", NULL);
+        }
+    }
 
 }
