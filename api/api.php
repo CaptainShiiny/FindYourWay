@@ -31,4 +31,10 @@ $app->post("/destinations[/]",
     }
 );
 
+$app->get('/destinations/{id}',
+	function(Request $req, Response $resp, $args){
+		return (new FinalDestinationController($this))->afficheDestinationId($req, $resp, $args);
+	}
+);
+
 $app->run();
