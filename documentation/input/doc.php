@@ -77,9 +77,11 @@
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
 *
-*    {
-*      "Error": "Destination 143 inexistante"
+*  {
+*    "status": {
+*      "404": "Destination not found."
 *    }
+*  }
 */
 
 /**
@@ -126,9 +128,11 @@
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
 *
-*    {
-*      "Error": "Destination 143 inexistante"
+*  {
+*    "status": {
+*      "404": "Destination not found."
 *    }
+*  }
 */
 
 /**
@@ -170,10 +174,11 @@
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
 *
-*    {
+*  {
 *    "status": {
 *      "404": "Destination not found."
 *    }
+*  }
 *
 */
 
@@ -205,9 +210,10 @@
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
 *
-*    {
+*  {
 *    "status": {
 *      "404": "Destination not found."
 *    }
+*  }
 *
 */

@@ -82,7 +82,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemple de réponse en cas d'erreur",
-          "content": " HTTP/1.1 404 Not Found\n\n{\n  \"Error\": \"Destination 143 inexistante\"\n}",
+          "content": "   HTTP/1.1 404 Not Found\n\n{\n  \"status\": {\n    \"404\": \"Destination not found.\"\n  }\n}",
           "type": "json"
         }
       ]
@@ -167,7 +167,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemple de réponse en cas d'erreur",
-          "content": " HTTP/1.1 404 Not Found\n\n{\n  \"Error\": \"Destination 143 inexistante\"\n}",
+          "content": "   HTTP/1.1 404 Not Found\n\n{\n  \"status\": {\n    \"404\": \"Destination not found.\"\n  }\n}",
           "type": "json"
         }
       ]
@@ -224,7 +224,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemple de réponse en cas d'erreur",
-          "content": " HTTP/1.1 404 Not Found\n\n{\n\"status\": {\n  \"404\": \"Destination not found.\"\n}",
+          "content": "   HTTP/1.1 404 Not Found\n\n{\n  \"status\": {\n    \"404\": \"Destination not found.\"\n  }\n}",
           "type": "json"
         }
       ]
@@ -367,7 +367,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemple de réponse en cas d'erreur",
-          "content": " HTTP/1.1 404 Not Found\n\n{\n\"status\": {\n  \"404\": \"Destination not found.\"\n}",
+          "content": "   HTTP/1.1 404 Not Found\n\n{\n  \"status\": {\n    \"404\": \"Destination not found.\"\n  }\n}",
           "type": "json"
         }
       ]
