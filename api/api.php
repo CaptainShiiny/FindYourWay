@@ -62,12 +62,11 @@ $app->post("/destinations[/]",
 );
 
 //On affiche une destination avec son id
-$app->get('/destinations/{id}',
+$app->get('/destinations/{id}[/]',
 	function(Request $req, Response $resp, $args){
 		return (new FinalDestinationController($this))->afficheDestinationId($req, $resp, $args);
 	}
 );
-
 
 
 //on modfie une destination
