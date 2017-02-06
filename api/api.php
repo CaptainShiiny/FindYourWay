@@ -31,4 +31,13 @@ $app->post("/destinations[/]",
     }
 );
 
+//on modfie une destination
+$app->put("/destinations/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      $requestbody = $req->getParsedBody();
+      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args, $requestbody);
+    }
+);
+
+
 $app->run();
