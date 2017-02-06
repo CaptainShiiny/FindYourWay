@@ -11,7 +11,7 @@ class Player extends Model{
 	public $timestamps = false;
 
 	public function Game(){
-		return $this->hasMany("src\models\Clue", "game_id");
+		return $this->hasMany("src\models\Player", "game_id");
 	}
 
 }
