@@ -136,5 +136,12 @@ $app->delete("/places/{id}[/]",
     }
 );
 
+//on liste les joueurs
+$app->get("/players[/]",
+    function(Request $req, Response $resp, $args){
+        return (new PlayerController($this))->listPlayers($req, $resp, $args);
+    }
+);
+
 
 $app->run();
