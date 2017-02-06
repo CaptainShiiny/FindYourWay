@@ -13,8 +13,8 @@ class GameController extends AbstractController{
         try{
 
             $game = new Game();
-            $game->player_id = args['player_id'];
-            $game->destination_id = args['destination_id'];
+            $game->player_id = $args['player_id'];
+            $game->destination_id = $args['destination_id'];
             $game->score = 0;
             $game->status = "créée";
             $game->save();
