@@ -16,33 +16,47 @@ class FinalDestinationController extends AbstractController{
 
       foreach($destinations as $destination){
           $data = [
-                      "name" => $destination->nom,
-                      "link" => ["self" => DIR."/destinations/".$destination->id]
+                      "name" => $destination->name,
+                      "links" => ["self" => DIR."/destinations/".$destination->id]
                   ];
           array_push($destinations_tab, $data);
       }
-      $status = ["status" => [200 => "ok"]];
       $data = [
-                "data" =>
-                    [
-                        "destinations_number" => $destinations_number,
-                        "destinations" => $destinations_tab
-                    ]
+                "destinations_number" => $destinations_number,
+                "destinations" => $destinations_tab
               ];
-      return $this->responseJSON(200, [$status, $data]);
+      return $this->responseJSON(200, "ok", $data);
 
     }
 
     function addDestination($req, $resp, $args){
         try{
+
+            if(
+                !isset($req->getParams()["label"]) ||
+                !isset($req->getParams()["longitude"]) ||
+                !isset($req->getParams()["latitude"]) ||
+                !isset($req->getParams()["name"])
+            ){
+                return $this->responseJSON(400, "Veuillez bien compléter les champs suivants: label, longitude, latitude, name.", NULL);
+            }
+
             $destination = new FinalDestination();
 
             $destination->label = $label = $req->getParams()["label"];
-            $destination->label = $label = $req->getParams()["label"];
-            $destination->label = $label = $req->getParams()["label"];
-            $destination->label = $label = $req->getParams()["label"];
-        }catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+            $destination->longitude = $longitude = $req->getParams()["longitude"];
+            $destination->latitude = $latitude = $req->getParams()["latitude"];
+            $destination->name = $name = $req->getParams()["name"];
+            $destination->save();
 
+            $status = ["status" => [200 => "La destination a bien été crée"]];
+            $data = [
+                        "name" => $destination->name,
+                        "links" => ["self" => DIR."/destination/".$destination->id]
+                    ];
+            return $this->responseJSON(200, "ok", $data);
+        }catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+            return $this->responseJSON(400, "Une erreur est survenue.", NULL);
         }
     }
 
