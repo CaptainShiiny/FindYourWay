@@ -36,11 +36,11 @@ class GameController extends AbstractController{
         try{
             $game = Game::findOrFail($args['id']);
             $game->delete();
-            return $this->responseJSON(200, "The game has been deleted", NULL);
+            return $this->responseJSON(200, "Le jeu a été supprimé", NULL);
 
         }catch(Exception $e){
 
-            return $this->responseJSON(404, "Game not found", NULL);
+            return $this->responseJSON(404, "Not found", NULL);
 
             
         }
