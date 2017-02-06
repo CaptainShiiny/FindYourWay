@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace src\models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class Game extends Model{
     public $timestamps = false;
 
     public function player(){
-        return $this->belongsTo('app\models\Player', 'player_id');
+        return $this->belongsTo('src\models\Player', 'player_id');
     }
 
 }
