@@ -32,6 +32,20 @@ $app->get("/places[/]",
     }
 );
 
+// On affiche les lieux
+$app->post("/places[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->addPlace($req, $resp, $args);
+    }
+);
+
+// On modifie un lieu
+$app->post("/places[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->modifyPlace($req, $resp, $args);
+    }
+);
+
 // On ajoute une destination finale
 $app->post("/destinations[/]",
     function(Request $req, Response $resp, $args){
