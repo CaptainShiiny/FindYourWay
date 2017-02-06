@@ -150,5 +150,13 @@ $app->delete("/players/{id}[/]",
     }
 );
 
+// On modifie un joueur
+$app->put("/players/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      $requestbody = $req->getParsedBody();
+      return (new PlayerController($this))->updatePlayer($req, $resp, $args, $requestbody);
+    }
+);
+
 
 $app->run();
