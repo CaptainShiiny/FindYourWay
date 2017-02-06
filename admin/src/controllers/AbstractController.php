@@ -16,13 +16,15 @@ abstract class AbstractController{
         header("location: $route");
     }
 
-    public function responseJSON($status, $data){
+    public function responseJSON($status, $message_status, $data){
         $resp = $this->request->response
                     ->withStatus($status)
                     ->withHeader(
                             "Content-type",
                             "application/json, charset=utf-8");
-        $resp->getBody()->write(json_encode($data));
+        $status = ["status" => [$status => $message_status]];
+        $data = ["data" => $data];
+        $resp->getBody()->write(json_encode([$status, $data]));
         return $resp;
     }
 
