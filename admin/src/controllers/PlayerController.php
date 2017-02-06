@@ -36,13 +36,13 @@ class PlayerController extends AbstractController{
     }
 
     function listPlayers($req, $resp, $args){
-        
+
             $players_tab = [];
-           
-            
+
+
             $players = Player::get();
             $players_number = $players->count();
-        
+
 
             foreach($players as $player){
                 $data = [
@@ -86,6 +86,24 @@ class PlayerController extends AbstractController{
             return $this->responseJSON(404, "Player not found", NULL);
         }
 
+    }
+
+    function updatePlayer($req, $resp, $args){
+        try{
+            $player = Player::findOrFail($args['id']);
+            if(isset($req->getParams()['pseudo'])){
+                $player->pseudo = $req->getParams()['pseudo'];
+            }
+            $player->save();
+
+            $data = [
+                        "pseudo" => $player->pseudo,
+                        "links" => ["self" => DIR."/players/".$player->id]
+                    ];
+            return $this->responseJSON(200, "Success", $data);
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Player not found.", NULL);
+        }
     }
 
 }
