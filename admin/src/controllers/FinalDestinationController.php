@@ -81,9 +81,32 @@ class FinalDestinationController extends AbstractController{
         }
     }
 
-    function updateDestination($req, $resp, $args, $requestbody){
+    function updateDestination($req, $resp, $args){
+         try{
+            $dest = FinalDestination::findOrFail($args['id']);
+            if(isset($req->getParams()['longitude'])){
+                $dest->longitude = $req->getParams()['longitude'];
+            }
+            if(isset($req->getParams()['latitude'])){
+                $dest->latitude = $req->getParams()['latitude'];
+            }
+            if(isset($req->getParams()['label'])){
+                $dest->label = $req->getParams()['label'];
+            }
+            if(isset($req->getParams()['name'])){
+                $dest->name = $req->getParams()['name'];
+            }
+            $dest->save();
 
-        $mess = [];
+            $data = [
+                        "name" => $dest->name,
+                        "links" => ["self" => DIR."/destinations/".$dest->id]
+                    ];
+            return $this->responseJSON(200, "Success", $data);
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Destination not found.", NULL);
+        }
+        /*$mess = [];
         try{
             $id_dest = $args['id'];
             $dest = FinalDestination::findOrFail($id_dest);
@@ -110,7 +133,7 @@ class FinalDestinationController extends AbstractController{
             $mess =  ["Error" => "La destination $id est introuvable"];
             return $this->responseJSON(404, "Bad Request", $mess);
 
-        }
+        }*/
 
     }
 

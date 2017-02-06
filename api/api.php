@@ -72,10 +72,9 @@ function(Request $req, Response $resp, $args){
 
 //on modfie une destination
 $app->put("/destinations/{id}[/]",
-function(Request $req, Response $resp, $args){
-    $requestbody = $req->getParsedBody();
-    return (new FinalDestinationController($this))->updateDestination($req, $resp, $args, $requestbody);
-}
+    function(Request $req, Response $resp, $args){
+      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args);
+    }
 );
 
 
@@ -143,6 +142,13 @@ $app->post("/players/{player_id}/destinations/{destination_id}/games[/]",
 function(Request $req, Response $resp, $args){
     return (new GameController($this))->addGame($req, $resp, $args);
 }
+);
+
+//on liste les joueurs
+$app->get("/players[/]",
+    function(Request $req, Response $resp, $args){
+        return (new PlayerController($this))->listPlayers($req, $resp, $args);
+    }
 );
 
 
