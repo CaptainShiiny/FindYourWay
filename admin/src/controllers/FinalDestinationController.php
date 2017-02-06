@@ -61,6 +61,39 @@ class FinalDestinationController extends AbstractController{
         }
     }
 
+
+    function updateDestination($req, $resp, $args, $requestbody){
+
+        $mess = [];
+        try{
+            $id_dest = $args['id'];
+            $dest = FinalDestination::findOrFail($id_dest);
+            
+            foreach($requestbody as $key => $value){
+
+              if(in_array($key,$dest->getFillable()))
+                {
+                    $dest->$key = filter_var($value, FILTER_SANITIZE_STRING);
+                }
+                else
+                {
+                    $mess[] =  ["Warning" => "Il manque une valeur à $key"];
+                }
+
+            }
+            $dest->save();
+             if(!empty($mess))
+                return $this->responseJSON(200, $mess);
+                return $this->responseJSON(204, NULL);
+
+        }catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+
+            $mess =  ["Error" => "La destination $id est introuvable"];
+            return $this->responseJSON(404, $mess);
+
+        }
+      
+
     function listClues($req, $resp, $args){
         try {
             $clues_tab = [];

@@ -9,6 +9,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \Slim\Extras\Middleware\HttpBasicAuth;
 use src\controllers\FinalDestinationController as FinalDestinationController;
+use src\controllers\PlaceController as PlaceController;
 
 $conf = ['settings' => ['displayErrorDetails' => true, 'tmpl_dir' => '..\templates'],
           'view' => function($c){
@@ -24,6 +25,27 @@ $app->get("/destinations[/]",
     }
 );
 
+// On affiche les lieux
+$app->get("/places[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->listPlaces($req, $resp, $args);
+    }
+);
+
+// On affiche les lieux
+$app->post("/places[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->addPlace($req, $resp, $args);
+    }
+);
+
+// On modifie un lieu
+$app->post("/places[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->modifyPlace($req, $resp, $args);
+    }
+);
+
 // On ajoute une destination finale
 $app->post("/destinations[/]",
     function(Request $req, Response $resp, $args){
@@ -31,6 +53,16 @@ $app->post("/destinations[/]",
     }
 );
 
+<<<<<<< HEAD
+//on modfie une destination
+$app->put("/destinations/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      $requestbody = $req->getParsedBody();
+      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args, $requestbody);
+    }
+);
+
+=======
 // On affiche les indices d'un destination finale
 $app->get("/destinations/{id}/clues[/]",
     function(Request $req, Response $resp, $args){
@@ -44,5 +76,6 @@ $app->post("/destinations/{id}/clues[/]",
         return (new FinalDestinationController($this))->addClue($req, $resp, $args);
     }
 );
+>>>>>>> e5603ae20b2cddf69e5237391b3541edd92a00c3
 
 $app->run();
