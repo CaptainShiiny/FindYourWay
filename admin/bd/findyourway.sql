@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 06 Février 2017 à 11:22
+-- Généré le :  Lun 06 Février 2017 à 12:24
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.4
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `clue` (
   `id` int(11) NOT NULL,
   `label` text NOT NULL,
-  `destination_id` int(11) NOT NULL
+  `destination_id` int(11) NOT NULL,
+  `position` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -45,6 +46,14 @@ CREATE TABLE `final_destination` (
   `latitude` varchar(250) NOT NULL,
   `longitude` varchar(250) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `final_destination`
+--
+
+INSERT INTO `final_destination` (`id`, `label`, `name`, `latitude`, `longitude`) VALUES
+(1, 'Nancy: une magnifique ville !!', 'Nancy', '48.694138', '6.183393'),
+(2, 'Nancy: une magnifique ville !!', 'Nancy', '48.694138', '6.183393');
 
 -- --------------------------------------------------------
 
@@ -131,7 +140,7 @@ ALTER TABLE `clue`
 -- AUTO_INCREMENT pour la table `final_destination`
 --
 ALTER TABLE `final_destination`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `game`
 --
