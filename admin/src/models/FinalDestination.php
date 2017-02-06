@@ -11,7 +11,7 @@ class FinalDestination extends Model{
   protected $fillable = ["label", "name", "latitude", "longitude"];
   public $timestamps = false;
 
-  public function clue(){
+  public function clues(){
     return $this->hasMany("src\models\Clue", "destination_id");
   }
 
