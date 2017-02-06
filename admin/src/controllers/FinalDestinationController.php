@@ -10,6 +10,12 @@ class FinalDestinationController extends AbstractController{
 
   function listDestinations($req, $resp, $args){
       $destinations = FinalDestination::get();
+    //   $destinations_number = $destinations->count();
+      //
+    //   foreach($destinations as $destination){
+    //       array_push($destinations_tab, )
+    //   }
+
       var_dump($destinations);die;
     }
 
