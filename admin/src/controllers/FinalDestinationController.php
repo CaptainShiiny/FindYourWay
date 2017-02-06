@@ -141,7 +141,13 @@ class FinalDestinationController extends AbstractController{
             $id = $args['id'];
             $destination = FinalDestination::findOrFail($id);
             $clues = Clue::where('destination_id', $id)->get();
+
             if ($clues->count() < 5) {
+                foreach ($clues as $value) {
+                    if ($value->position == $req->getParams()['position']) {
+                        return $this->responseJSON(400, "Bad Request", ["Error" => "La position existe déjà"]);
+                    }
+                }
                 $clue = new Clue();
                 $clue->label = $label = $req->getParams()["label"];
                 $clue->position = $position = $req->getParams()['position'];
@@ -162,7 +168,7 @@ class FinalDestinationController extends AbstractController{
             }
         } catch (Exception $e) {
             $data = [
-                "Error" => "Ressource Inconnue"
+                "Error" => "Ressource inconnue"
             ];
             return $this->responseJSON(404, "Not Found", $data);
         }
