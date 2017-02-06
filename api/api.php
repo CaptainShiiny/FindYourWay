@@ -151,6 +151,14 @@ $app->get("/players[/]",
     }
 );
 
+
+//on affiche un joueur
+$app->get("/players/{id}[/]",
+    function(Request $req, Response $resp, $args){
+        return (new PlayerController($this))->getPlayer($req, $resp, $args);
+    }
+);
+
 // On supprime (ban) un joueur (Charles)
 $app->delete("/players/{id}[/]",
     function(Request $req, Response $resp, $args){
@@ -164,6 +172,7 @@ $app->get("/games/{id}[/]",
         return (new GameController($this))->gameById($req, $resp, $args);
     }
 );
+
 
 
 $app->run();
