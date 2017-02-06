@@ -151,5 +151,12 @@ $app->get("/players[/]",
     }
 );
 
+// On supprime (ban) un joueur (Charles)
+$app->delete("/players/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlayerController($this))->deletePlayer($req, $resp, $args);
+    }
+);
+
 
 $app->run();
