@@ -85,6 +85,13 @@ $app->get("/destinations/{id}/clues[/]",
     }
 );
 
+// On affiche un indice
+$app->get("/clues/{id}[/]",
+    function(Request $req, Response $resp, $args){
+        return (new FinalDestinationController($this))->detailClue($req, $resp, $args);
+    }
+);
+
 // On affiche les indices d'un destination finale
 $app->post("/destinations/{id}/clues[/]",
     function(Request $req, Response $resp, $args){

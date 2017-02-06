@@ -125,9 +125,23 @@ class FinalDestinationController extends AbstractController{
             ];
             return $this->responseJSON(200, "OK", $data);
         } catch (Exception $e) {
+            $data = ["Error" => "Ressource Inconnue"];
+            return $this->responseJSON(404, "Not Found", $data);
+        }
+    }
+
+    function detailClue($req, $resp, $args){
+        try {
+            $id = $args['id'];
+            $clue = Clue::findOrFail($id);
             $data = [
-                "Error" => "Ressource Inconnue"
+                "label" => $clue->label,
+                "position" => $clue->position,
+                "id_destination" => $clue->destination_id
             ];
+            return $this->responseJSON(200, "OK", $data);
+        } catch (Exception $e) {
+            $data = ["Error" => "Ressource Inconnue"];
             return $this->responseJSON(404, "Not Found", $data);
         }
     }
@@ -175,38 +189,28 @@ class FinalDestinationController extends AbstractController{
 
     }
 
-
-
     function updateClue($req, $resp, $args, $requestbody){
+        try{
+            $id = $args['id'];
+            $clue = Clue::findOrfail($id);
 
-          try{
-              $id = $args['id'];
-              $clue = Clue::findOrfail($id);
-
-              foreach($requestbody as $key=>$value){
-
-                if(in_array($key,$clue->getFillable()))
-                    {
-                        $clue->$key = filter_var($value, FILTER_SANITIZE_STRING);
-                    }
-                    else
-                    {
-                        $mess[] =  ["Warning" => "Il manque une valeur à $key"];
-                    }
-              }
-                $clue->save();
-                if(!empty($mess))
-                    return $this->responseJSON(200, "succès de  la requête", $mess);
-                    return $this->responseJSON(204,"No content", NULL);
-
-
-          }catch(Exception $e){
-
-              $mess =  ["Error" => "L'indice $id est introuvable"];
-                return $this->responseJSON(404,"Bad Request", $mess);
-          }
-
-
+            foreach($requestbody as $key=>$value){
+                if(in_array($key,$clue->getFillable())){
+                    $clue->$key = filter_var($value, FILTER_SANITIZE_STRING);
+                }else{
+                    $mess[] =  ["Warning" => "Il manque une valeur à $key"];
+                }
+            }
+            $clue->save();
+            if(!empty($mess)){
+                return $this->responseJSON(200, "succès de  la requête", $mess);
+            }else{
+                return $this->responseJSON(204,"No content", NULL);
+            }
+        }catch(Exception $e){
+            $mess =  ["Error" => "L'indice $id est introuvable"];
+            return $this->responseJSON(404,"Bad Request", $mess);
+        }
     }
 
 }
