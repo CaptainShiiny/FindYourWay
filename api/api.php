@@ -99,12 +99,25 @@ $app->post("/destinations/{id}/clues[/]",
     }
 );
 
+// On supprime la destination {id}
+$app->delete("/destinations/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new FinalDestinationController($this))->deleteDestination($req, $resp, $args);
+    }
+);
 
 //on modifie un indice
 $app->put("/clue/{id}[/]",
     function(Request $req, Response $resp, $args){
       $requestbody = $req->getParsedBody();
       return (new FinalDestinationController($this))->updateClue($req, $resp, $args, $requestbody);
+    }
+);
+
+// On supprime le lieu {id}
+$app->delete("/places/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new PlaceController($this))->deletePlace($req, $resp, $args);
     }
 );
 

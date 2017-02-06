@@ -97,4 +97,14 @@ class PlaceController extends AbstractController{
         }
     }
 
+    function deletePlace($req, $resp, $args){
+        try{
+            $place = Place::findOrFail($args['id']);
+            $place->delete();
+            return $this->responseJSON(200, "Success", $data);
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Place not found.", NULL);
+        }
+    }
+
 }
