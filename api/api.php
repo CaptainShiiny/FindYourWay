@@ -143,5 +143,11 @@ $app->get("/players[/]",
     }
 );
 
+//on affiche un joueur
+$app->get("/players/{id}[/]",
+    function(Request $req, Response $resp, $args){
+        return (new PlayerController($this))->getPlayers($req, $resp, $args);
+    }
+);
 
 $app->run();

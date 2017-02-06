@@ -106,34 +106,7 @@ class FinalDestinationController extends AbstractController{
         }catch(Exception $e){
             return $this->responseJSON(404, "Destination not found.", NULL);
         }
-        /*$mess = [];
-        try{
-            $id_dest = $args['id'];
-            $dest = FinalDestination::findOrFail($id_dest);
-
-            foreach($requestbody as $key => $value){
-
-              if(in_array($key,$dest->getFillable()))
-                {
-                    $dest->$key = filter_var($value, FILTER_SANITIZE_STRING);
-                }
-                else
-                {
-                    $mess[] =  ["Warning" => "Il manque une valeur à $key"];
-                }
-
-            }
-            $dest->save();
-             if(!empty($mess))
-                return $this->responseJSON(200,"succès de  la requête", $mess);
-                return $this->responseJSON(204,"No content", NULL);
-
-        }catch(Exception $e){
-
-            $mess =  ["Error" => "La destination $id est introuvable"];
-            return $this->responseJSON(404, "Bad Request", $mess);
-
-        }*/
+        
 
     }
 
