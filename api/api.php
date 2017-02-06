@@ -72,8 +72,7 @@ $app->get('/destinations/{id}[/]',
 //on modfie une destination
 $app->put("/destinations/{id}[/]",
     function(Request $req, Response $resp, $args){
-      $requestbody = $req->getParsedBody();
-      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args, $requestbody);
+      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args);
     }
 );
 
