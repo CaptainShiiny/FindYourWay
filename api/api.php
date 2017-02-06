@@ -72,8 +72,7 @@ $app->get('/destinations/{id}[/]',
 //on modfie une destination
 $app->put("/destinations/{id}[/]",
     function(Request $req, Response $resp, $args){
-      $requestbody = $req->getParsedBody();
-      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args, $requestbody);
+      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args);
     }
 );
 
@@ -137,12 +136,17 @@ $app->delete("/places/{id}[/]",
     }
 );
 
-// On supprime (ban) un joueur (Charles)
+//on liste les joueurs
+$app->get("/players[/]",
+    function(Request $req, Response $resp, $args){
+        return (new PlayerController($this))->listPlayers($req, $resp, $args);
+    }
+);
 
+// On supprime (ban) un joueur (Charles)
 $app->delete("/players/{id}[/]",
     function(Request $req, Response $resp, $args){
       return (new PlayerController($this))->deletePlayer($req, $resp, $args);
-
     }
 );
 

@@ -36,28 +36,28 @@ class PlayerController extends AbstractController{
     }
 
     function listPlayers($req, $resp, $args){
-        try {
+        
             $players_tab = [];
-            $id = $args['id'];
-            $destination = FinalDestination::findOrFail($id);
-            $clues =  Clue::where('destination_id', $id)->OrderBy('position')->get();
-            $clue_number = $clues->count();
-            foreach ($clues as $clue) {
+           
+            
+            $players = Player::get();
+            $players_number = $players->count();
+        
+
+            foreach($players as $player){
                 $data = [
-                    "label" => $clue->label,
-                    "position" => $clue->position
-                ];
-                array_push($clues_tab, $data);
+                            "pseudo" => $player->pseudo,
+                            "links" => ["self" => DIR."/players/".$player->id]
+                        ];
+                array_push($players_tab, $data);
             }
             $data = [
-                "clue_number" => $clue_number,
-                "clues" => $clues_tab
-            ];
-            return $this->responseJSON(200, "OK", $data);
-        } catch (Exception $e) {
-            $data = ["Error" => "Ressource Inconnue"];
-            return $this->responseJSON(404, "Not Found", $data);
-        }
+                        "players_number" => $players_number,
+                        "players" => $players_tab
+                    ];
+            return $this->responseJSON(200, "ok", $data);
+
+
     }
 
     function deletePlayer($req, $resp, $args){
