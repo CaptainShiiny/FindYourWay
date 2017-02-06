@@ -83,16 +83,16 @@ class FinalDestinationController extends AbstractController{
             }
             $dest->save();
              if(!empty($mess))
-                return $this->responseJSON(200, $mess);
-                return $this->responseJSON(204, NULL);
+                return $this->responseJSON(200,"succès de  la requête", $mess);
+                return $this->responseJSON(204,"No content", NULL);
 
-        }catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+        }catch(Exception $e){
 
             $mess =  ["Error" => "La destination $id est introuvable"];
-            return $this->responseJSON(404, $mess);
+            return $this->responseJSON(404, "Bad Request", $mess);
 
         }
-      
+    } 
 
     function listClues($req, $resp, $args){
         try {
@@ -120,6 +120,40 @@ class FinalDestinationController extends AbstractController{
             return $this->responseJSON(400, "Bad Request", $data);
         }
 
+
+    }
+
+
+
+    function updateClue($req, $resp, $args, $requestbody){
+
+          try{
+              $id = $args['id'];
+              $clue = Clue::findOrfail($id);
+
+              foreach($requestbody as $key=>$value){
+                
+                if(in_array($key,$clue->getFillable()))
+                    {
+                        $clue->$key = filter_var($value, FILTER_SANITIZE_STRING);
+                    }
+                    else
+                    {
+                        $mess[] =  ["Warning" => "Il manque une valeur à $key"];
+                    }
+              }
+                $clue->save();
+                if(!empty($mess))
+                    return $this->responseJSON(200, "succès de  la requête", $mess);
+                    return $this->responseJSON(204,"No content", NULL);
+
+
+          }catch(Exception $e){
+
+              $mess =  ["Error" => "L'indice $id est introuvable"];
+                return $this->responseJSON(404,"Bad Request", $mess);
+          }
+        
 
     }
 
