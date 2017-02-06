@@ -73,6 +73,16 @@ class FinalDestinationController extends AbstractController{
       }
     }
 
+    function deleteDestination($req, $resp, $args){
+      try{
+        $destination = FinalDestination::delete('id', '=', $args['id'])->first();
+        return $this->responseJSON(200, "ok", NULL);
+      }
+      catch(Exception $e){
+          return $this->responseJSON(400, "Une erreur est survenue.", NULL);
+      }
+    }
+
     function updateDestination($req, $resp, $args, $requestbody){
 
         $mess = [];
