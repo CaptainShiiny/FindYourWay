@@ -60,6 +60,23 @@ class PlayerController extends AbstractController{
 
     }
 
+
+    function getPlayer($req, $resp, $args){
+        try{
+                 $player = Player::findOrFail($args['id']);
+
+                $data = [
+                    "pseudo"=>$player->pseudo,
+                ];
+
+                return $this->responseJSON(200, "ok", $data);
+
+
+        }catch(\Exception $e){
+
+                return $this->responseJSON(400, "Une erreur est survenue.", NULL);
+        }
+
     function deletePlayer($req, $resp, $args){
         try{
             $player = Player::findOrFail($args['id']);
@@ -68,6 +85,7 @@ class PlayerController extends AbstractController{
         }catch(Exception $e){
             return $this->responseJSON(404, "Player not found", NULL);
         }
+
     }
 
     function updatePlayer($req, $resp, $args){
