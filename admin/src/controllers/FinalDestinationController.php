@@ -79,7 +79,7 @@ class FinalDestinationController extends AbstractController{
         try{
             $id_dest = $args['id'];
             $dest = FinalDestination::findOrFail($id_dest);
-            
+
             foreach($requestbody as $key => $value){
 
               if(in_array($key,$dest->getFillable()))
@@ -103,7 +103,7 @@ class FinalDestinationController extends AbstractController{
             return $this->responseJSON(404, $mess);
 
         }
-      
+    }
 
     function listClues($req, $resp, $args){
         try {
@@ -134,7 +134,8 @@ class FinalDestinationController extends AbstractController{
 
     function addClue($req, $resp, $args){
         try {
-            if (!isset($req->getParams()["label"])) {
+            if (!isset($req->getParams()["label"]) ||
+            !isset($req->getParams()["position"])) {
                 return $this->responseJSON(400, "Veuillez bien compléter les champs suivants: label, position", NULL);
             }
             $id = $args['id'];
@@ -143,7 +144,7 @@ class FinalDestinationController extends AbstractController{
             if ($clues->count() < 5) {
                 $clue = new Clue();
                 $clue->label = $label = $req->getParams()["label"];
-                $clue->position = $clues->count()+1;
+                $clue->position = $position = $req->getParams()['position'];
                 $clue->destination_id = $id;
                 if ($clue->save()) {
                     $status = 200;
