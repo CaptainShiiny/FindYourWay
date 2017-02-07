@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 06 Février 2017 à 12:24
+-- Généré le :  Mar 07 Février 2017 à 08:12
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.4
 
@@ -32,6 +32,14 @@ CREATE TABLE `clue` (
   `destination_id` int(11) NOT NULL,
   `position` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `clue`
+--
+
+INSERT INTO `clue` (`id`, `label`, `destination_id`, `position`) VALUES
+(1, 'hsdvjxvnolredkfp', 2, 7),
+(2, 'hsdvjxvnolredkfp', 2, 5);
 
 -- --------------------------------------------------------
 
@@ -69,6 +77,15 @@ CREATE TABLE `game` (
   `status` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `game`
+--
+
+INSERT INTO `game` (`id`, `score`, `player_id`, `destination_id`, `status`) VALUES
+(1, 0, 1, 1, 'créée'),
+(2, 0, 3, 2, 'créée'),
+(4, 0, 4, 2, 'créée');
+
 -- --------------------------------------------------------
 
 --
@@ -82,6 +99,13 @@ CREATE TABLE `place` (
   `label` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `place`
+--
+
+INSERT INTO `place` (`id`, `longitude`, `latitude`, `label`) VALUES
+(3, '6.183393', '48.694138', 'Place Stanislas');
+
 -- --------------------------------------------------------
 
 --
@@ -90,8 +114,18 @@ CREATE TABLE `place` (
 
 CREATE TABLE `player` (
   `id` int(11) NOT NULL,
-  `pseudo` varchar(255) NOT NULL
+  `pseudo` varchar(255) NOT NULL,
+  `token` varchar(500) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `player`
+--
+
+INSERT INTO `player` (`id`, `pseudo`, `token`) VALUES
+(2, ' fdjixbcortg', '0'),
+(3, ' fdjixbcortg', 'gSuKiF6dKHnBCAALyn1rGqs1pqfgqg0d'),
+(4, 'milad', 'xDoBlbvnC+8vBiAwL4z2T1YcI3Dw/jqG');
 
 --
 -- Index pour les tables exportées
@@ -135,27 +169,27 @@ ALTER TABLE `player`
 -- AUTO_INCREMENT pour la table `clue`
 --
 ALTER TABLE `clue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `final_destination`
 --
 ALTER TABLE `final_destination`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `place`
 --
 ALTER TABLE `place`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `player`
 --
 ALTER TABLE `player`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
