@@ -5,12 +5,13 @@
   <head>
       <meta charset="UTF-8">
       <link rel="stylesheet" href="lib/js/angular-1.6.1/angular-csp.css">
+      <link rel="stylesheet" href="lib/css/style.css">
       <link rel="stylesheet" href="lib/css/font-awesome/css/font-awesome.min.css">
       <link rel="stylesheet" href="lib/css/bootstrap/stylesheets/styles.css">
 
       <!-- leaflet -->
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-	    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 
       <title>FindYourWay</title>
       <!-- library -->
@@ -22,15 +23,23 @@
       <script src="app/directive/game_directive.js"></script>
       <script src="app/directive/map_directive.js"></script>
       <!-- model -->
-      <!-- <script src="app/model/game.js"></script> -->
+
+      <script src="app/model/game.js"></script>
       <!-- controller -->
-      <!-- <script src="app/controller/game_controller.js"></script> -->
+      <script src="app/controller/game_controller.js"></script>
+
+      <script src="app/model/player.js"></script>
+      <!-- controller -->
+      <script src="app/controller/player_controller.js"></script>
 
   </head>
 
   <body class="container-fluid" ng-app="findyourway">
       <game></game>
       <map></map>
+      <section ng-controller="PlayerController">
+          <div ng-if="player">Bonjour {{player.pseudo}}</div>
+      </section>
   </body>
 
 </html>

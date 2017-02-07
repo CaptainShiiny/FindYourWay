@@ -1,15 +1,17 @@
 angular.module("findyourway").directive("game", [
-    function(List){
+    "Player",
+    function(Player){
         return{
             restrict: "E",
-            templateUrl: "app/templates/game.html"
+            templateUrl: "app/templates/game.html",
             link: function(scope, element, attrs){
                 scope.displayForm = function(){
-                    if(scope.task_name){
-                        Task.addTask(scope.task_name, scope.parent_list.id);
-                    }else{
-                        Task.addTask($("#task_name").val(), scope.parent_list.id);
-                    }
+                    $("#btnToOpenFormPseudo").hide();
+                    $("#formPseudo").show();
+                },
+                scope.verifyPseudo = function(){
+                    $("#formPseudo").hide();
+                    Player.add(scope.Pseudo);
                 }
             }
         };
