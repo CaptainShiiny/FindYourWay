@@ -1,1 +1,1 @@
-angular.module("FindYourWay", []);
+angular.module("findyourway", []);

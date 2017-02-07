@@ -1,4 +1,4 @@
-angular.module("FindYourWay").directive("game", [
+angular.module("findyourway").directive("game", [
     function(List){
         return{
             restrict: "E",
