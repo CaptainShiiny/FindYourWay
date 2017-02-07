@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ajouter une destination</title>
+</head>
+<body>
+    <form method="POST" action="{{base_url}}/destinations">
+        <p><label for="label">Label</label><input id="label" name="label" type="text"/></p>
+        <p><label for="latitude">Latitude</label><input id="latitude" name="latitude" type="text" required/></p>
+        <p><label for="longitude">Longitude</label><input id="longitude" name="longitude" type="text" required/></p>
+        <p><label for="nom">Nom</label><input id="nom" name="name" type="text" required/></p>
+        <p><input type="submit" name="addDestination" value="Ajouter"/></p>
+    </form>
+</body>
+</html>
