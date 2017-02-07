@@ -28,7 +28,7 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
                 }).then(function(response){
                     info.pseudo = response.data[1].data.pseudo;
                     $scope.player = new Player(info);
-                    $scope.getDestination(url, info.toke);
+                    $scope.getDestination(url, info.token);
                 },function(error){
                     console.log(error);
                 });
@@ -54,12 +54,32 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
         $scope.addGame = function(url, destination_id, token){
             if(destination_id){
                 url = url+"/destinations/"+destination_id+"/games";
+                console.log(token);
                 $http.post(url, {}, {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "Authorization": token
+                    }
+                }).then(function(response){
+                    $scope.getGame(response.data[1].data.links.self, token);
+                },function(error){
+                    console.log(error);
+                });
+            }
+        }
+
+        $scope.getGame = function(url, token){
+            if(url){
+                $http.get(url, {
                     headers: {
                         "Authorization": token
                     }
                 }).then(function(response){
-                    console.log(response.data);
+                    var info = {};
+                    info.pseudo = response.data[1].data.joueur;
+                    info.token = token;
+                    info.game_in_progress = {"score": response.data[1].data.score, "destination": response.data[1].data.destination};
+                    $scope.player = new Player(info);
                 },function(error){
                     console.log(error);
                 });
