@@ -4,8 +4,9 @@
     </div>
     <div id="formPseudo">
         <form>
-            <label>Pseudo</label><input name="pseudo">
-            <input type="submit" value="valider">
+            <input ng-model="Pseudo" placeholder="Choisissez votre pseudo">
+            <br />
+            <button class="btn btn-success" ng-click="verifyPseudo()">Valider</button>
         </form>
     </div>
 </section>

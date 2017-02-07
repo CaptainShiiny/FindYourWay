@@ -1,5 +1,6 @@
 angular.module("findyourway").directive("game", [
-    function(){
+    "Player",
+    function(Player){
         return{
             restrict: "E",
             templateUrl: "app/templates/game.html",
@@ -7,6 +8,9 @@ angular.module("findyourway").directive("game", [
                 scope.displayForm = function(){
                     $("#btnToOpenFormPseudo").hide();
                     $("#formPseudo").show();
+                },
+                scope.verifyPseudo = function(){
+                    Player.add(scope.Pseudo);
                 }
             }
         };
