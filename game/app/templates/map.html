@@ -1,7 +1,7 @@
 <center>
-    <h1>FIND YOU WAY</h1></center>
+    <h1>FIND YOUR WAY</h1></center>
 <center>
-    <div id="mapid" style="height:600px; width:900px; cursor:pointer;"></div>
+    <div id="mapid" style="height:600px; width:900px; cursor:pointer;border-radius:10px;border:solid black 3px;box-shadow:14px 14px 16px #aaa"></div>
 </center>
 </body>
 
@@ -14,7 +14,7 @@
     }).addTo(mymap);
 
     mymap.on('click', function(e) {
-    alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-    //icon: "https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png",
+    var marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
+    alert("Vous venez de cliquer sur les coordonnées suivantes : Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
     });
 </script>
