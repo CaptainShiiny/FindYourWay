@@ -22,9 +22,13 @@ class PlayerController extends AbstractController{
             }
             $player = new Player();
             $player->pseudo = $req->getParams()["pseudo"];
+            $player->token = (new \RandomLib\Factory)->getMediumStrengthGenerator()->generateString(32);
             $player->save();
 
-            $data = ["links"=>[ "self" => DIR."/players/".$player->id]];
+            $data = [
+                    "token" => $player->token,
+                    "links"=>[ "self" => DIR."/players/".$player->id]
+                    ];
 
             return $this->responseJSON(200, "OK", $data);
 
