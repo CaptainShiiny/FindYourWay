@@ -15,6 +15,30 @@
     }).addTo(mymap);
 
     mymap.on('click', function(e) {
-    alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+
+        var bonneLat = 48.853;
+        var bonneLong = 2.35;
+
+        var rlat1 = Math.PI * bonneLat/180; // Passage de degrès à radians
+        var rlat2 = Math.PI * e.latlng.lat/180;
+        var rlong1 = Math.PI * bonneLong/180;
+        var rlong2 = Math.PI * e.latlng.lng/180;
+
+        var theta = bonneLong - e.latlng.lng;
+        var rtheta = Math.PI * theta/180;
+
+        var dist = Math.sin(rlat1) * Math.sin(rlat2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.cos(rtheta);
+        dist = Math.acos(dist);
+        dist = dist * 180/Math.PI;
+        dist = dist * 60 * 1.1515 * 1.609344;
+
+
+        if (dist < 50){
+            var marker = L.marker([bonneLat, bonneLong]).addTo(mymap);
+            alert("Félicitations, vous êtes au bon endroit");
+        }else{
+            var marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
+            alert("Vous êtes à : " + dist + " km de votre destination");
+        }
     });
 </script>
