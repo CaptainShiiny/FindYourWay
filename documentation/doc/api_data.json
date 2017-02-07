@@ -42,22 +42,16 @@
           {
             "group": "Erreur : 400",
             "optional": false,
-            "field": "Position",
-            "description": "<p>déjà présente dans la base</p>"
-          },
-          {
-            "group": "Erreur : 400",
-            "optional": false,
-            "field": "Bad",
-            "description": "<p>Request 5 indices sont déjà liés à cette destination</p>"
+            "field": "BadRequest",
+            "description": "<p>Position déjà présente dans la base</p>"
           }
         ],
         "Erreur : 404": [
           {
             "group": "Erreur : 404",
             "optional": false,
-            "field": "Not",
-            "description": "<p>Found La ressource est introuvable</p>"
+            "field": "NotFound",
+            "description": "<p>La ressource est introuvable</p>"
           }
         ]
       },
@@ -105,8 +99,8 @@
           {
             "group": "Erreur : 404",
             "optional": false,
-            "field": "Not",
-            "description": "<p>Found Clue not found</p>"
+            "field": "NotFound",
+            "description": "<p>Clue not found</p>"
           }
         ]
       },
@@ -169,8 +163,8 @@
           {
             "group": "Erreur : 404",
             "optional": false,
-            "field": "Not",
-            "description": "<p>Found Indice inexistant</p>"
+            "field": "NotFound",
+            "description": "<p>Indice inexistant</p>"
           }
         ]
       },
@@ -229,7 +223,7 @@
       "examples": [
         {
           "title": "Exemple de réponse en cas de succès",
-          "content": " HTTP/1.1 200 OK\n\n{\n   \"clue_number\": 3,\n   \"clues\": [\n     {\n       \"label\": \"Tour Eiffel\",\n       \"position\": 1,\n       \"links\": {\n         \"self\": \"/clues/1\"\n       }\n     },\n     {\n       ...\n     }\n   ]\n }",
+          "content": " HTTP/1.1 200 OK\n\n{\n  \"clue_number\": 3,\n  \"clues\": [\n    {\n      \"label\": \"Tour Eiffel\",\n      \"position\": 1,\n      \"links\": {\n        \"self\": \"/clues/1\"\n      }\n    },\n    {\n      ...\n    }\n  ]\n}",
           "type": "json"
         }
       ]
@@ -280,8 +274,8 @@
           {
             "group": "Erreur : 404",
             "optional": false,
-            "field": "Not",
-            "description": "<p>Found Destination not found</p>"
+            "field": "NotFound",
+            "description": "<p>Destination not found</p>"
           }
         ]
       },
@@ -360,26 +354,26 @@
       "examples": [
         {
           "title": "Exemple de réponse en cas de succès",
-          "content": "  HTTP/1.1 200 OK\n\n{\n \"data\": {\n   \"name\": \"Nancy\",\n   \"links\": {\n     \"self\": \"/destination/4\"\n   }\n }\n}",
+          "content": "  HTTP/1.1 200 OK\n\n{\n \"data\": {\n   \"name\": \"Nancy\",\n   \"links\": {\n     \"self\": \"/api.php/destination/4\"\n   }\n }\n}",
           "type": "json"
         }
       ]
     },
     "error": {
       "fields": {
-        "Erreur : 404": [
+        "Erreur : 400": [
           {
-            "group": "Erreur : 404",
+            "group": "Erreur : 400",
             "optional": false,
-            "field": "Not",
-            "description": "<p>Found Destination inexistante</p>"
+            "field": "BadRequest",
+            "description": ""
           }
         ]
       },
       "examples": [
         {
           "title": "Exemple de réponse en cas d'erreur",
-          "content": "   HTTP/1.1 404 Not Found\n\n{\n  \"status\": {\n    \"404\": \"Destination not found.\"\n  }\n}",
+          "content": "   HTTP/1.1 400 Bad Request\n\n{\n  \"status\": {\n    \"400\": \"Veuillez bien compléter les champs suivants: label, longitude, latitude, name.\"\n  }\n}",
           "type": "json"
         }
       ]
@@ -445,7 +439,7 @@
       "examples": [
         {
           "title": "Exemple de réponse en cas de succès",
-          "content": " HTTP/1.1 200 OK\n\n\"data\": {\n  \"0\": {\n    \"id\": 1,\n    \"label\": \"\",\n    \"name\": \"Nancy\",\n    \"latitude\": \"48.7092969\",\n    \"longitude\": \"6.2126329\"\n  },\n  \"links \": {\n    \"label\": {\n      \"href\": \"/destinations/1\"\n    }\n  }\n}",
+          "content": " HTTP/1.1 200 OK\n\n\"data\": {\n  \"0\": {\n    \"id\": 1,\n    \"label\": \"\",\n    \"name\": \"Nancy\",\n    \"latitude\": \"48.7092969\",\n    \"longitude\": \"6.2126329\"\n  },\n  \"links \": {\n    \"label\": {\n      \"href\": \"/api.php/destinations/1\"\n    }\n  }\n}",
           "type": "json"
         }
       ]
@@ -456,8 +450,8 @@
           {
             "group": "Erreur : 404",
             "optional": false,
-            "field": "Not",
-            "description": "<p>Found Destination inexistante</p>"
+            "field": "NotFound",
+            "description": "<p>Destination inexistante</p>"
           }
         ]
       },
@@ -495,8 +489,8 @@
           {
             "group": "Erreur : 404",
             "optional": false,
-            "field": "Not",
-            "description": "<p>Found Destination not found</p>"
+            "field": "Notfound",
+            "description": "<p>Destination not found</p>"
           }
         ]
       },
@@ -555,7 +549,7 @@
       "examples": [
         {
           "title": "Exemple de réponse en cas de succès",
-          "content": " HTTP/1.1 200 OK\n\n{\n  \"destinations_number\": 3,\n  \"destinations\": [\n    {\n      \"name\": \"Nancy\",\n      \"links\": {\n        \"self\": \"/destinations/1\"\n      }\n    },\n    {\n      ...\n    }\n  ]\n}",
+          "content": " HTTP/1.1 200 OK\n\n{\n  \"destinations_number\": 3,\n  \"destinations\": [\n    {\n      \"name\": \"Nancy\",\n      \"links\": {\n        \"self\": \"/api.php/destinations/1\"\n      }\n    },\n    {\n      ...\n    }\n  ]\n}",
           "type": "json"
         }
       ]
@@ -573,30 +567,30 @@
     "description": "<p>On modifie une destination</p> <p>Retourne une représentation json de la ressource ajoutée Un label, des coordonnées ainsi qu'un nom doivent être fournis</p>",
     "parameter": {
       "fields": {
-        "Paramètres requis": [
+        "Paramètres possible": [
           {
-            "group": "Paramètres requis",
+            "group": "Paramètres possible",
             "type": "String",
             "optional": false,
             "field": "label",
             "description": "<p>Label de la destination</p>"
           },
           {
-            "group": "Paramètres requis",
+            "group": "Paramètres possible",
             "type": "Float",
             "optional": false,
             "field": "latitude",
             "description": "<p>Latitude de la destination</p>"
           },
           {
-            "group": "Paramètres requis",
+            "group": "Paramètres possible",
             "type": "Float",
             "optional": false,
             "field": "longitude",
             "description": "<p>Longitude de la destination</p>"
           },
           {
-            "group": "Paramètres requis",
+            "group": "Paramètres possible",
             "type": "String",
             "optional": false,
             "field": "name",
@@ -627,7 +621,7 @@
       "examples": [
         {
           "title": "Exemple de réponse en cas de succès",
-          "content": "  HTTP/1.1 200 OK\n\n{\n \"data\": {\n   \"name\": \"Nancy\",\n   \"links\": {\n     \"self\": \"/destination/4\"\n   }\n }\n}",
+          "content": "  HTTP/1.1 200 OK\n\n{\n \"data\": {\n   \"name\": \"Nancy\",\n   \"links\": {\n     \"self\": \"/api.php/destination/4\"\n   }\n }\n}",
           "type": "json"
         }
       ]
@@ -638,8 +632,8 @@
           {
             "group": "Erreur : 404",
             "optional": false,
-            "field": "Not",
-            "description": "<p>Found Destination not found</p>"
+            "field": "NotFound",
+            "description": "<p>Destination not found</p>"
           }
         ]
       },

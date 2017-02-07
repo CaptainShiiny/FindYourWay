@@ -72,7 +72,7 @@
 *    }
 *   }
 *
-* @apiError (Erreur : 400) Bad Request
+* @apiError (Erreur : 400) BadRequest
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 400 Bad Request
@@ -123,7 +123,7 @@
 *      }
 *    }
 *
-* @apiError (Erreur : 404) Not Found Destination inexistante
+* @apiError (Erreur : 404) NotFound Destination inexistante
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
@@ -169,7 +169,7 @@
 *    }
 *   }
 *
-* @apiError (Erreur : 404) Not Found Destination not found
+* @apiError (Erreur : 404) NotFound Destination not found
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
@@ -201,7 +201,7 @@
 *    }
 *  }
 *
-* @apiError (Erreur : 404) Not found Destination not found
+* @apiError (Erreur : 404) Notfound Destination not found
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
@@ -238,20 +238,20 @@
 *     HTTP/1.1 200 OK
 *
 *    {
-      "clue_number": 3,
-      "clues": [
-        {
-          "label": "Tour Eiffel",
-          "position": 1,
-          "links": {
-            "self": "/clues/1"
-          }
-        },
-        {
-          ...
-        }
-      ]
-    }
+*      "clue_number": 3,
+*      "clues": [
+*        {
+*          "label": "Tour Eiffel",
+*          "position": 1,
+*          "links": {
+*            "self": "/clues/1"
+*          }
+*        },
+*        {
+*          ...
+*        }
+*      ]
+*    }
 */
 
 /**
@@ -279,7 +279,7 @@
 *      "Success": "Ajout de l'indice dans la base de données"
 *    }
 *
-* @apiError (Erreur : 400) Position déjà présente dans la base
+* @apiError (Erreur : 400) BadRequest Position déjà présente dans la base
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 400 Bad Request
@@ -288,7 +288,6 @@
 *      "Error": "La position existe déjà"
 *    }
 *
-* @apiError (Erreur : 400) Bad Request 5 indices sont déjà liés à cette destination
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 400 Bad Request
@@ -297,7 +296,7 @@
 *      "Error": "Il y a déjà 5 indices pour cette destination"
 *    }
 *
-* @apiError (Erreur : 404) Not Found La ressource est introuvable
+* @apiError (Erreur : 404) NotFound La ressource est introuvable
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
@@ -332,7 +331,7 @@
 *      "id_destination": 1
 *    }
 *
-* @apiError (Erreur : 404) Not Found Indice inexistant
+* @apiError (Erreur : 404) NotFound Indice inexistant
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
@@ -364,7 +363,7 @@
 *     HTTP/1.1 200 OK
 *
 *
-* @apiError (Erreur : 404) Not Found Destination not found
+* @apiError (Erreur : 404) NotFound Destination not found
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
@@ -396,7 +395,7 @@
 *    }
 *  }
 *
-* @apiError (Erreur : 404) Not Found Clue not found
+* @apiError (Erreur : 404) NotFound Clue not found
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
 *     HTTP/1.1 404 Not Found
