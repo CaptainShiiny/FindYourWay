@@ -23,7 +23,6 @@
       <script src="app/directive/game_directive.js"></script>
       <script src="app/directive/map_directive.js"></script>
       <!-- model -->
-
       <script src="app/model/game.js"></script>
       <!-- controller -->
       <script src="app/controller/game_controller.js"></script>
@@ -38,7 +37,12 @@
       <game></game>
       <map></map>
       <section ng-controller="PlayerController">
-          <div ng-if="player">Bonjour {{player.pseudo}}</div>
+          <div ng-if="player">
+              <ul>
+                  <li>Bonjour {{player.pseudo}}</li>
+                  <li>Score: {{player.game_in_progress.score}}</li>
+              </ul>
+          </div>
       </section>
   </body>
 
