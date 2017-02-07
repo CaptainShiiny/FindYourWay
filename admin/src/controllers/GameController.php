@@ -15,14 +15,14 @@ class GameController extends AbstractController{
         try{
 
             $game = new Game();
-            $game->player_id = $args['player_id'];
+            $game->player_id = $args['id'];
             $game->destination_id = $args['destination_id'];
             $game->score = 0;
             $game->status = "créée";
             $game->save();
 
             $data = [
-                        "links" => ["self" => DIR."/games/".$game->id]
+                        "links" => ["self" => DIR."/players/".$game->player_id."/games/".$game->id]
                     ];
             return $this->responseJSON(200, "ok", $data);
         }catch(Exception $e){
@@ -34,7 +34,7 @@ class GameController extends AbstractController{
     function deleteGame($req, $resp, $args){
 
         try{
-            $game = Game::findOrFail($args['id']);
+            $game = Game::findOrFail($args['game_id']);
             $game->delete();
             return $this->responseJSON(200, "Le jeu a été supprimé", NULL);
 
@@ -48,7 +48,7 @@ class GameController extends AbstractController{
 
     function gameById($req, $resp, $args){
         try{
-            $game = Game::findOrFail($args['id']);
+            $game = Game::findOrFail($args['game_id']);
             $player = Player::findOrFail($game->player_id);
             $destination = FinalDestination::findOrFail($game->destination_id);
             $data = [
@@ -76,7 +76,7 @@ class GameController extends AbstractController{
                 $destination = FinalDestination::findOrFail($game->destination_id);
                 $data = [
                             "destination" => $destination->name,
-                            "links" => ["self" => DIR."/games/".$game->id]
+                            "links" => ["self" => DIR."/players/".$player->id."/games/".$game->id]
                         ];
                 array_push($games_tab, $data);
             }

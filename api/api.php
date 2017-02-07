@@ -3,6 +3,7 @@
 define("DIR", $_SERVER['SCRIPT_NAME']);
 
 require("../admin/vendor/autoload.php");
+require("../admin/src/utils/Authentification.php");
 src\utils\AppInit::bootEloquent('../admin/conf/conf.ini');
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
@@ -24,8 +25,38 @@ $app = new \Slim\App($errorDetails);
 $app->get("/destinations[/]",
 function(Request $req, Response $resp, $args){
     return (new FinalDestinationController($this))->listDestinations($req, $resp, $args);
-}
-);
+});
+
+// On ajoute une destination finale
+$app->post("/destinations[/]",
+function(Request $req, Response $resp, $args){
+    return (new FinalDestinationController($this))->addDestination($req, $resp, $args);
+})->add('checkAccessManager');
+
+//On affiche une destination avec son id
+$app->get('/destinations/{id}[/]',
+function(Request $req, Response $resp, $args){
+    return (new FinalDestinationController($this))->afficheDestinationId($req, $resp, $args);
+});
+
+//on modfie une destination
+$app->put("/destinations/{id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args);
+    }
+)->add('checkAccessManager');
+
+// On supprime la destination {id}
+$app->delete("/destinations/{id}[/]",
+function(Request $req, Response $resp, $args){
+    return (new FinalDestinationController($this))->deleteDestination($req, $resp, $args);
+})->add('checkAccessManager');
+
+// On affiche les indices d'un destination finale
+$app->get("/destinations/{id}/clues[/]",
+function(Request $req, Response $resp, $args){
+    return (new FinalDestinationController($this))->listClues($req, $resp, $args);
+});
 
 // On affiche les lieux
 $app->get("/places[/]",
@@ -46,44 +77,16 @@ $app->post("/places[/]",
 function(Request $req, Response $resp, $args){
     return (new PlaceController($this))->addPlace($req, $resp, $args);
 }
-);
+)->add('checkAccessManager');
 
 // On modifie un lieu
 $app->put("/places/{id}[/]",
 function(Request $req, Response $resp, $args){
     return (new PlaceController($this))->modifyPlace($req, $resp, $args);
 }
-);
-
-// On ajoute une destination finale
-$app->post("/destinations[/]",
-function(Request $req, Response $resp, $args){
-    return (new FinalDestinationController($this))->addDestination($req, $resp, $args);
-}
-);
-
-//On affiche une destination avec son id
-$app->get('/destinations/{id}[/]',
-function(Request $req, Response $resp, $args){
-    return (new FinalDestinationController($this))->afficheDestinationId($req, $resp, $args);
-}
-);
+)->add('checkAccessManager');
 
 
-//on modfie une destination
-$app->put("/destinations/{id}[/]",
-    function(Request $req, Response $resp, $args){
-      return (new FinalDestinationController($this))->updateDestination($req, $resp, $args);
-    }
-);
-
-
-// On affiche les indices d'un destination finale
-$app->get("/destinations/{id}/clues[/]",
-function(Request $req, Response $resp, $args){
-    return (new FinalDestinationController($this))->listClues($req, $resp, $args);
-}
-);
 
 // On affiche un indice
 $app->get("/clues/{id}[/]",
@@ -97,29 +100,21 @@ $app->post("/destinations/{id}/clues[/]",
 function(Request $req, Response $resp, $args){
     return (new FinalDestinationController($this))->addClue($req, $resp, $args);
 }
-);
-
-// On supprime la destination {id}
-$app->delete("/destinations/{id}[/]",
-function(Request $req, Response $resp, $args){
-    return (new FinalDestinationController($this))->deleteDestination($req, $resp, $args);
-}
-);
+)->add('checkAccessManager');
 
 //on modifie un indice
 $app->put("/clues/{id}[/]",
 function(Request $req, Response $resp, $args){
-    $requestbody = $req->getParsedBody();
-    return (new FinalDestinationController($this))->updateClue($req, $resp, $args, $requestbody);
+    return (new FinalDestinationController($this))->updateClue($req, $resp, $args);
 }
-);
+)->add('checkAccessManager');
 
 // On supprime l'indince
 $app->delete("/clues/{id}[/]",
 function(Request $req, Response $resp, $args){
     return (new FinalDestinationController($this))->deleteClue($req, $resp, $args);
 }
-);
+)->add('checkAccessManager');
 
 //on ajoute un player
 $app->post("/players[/]",
@@ -135,14 +130,14 @@ function(Request $req, Response $resp, $args){
     return (new PlaceController($this))->deletePlace($req, $resp, $args);
 
 }
-);
+)->add('checkAccessManager');
 
 //on ajoute une partie
-$app->post("/players/{player_id}/destinations/{destination_id}/games[/]",
+$app->post("/players/{id}/destinations/{destination_id}/games[/]",
 function(Request $req, Response $resp, $args){
     return (new GameController($this))->addGame($req, $resp, $args);
 }
-);
+)->add('checkTokenPlayer');
 
 //on liste les joueurs
 $app->get("/players[/]",
@@ -164,15 +159,15 @@ $app->delete("/players/{id}[/]",
     function(Request $req, Response $resp, $args){
       return (new PlayerController($this))->deletePlayer($req, $resp, $args);
     }
-);
+)->add('checkAccessManager');
 
 
 // On supprime une partie
-$app->delete("/games/{id}[/]",
+$app->delete("/players/{id}/games/{game_id}[/]",
     function(Request $req, Response $resp, $args){
       return (new GameController($this))->deleteGame($req, $resp, $args);
   }
-);
+)->add('checkTokenPlayer');
 
 // On modifie un joueur
 $app->put("/players/{id}[/]",
@@ -180,22 +175,22 @@ $app->put("/players/{id}[/]",
       $requestbody = $req->getParsedBody();
       return (new PlayerController($this))->updatePlayer($req, $resp, $args, $requestbody);
     }
-);
+)->add('checkTokenPlayer');
 
 //on liste les parties
-$app->get("/games/{id}[/]",
+$app->get("/players/{id}/games/{game_id}[/]",
     function(Request $req, Response $resp, $args){
         return (new GameController($this))->gameById($req, $resp, $args);
 
     }
-);
+)->add('checkTokenPlayer');
 
 //on liste les parties d'un joueur
 $app->get("/players/{id}/games[/]",
     function(Request $req, Response $resp, $args){
         return (new GameController($this))->gamesFromPlayer($req, $resp, $args);
     }
-);
+)->add('checkTokenPlayer');
 
 
 $app->run();

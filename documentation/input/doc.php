@@ -27,7 +27,7 @@
 *        {
 *          "name": "Nancy",
 *          "links": {
-*            "self": "/LP/FindYourWay/api/api.php/destinations/1"
+*            "self": "/api.php/destinations/1"
 *          }
 *        },
 *        {
@@ -67,19 +67,19 @@
 *    "data": {
 *      "name": "Nancy",
 *      "links": {
-*        "self": "/LP/FindYourWay/api/api.php/destination/4"
+*        "self": "/api.php/destination/4"
 *      }
 *    }
 *   }
 *
-* @apiError (Erreur : 404) Not Found Destination inexistante
+* @apiError (Erreur : 400) Bad Request
 *
 * @apiErrorExample {json} Exemple de réponse en cas d'erreur
-*     HTTP/1.1 404 Not Found
+*     HTTP/1.1 400 Bad Request
 *
 *  {
 *    "status": {
-*      "404": "Destination not found."
+*      "400": "Veuillez bien compléter les champs suivants: label, longitude, latitude, name."
 *    }
 *  }
 */
@@ -118,7 +118,7 @@
 *      },
 *      "links ": {
 *        "label": {
-*          "href": "/LP/FindYourWay/api/api.php/destinations/1"
+*          "href": "/api.php/destinations/1"
 *        }
 *      }
 *    }
@@ -148,10 +148,10 @@
 * Un label, des coordonnées ainsi qu'un nom doivent être fournis
 *
 *
-* @apiParam  (Paramètres requis) {String} label Label de la destination
-* @apiParam  (Paramètres requis) {Float} latitude Latitude de la destination
-* @apiParam  (Paramètres requis) {Float} longitude Longitude de la destination
-* @apiParam  (Paramètres requis) {String} name Nom de la destination
+* @apiParam  (Paramètres possible) {String} label Label de la destination
+* @apiParam  (Paramètres possible) {Float} latitude Latitude de la destination
+* @apiParam  (Paramètres possible) {Float} longitude Longitude de la destination
+* @apiParam  (Paramètres possible) {String} name Nom de la destination
 *
 *
 * @apiSuccess (Succès : 200) {String} name Nom de la destination
@@ -164,7 +164,7 @@
 *    "data": {
 *      "name": "Nancy",
 *      "links": {
-*        "self": "/LP/FindYourWay/api/api.php/destination/4"
+*        "self": "/api.php/destination/4"
 *      }
 *    }
 *   }
@@ -192,10 +192,6 @@
 * @apiDescription On supprime une destination
 *
 *
-*
-* @apiSuccess (Succès : 200) {String} name Nom de la destination
-* @apiSuccess (Succès : 200) {Link}   links Lien vers la destination
-*
 * @apiSuccessExample {json} Exemple de réponse en cas de succès
 *     HTTP/1.1 200 OK
 *
@@ -204,6 +200,169 @@
 *      "200": "Success"
 *    }
 *  }
+*
+* @apiError (Erreur : 404) Not found Destination not found
+*
+* @apiErrorExample {json} Exemple de réponse en cas d'erreur
+*     HTTP/1.1 404 Not Found
+*
+*  {
+*    "status": {
+*      "404": "Destination not found."
+*    }
+*  }
+*
+*/
+
+/**
+* @apiGroup Clues
+* @apiName listClues
+* @apiVersion 0.1.0
+*
+* @api {get} /destinations/{id}/clues[/]  Afficher
+*
+* @apiDescription On affiche la liste des indices
+*
+* Retourne une représentation json des ressources
+*
+* Le résultat inclut le nombre de d'indices et un lien pour accéder à l'indice.
+*
+*
+*
+* @apiSuccess (Succès : 200) {Number} destinations_number Nombre d'indices dans la base
+* @apiSuccess (Succès : 200) {Array} clues Tableau contenant les informations de chaque indices
+* @apiSuccess (Succès : 200) {String} label Label de l'indice
+* @apiSuccess (Succès : 200) {Link}   links Lien vers la destination
+*
+* @apiSuccessExample {json} Exemple de réponse en cas de succès
+*     HTTP/1.1 200 OK
+*
+*    {
+      "clue_number": 3,
+      "clues": [
+        {
+          "label": "Tour Eiffel",
+          "position": 1,
+          "links": {
+            "self": "/clues/1"
+          }
+        },
+        {
+          ...
+        }
+      ]
+    }
+*/
+
+/**
+* @apiGroup Clues
+* @apiName addClue
+* @apiVersion 0.1.0
+*
+* @api {post} /destination/{id}/clues[/]  Ajouter
+*
+* @apiDescription On ajoute un indice
+*
+* Retourne une représentation json de la ressource ajoutée
+* Un label ainsi qu'une position doivent être fournis
+*
+*
+* @apiParam  (Paramètres requis) {String} label Label de l'indice
+* @apiParam  (Paramètres requis) {Int} position Position de l'indice
+*
+*
+*
+* @apiSuccessExample {json} Exemple de réponse en cas de succès
+*     HTTP/1.1 200 OK
+*
+*    {
+*      "Success": "Ajout de l'indice dans la base de données"
+*    }
+*
+* @apiError (Erreur : 400) Position déjà présente dans la base
+*
+* @apiErrorExample {json} Exemple de réponse en cas d'erreur
+*     HTTP/1.1 400 Bad Request
+*
+*    {
+*      "Error": "La position existe déjà"
+*    }
+*
+* @apiError (Erreur : 400) Bad Request 5 indices sont déjà liés à cette destination
+*
+* @apiErrorExample {json} Exemple de réponse en cas d'erreur
+*     HTTP/1.1 400 Bad Request
+*
+*    {
+*      "Error": "Il y a déjà 5 indices pour cette destination"
+*    }
+*
+* @apiError (Erreur : 404) Not Found La ressource est introuvable
+*
+* @apiErrorExample {json} Exemple de réponse en cas d'erreur
+*     HTTP/1.1 404 Not Found
+*
+*    {
+*      "Error": "Ressource inconnue"
+*    }
+*/
+
+/**
+* @apiGroup Clues
+* @apiName detailClue
+* @apiVersion 0.1.0
+*
+* @api {get} /clues/{id}[/]  Détail
+*
+* @apiDescription On affiche un indice
+*
+* Retourne une représentation json de la ressource
+*
+*
+* @apiSuccess (Succès : 200) {String} label Label de l'indice
+* @apiSuccess (Succès : 200) {Int} position Position de l'indice
+* @apiSuccess (Succès : 200) {Int} id_destination Id de la destination liée
+*
+* @apiSuccessExample {json} Exemple de réponse en cas de succès
+*     HTTP/1.1 200 OK
+*
+*    {
+*      "label": "Grand Est",
+*      "position": 1,
+*      "id_destination": 1
+*    }
+*
+* @apiError (Erreur : 404) Not Found Indice inexistant
+*
+* @apiErrorExample {json} Exemple de réponse en cas d'erreur
+*     HTTP/1.1 404 Not Found
+*
+*    {
+*      "Error": "Ressource Inconnue"
+*    }
+*/
+
+/**
+* @apiGroup Clues
+* @apiName updateClue
+* @apiVersion 0.1.0
+*
+* @api {put} /clues/{id}[/]  Modifier
+*
+* @apiDescription On modifie un indice
+*
+* Retourne une représentation json de la ressource ajoutée
+* Un label ainsi qu'une position doivent être fournis
+*
+*
+* @apiParam  (Paramètres requis) {String} label Label de l'indice
+* @apiParam  (Paramètres requis) {Int} position Position de l'indice
+*
+*
+*
+* @apiSuccessExample {json} Exemple de réponse en cas de succès
+*     HTTP/1.1 200 OK
+*
 *
 * @apiError (Erreur : 404) Not Found Destination not found
 *
@@ -215,5 +374,37 @@
 *      "404": "Destination not found."
 *    }
 *  }
+*
+*/
+
+/**
+* @apiGroup Clues
+* @apiName deleteClue
+* @apiVersion 0.1.0
+*
+* @api {delete} /clues/{id}[/]  Supprimer
+*
+* @apiDescription On supprime un indice
+*
+*
+* @apiSuccessExample {json} Exemple de réponse en cas de succès
+*     HTTP/1.1 200 OK
+*
+*  {
+*    "status": {
+*      "200": "Success"
+*    }
+*  }
+*
+* @apiError (Erreur : 404) Not Found Clue not found
+*
+* @apiErrorExample {json} Exemple de réponse en cas d'erreur
+*     HTTP/1.1 404 Not Found
+*
+*  {
+*    "status": {
+*      "404": "Clue not found"
+*    }
+ * }
 *
 */
