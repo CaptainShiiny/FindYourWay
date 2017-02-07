@@ -1,8 +1,9 @@
 angular.module("backoffice").controller("DestinationsController",["$scope", "$http", "Destination",
     function($scope, $http, Destination){
-        //On affiche toutes les destinations
         var url_base = "http://localhost/LP/FindYourWay/api/api.php";
         var localhost = "http://localhost";
+
+        //On affiche toutes les destinations
         $http.get(url_base+"/destinations/").then(function(response){
             $scope.destinations = [];
             response.data[1].data.destinations.forEach(function(data){

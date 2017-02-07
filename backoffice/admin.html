@@ -16,22 +16,25 @@
         <script src="app/app.js"></script>
         <!-- directive -->
         <script src="app/directive/destinations_directive.js"></script>
+        <script src="app/directive/clues_directive.js"></script>
         <!-- model -->
         <script src="app/model/destinations.js"></script>
+        <script src="app/model/clues.js"></script>
         <!-- controller -->
         <script src="app/controller/destinations_controller.js"></script>
+        <script src="app/controller/clues_controller.js"></script>
     </head>
     <body ng-app="backoffice">
         <h1>Backoffice</h1>
-        <h3>Connexion</h3>
-        <form>
-            <input type="text" placeholder="login">
-            <input type="password" placeholder="password">
-            <button ng-click="auth()">Valider</button>
-        </form>
-        <section ng-controller="DestinationsController"  id="destinations">
-            <h3 class="text-align-center">Destinations</h3>
+        <!-- <h3>Connexion</h3>
+        <authentification /> -->
+        <section ng-controller="DestinationsController" id="destinations">
+            <h3>Destinations</h3>
             <destinations />
+        </section>
+        <section ng-controller="CluesController" id="clues">
+            <h3>Indices</h3>
+            <clues />
         </section>
     </body>
 </html>
