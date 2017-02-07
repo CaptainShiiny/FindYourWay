@@ -37,7 +37,12 @@
       <game></game>
       <map></map>
       <section ng-controller="PlayerController">
-          <div ng-if="player">Bonjour {{player.pseudo}}</div>
+          <div ng-if="player">
+              <ul>
+                  <li>Bonjour {{player.pseudo}}</li>
+                  <li>Score: {{player.game_in_progress.score}}</li>
+              </ul>
+          </div>
       </section>
   </body>
 
