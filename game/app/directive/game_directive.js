@@ -10,6 +10,7 @@ angular.module("findyourway").directive("game", [
                     $("#formPseudo").show();
                 },
                 scope.verifyPseudo = function(){
+                    $("#formPseudo").hide();
                     Player.add(scope.Pseudo);
                 }
             }
