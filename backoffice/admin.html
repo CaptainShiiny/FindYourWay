@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../game/lib/js/angular-1.6.1/angular-csp.css">
+        <link rel="stylesheet" href="../game/lib/css/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../game/lib/css/bootstrap/stylesheets/styles.css">
+
+        <title>FindYourWay - Backoffice</title>
+        <!-- library -->
+        <script src="../game/lib/js/jquery.js"></script>
+        <script src="../game/lib/js/angular-1.6.1/angular.min.js"></script>
+        <!-- app repository -->
+        <script src="app/app.js"></script>
+        <!-- directive -->
+        <script src="app/directive/destinations_directive.js"></script>
+        <!-- model -->
+        <script src="app/model/destinations.js"></script>
+        <!-- controller -->
+        <script src="app/controller/destinations_controller.js"></script>
+    </head>
+    <body ng-app="backoffice">
+        <h1>Backoffice</h1>
+        <h3>Connexion</h3>
+        <form>
+            <input type="text" placeholder="login">
+            <input type="password" placeholder="password">
+            <button ng-click="auth()">Valider</button>
+        </form>
+        <section ng-controller="DestinationsController"  id="destinations">
+            <h3 class="text-align-center">Destinations</h3>
+            <destinations />
+        </section>
+    </body>
+</html>
