@@ -25,11 +25,9 @@
       <script src="app/directive/place_directive.js"></script>
       <!-- model -->
       <script src="app/model/player.js"></script>
-      
       <script src="app/model/place.js"></script>
       <script src="app/model/map.js"></script>
       <!-- controller -->
-      
       <script src="app/controller/player_controller.js"></script>
       <script src="app/controller/place_controller.js"></script>
       <script src="app/controller/map_controller.js"></script>
@@ -55,7 +53,9 @@
               <place />
           </section>
       </section>
-      <game></game>
+      <section class="row" ng-controller="MapController">
+          <game></game>
+      </section>
       <map></map>
 
   </body>
