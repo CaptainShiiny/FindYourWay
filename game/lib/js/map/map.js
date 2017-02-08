@@ -8,6 +8,9 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 }).addTo(mymap);
 
 function comparaisonDestinationFinale(bonneLat, bonneLong) {
+
+    // var villes = [];
+
     mymap.on('click', function(e) {
         //e.latlng.lat et e.latlng.lng représente la latitude et longitude de l'endroit cliqué
         //bonneLat et bonneLong représente la latitude et longitude de l'endroit à trouver
@@ -46,6 +49,19 @@ function comparaisonDestinationFinale(bonneLat, bonneLong) {
         } else {
             var marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
             alert("Vous êtes à : " + dist + " km de votre destination");
+
+            /* villes.push(["Bordeaux", e.latlng.lat, e.latlng.lng]);
+
+            function pointsArray(items) {
+            	var pointsArray = new Array();
+            	for (var i = 0; i < items.length; i++) {
+            		var item = items[i];
+            		pointsArray.push(new L.LatLng(item[1],item[2]));
+            	}
+            	return pointsArray;
+            }
+            var trajet = new L.Polyline(pointsArray(villes));
+            mymap.addLayer(trajet); */
         }
     });
 }
@@ -83,3 +99,15 @@ function comparaisonLieuIndince(bonneLat, bonneLong, indice){
 
 comparaisonDestinationFinale(48.853, 2.35);
 //comparaisonLieuIndince(48.853, 2.35, "Balec");
+
+/*var pointA = new L.LatLng(e.latlng.lat, e.latlng.lng);
+var pointB = new L.LatLng(e.latlng.lat, e.latlng.lng);
+var pointList = [pointA, pointB];
+
+var firstpolyline = new L.Polyline(pointList, {
+    color: 'red',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1
+});
+firstpolyline.addTo(mymap);*/
