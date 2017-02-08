@@ -1,20 +1,21 @@
 angular.module("backoffice").controller("CluesController",["$scope", "$http", "Clue",
     function($scope, $http, Clue){
-        var url_base = "http://localhost/LP/FindYourWay/api/api.php";
-        var localhost = "http://localhost";
+        var url_api = "http://localhost/LP/FindYourWay/api/api.php";
+        var localhost = "http://localhost/";
 
-        //On affiche toutes les indices
+        //On affiche tous les indices
         $scope.showClues = function(){
             return Clue.showClues;
         }
         $scope.$watch($scope.showClues, function(newValue, oldValue){
             if (newValue) {
-                var url = localhost+newValue['url']+"/clues/";
+                var url = url_api+"/destinations/"+newValue['id']+"/clues/";
                 $http.get(url).then(function(response){
                     $scope.parent_id = newValue['id'];
                     $scope.clues = [];
                     response.data[1].data.clues.forEach(function(data){
                         var info = {};
+                        info.id = data.id;
                         info.label = data.label;
                         info.destination_id = data.destination_id;
                         info.position = data.position;
@@ -34,7 +35,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
         }
         $scope.$watch($scope.add, function(newValue, oldValue){
             if (newValue) {
-                var url = url_base+"/destinations/"+newValue[1]+"/clues/";
+                var url = url_api+"/destinations/"+newValue[1]+"/clues/";
                 $http.post(url, {
                         "label": newValue[0],
                         "position": newValue[2]
@@ -53,7 +54,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
         }
         $scope.$watch($scope.deleteClue, function(newValue, oldValue){
             if (newValue) {
-                var url = localhost+newValue['url'];
+                var url = url_api+"/clues/"+newValue['id'];
                 $http.delete(url).then(function(response){
                     $scope.refresh();
                 },function(error){
@@ -66,12 +67,13 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
         $scope.refresh = function(){
             $scope.$watch($scope.showClues, function(newValue, oldValue){
                 if (newValue) {
-                    var url = localhost+newValue['url']+"/clues/";
+                    var url = url_api+"/destinations/"+newValue['id']+"/clues/";
                     $http.get(url).then(function(response){
                         $scope.parent_id = newValue['id'];
                         $scope.clues = [];
                         response.data[1].data.clues.forEach(function(data){
                             var info = {};
+                            info.id = data.id;
                             info.label = data.label;
                             info.destination_id = data.destination_id;
                             info.position = data.position;
