@@ -6,9 +6,11 @@ angular.module("findyourway").service("Place", ["$http",
             this.label = data.label;
             this.url = data.url;
         }
+
         Place.randPlaces = function(verif){
             Place.randPlaces = [this, verif];
         }
+
         return Place;
     }
 ]);

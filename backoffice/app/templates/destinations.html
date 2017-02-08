@@ -22,8 +22,27 @@
         </form>
         <div ng-repeat="destination in destinations">
             <span>{{destination.name}}</span>
-            <span>{{destination.id}}</span>
             <button ng-click="showAllClues(destination)">Afficher les indices</button>
+            <button ng-click="showModifyForm = !showModifyForm"><i class="fa fa-cog" aria-hidden="true"></i></button>
+            <form ng-show="showModifyForm">
+                <div>
+                    <label for="nom">Nom</label>
+                    <input id="nom" name="name" ng-model="name" type="text" required/>
+                </div>
+                <div>
+                    <label for="label">Label</label>
+                    <input id="label" name="label" ng-model="label" type="text" required/>
+                </div>
+                <div>
+                    <label for="latitude">Latitude</label>
+                    <input id="latitude" ng-model="latitude" name="latitude" type="text" required/>
+                </div>
+                <div>
+                    <label for="longitude">Longitude</label>
+                    <input id="longitude" ng-model="longitude" name="longitude" type="text" required/>
+                </div>
+                <button ng-click="modifyDestination()">Valider</button>
+            </form>
             <button ng-click="deleteDestination(destination)"><i class="fa fa-trash" aria-hidden="true"></i></button>
         </div>
     </div>
@@ -32,6 +51,4 @@
         <h3>Indices</h3>
         <clues />
     </div>
-
-
 </div>

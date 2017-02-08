@@ -8,7 +8,7 @@
         </div>
         <div>
             <label>Ordre de l'indice</label>
-            <select name="position" ng-model="position">
+            <select name="position" ng-model="position" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -21,8 +21,9 @@
 
     <div ng-repeat="clue in clues">
         <span>{{clue.label}}</span>
-        <button ng-click="showForm = !showForm"><i class="fa fa-cog" aria-hidden="true"></i></button>
-        <form ng-show="showForm">
+        <span>{{clue.position}}</span>
+        <button ng-click="showModifyFormClue = !showModifyFormClue"><i class="fa fa-cog" aria-hidden="true"></i></button>
+        <form ng-show="showModifyFormClue">
             <input type="hidden" value="{{clue.destination_id}}">
             <div>
                 <label for="label">Label</label>
@@ -30,7 +31,7 @@
             </div>
             <div>
                 <label>Ordre de l'indice</label>
-                <select name="position" ng-model="position">
+                <select name="position" ng-model="position" required>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
