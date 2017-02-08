@@ -11,7 +11,7 @@
 
       <!-- leaflet -->
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-	     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 
       <title>FindYourWay</title>
       <!-- library -->
@@ -27,10 +27,12 @@
       <script src="app/model/player.js"></script>
       
       <script src="app/model/place.js"></script>
+      <script src="app/model/map.js"></script>
       <!-- controller -->
       
       <script src="app/controller/player_controller.js"></script>
       <script src="app/controller/place_controller.js"></script>
+      <script src="app/controller/map_controller.js"></script>
 
 
   </head>
@@ -49,7 +51,7 @@
                  </ul>
               </div>
           </section>
-          <section ng-controller="PlaceController" class="col-sm-4">
+          <section ng-controller="PlaceController" class="col-sm-6">
               <place />
           </section>
       </section>
