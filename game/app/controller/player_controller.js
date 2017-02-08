@@ -7,37 +7,22 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
         }
         $scope.$watch($scope.add, function(newValue, oldValue){
             if(newValue){
-                var url = "http://localhost/lFindYourWay/api/api.php/players";
+                var url = api_url+"/players";
                 $http.post(url, {
                     "pseudo": newValue
                 }).then(function(response){
-                    $scope.getInfo(response.data[1].data);
+                    var token = response.data[1].data.token;
+                    url = response.data[1].data.links.self;
+                    $scope.getDestination(url, token);
                 },function(error){
                     console.log(error);
                 });
             }
         });
 
-        $scope.getInfo = function(info){
-            if(info.token){
-                var url = info.links.self;
-                $http.get(url, {
-                    headers: {
-                        "Authorization": info.token
-                    }
-                }).then(function(response){
-                    info.pseudo = response.data[1].data.pseudo;
-                    $scope.player = new Player(info);
-                    $scope.getDestination(url, info.token);
-                },function(error){
-                    console.log(error);
-                });
-            }
-        }
-
         $scope.getDestination = function(url, token){
             if(url){
-                var url_to_destinations = "http://127.0.0.1:8080/lp_cisiie/ateliers/2/api/api.php/destinations";
+                var url_to_destinations = api_url+"/destinations";
                 $http.get(url_to_destinations).then(function(response){
                     var destinations_number = response.data[1].data.destinations_number;
                     var random_value = Math.random() * (destinations_number - 1);
