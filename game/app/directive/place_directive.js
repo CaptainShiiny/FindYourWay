@@ -9,6 +9,7 @@ angular.module("findyourway").directive("place", [
                 scope.propose = function(propose){
                     Map.reloadMap(propose);
                 }
+               
             }
         };
     }
