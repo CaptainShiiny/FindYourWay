@@ -127,6 +127,7 @@ class FinalDestinationController extends AbstractController{
             $clue_number = $clues->count();
             foreach ($clues as $clue) {
                 $data = [
+                    "id" => $clue->id,
                     "label" => $clue->label,
                     "position" => $clue->position,
                     "links" => ["self" => DIR."/clues/".$clue->id]

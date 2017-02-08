@@ -14,6 +14,7 @@ angular.module("backoffice").directive("destinations", ["Destination", "Clue",
                 scope.showAllClues = function(destination){
                     Clue.showAllClues(destination);
                     $("#addClue").show();
+                    $('#clueTitle').show();
                 }
             }
         };
