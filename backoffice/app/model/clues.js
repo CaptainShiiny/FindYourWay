@@ -1,17 +1,22 @@
-angular.module("backoffice").service("Clues",["$http",
+angular.module("backoffice").service("Clue",["$http",
     function($http){
-        var Clues = function(data){
-            console.log(this);
+        var Clue = function(data){
+            this.label = data.label;
+            this.postition = data.position;
         }
 
-        // Destination.addDestination = function(values){
-        //     Destination.add = values;
-        // }
+        Clue.showAllClues = function(destination){
+            Clue.showClues = destination;
+        }
+
+        Clue.addClue = function(values){
+            console.log(values);
+        }
         //
-        // Destination.prototype.deleteDestination = function(){
-        //     Destination.deleteDestination = this;
+        // Clue.prototype.deleteDestination = function(){
+        //     Clue.deleteDestination = this;
         // }
 
-        return Clues;
+        return Clue;
     }
 ]);
