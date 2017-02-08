@@ -1,6 +1,6 @@
 angular.module("findyourway").directive("game", [
-    "Player",
-    function(Player){
+    "Player", "Place",
+    function(Player, Place){
         return{
             restrict: "E",
             templateUrl: "app/templates/game.html",
@@ -13,6 +13,7 @@ angular.module("findyourway").directive("game", [
                 scope.verifyPseudo = function(){
                     $("#formPseudo").hide();
                     Player.add(scope.Pseudo);
+                    Place.randPlaces("true");
                 }
 
             }
