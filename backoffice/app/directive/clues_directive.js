@@ -7,6 +7,9 @@ angular.module("backoffice").directive("clues", ["Clue", "Destination",
                 scope.addClue = function(){
                     values = [scope.label, scope.parent_id, scope.position];
                     Clue.addClue(values);
+                },
+                scope.deleteClue = function(clue){
+                    clue.deleteClue();
                 }
             }
         };

@@ -2,6 +2,7 @@ angular.module("findyourway").controller("PlaceController", ["$scope", "$http", 
 
     function($scope, $http, Place){
 
+
         $scope.randPlaces = function(){
             return Place.randPlaces;
         }
@@ -11,6 +12,7 @@ angular.module("findyourway").controller("PlaceController", ["$scope", "$http", 
                 $http.get(url).then(function(response){
                     var places_tab = response.data[1].data.places;
                     var number_places = places_tab.length;
+
                     var randPlaces = [];
                     for(var i=0; i<5; i++){
                         randPlaces.push(places_tab[Math.floor(Math.random()*(number_places-1))]);
@@ -29,9 +31,11 @@ angular.module("findyourway").controller("PlaceController", ["$scope", "$http", 
                 },function(error){
                     console.log(error);
                 });
-            }
-        });
 
-    }
+            };
+                    
+        })
+    
+    }]
+);
 
-]);
