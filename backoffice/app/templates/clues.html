@@ -9,12 +9,7 @@
             </div>
             <div class="form-group">
                 <label>Ordre de l'indice</label>
-                <select name="position" ng-model="position" class="form-control" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                <select name="position" class="form-control" ng-model="position" ng-options="option.name for option in options" required>
                 </select>
             </div>
             <button ng-click="addClue()" class="btn btn-success col-md-12">Valider</button>
@@ -33,19 +28,14 @@
                     <input type="hidden" ng-value="parent_id">
                     <div class="form-group">
                         <label for="label">Label</label>
-                        <input id="label" class="form-control" ng-model="label" name="label" type="text" required/>
+                        <input id="label" class="form-control" ng-value="clue.label" ng-model="label" name="label" type="text" required/>
                     </div>
                     <div class="form-group">
                         <label>Ordre de l'indice</label>
-                        <select name="position" class="form-control" ng-model="position" required>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                        <select name="position" class="form-control" ng-model="position" ng-options="option.name for option in options" required>
                         </select>
                     </div>
-                    <button ng-click="modifyClue()" class="btn btn-success col-md-12">Valider</button>
+                    <button ng-click="modifyClue(clue)" class="btn btn-success col-md-12">Valider</button>
                 </form>
                 <button ng-click="deleteClue(clue)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </div>

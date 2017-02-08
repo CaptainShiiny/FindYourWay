@@ -1,7 +1,10 @@
 angular.module("backoffice").controller("CluesController",["$scope", "$http", "Clue",
     function($scope, $http, Clue){
         var url_api = "http://localhost/LP/FindYourWay/api/api.php";
-        var localhost = "http://localhost/";
+
+        //Valeurs du select
+        $scope.options = [{name:1},{name:2},{name:3},{name:4},{name:5}];
+        $scope.position = $scope.options[0];
 
         //On affiche tous les indices
         $scope.showClues = function(){
