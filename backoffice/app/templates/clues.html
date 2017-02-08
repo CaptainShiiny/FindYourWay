@@ -1,37 +1,15 @@
 <div>
-    <button style="display:none;" id="addClue" ng-click="showAddForm = !showAddForm">Ajouter un indice</button>
-    <form ng-show="showAddForm">
-        <input type="hidden" ng-value="parent_id">
-        <div>
-            <label for="label">Label</label>
-            <input id="label" ng-model="label" name="label" type="text" required/>
-        </div>
-        <div>
-            <label>Ordre de l'indice</label>
-            <select name="position" ng-model="position" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </div>
-        <button ng-click="addClue()">Valider</button>
-    </form>
-
-    <div ng-repeat="clue in clues">
-        <span>{{clue.label}}</span>
-        <span>{{clue.position}}</span>
-        <button ng-click="showModifyFormClue = !showModifyFormClue"><i class="fa fa-cog" aria-hidden="true"></i></button>
-        <form ng-show="showModifyFormClue">
-            <input type="hidden" value="{{clue.destination_id}}">
-            <div>
+    <div>
+        <button id="addClue" ng-click="showAddForm = !showAddForm" class="btn btn-success">Ajouter un indice</button>
+        <form ng-show="showAddForm">
+            <input type="hidden" ng-value="parent_id">
+            <div class="form-group">
                 <label for="label">Label</label>
-                <input id="label" ng-model="label" name="label" type="text" required/>
+                <input id="label" class="form-control" ng-model="label" name="label" type="text" required/>
             </div>
-            <div>
+            <div class="form-group">
                 <label>Ordre de l'indice</label>
-                <select name="position" ng-model="position" required>
+                <select name="position" ng-model="position" class="form-control" required>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -39,8 +17,38 @@
                     <option value="5">5</option>
                 </select>
             </div>
-            <button ng-click="modifyClue()">Valider</button>
+            <button ng-click="addClue()" class="btn btn-success col-md-12">Valider</button>
         </form>
-        <button ng-click="deleteClue(clue)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="col-md-12 clues">
+        <div ng-repeat="clue in clues" class="row clues">
+            <div class="col-md-8">
+                <span class="col-md-6">{{clue.label}}</span>
+                <span class="col-md-4">Position : {{clue.position}}</span>
+            </div>
+            <div class="form">
+                <button ng-click="showModifyFormClue = !showModifyFormClue" class="btn btn-default"><i class="fa fa-cog" aria-hidden="true"></i></button>
+                <form ng-show="showModifyFormClue">
+                    <input type="hidden" ng-value="parent_id">
+                    <div class="form-group">
+                        <label for="label">Label</label>
+                        <input id="label" class="form-control" ng-model="label" name="label" type="text" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Ordre de l'indice</label>
+                        <select name="position" class="form-control" ng-model="position" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <button ng-click="modifyClue()" class="btn btn-success col-md-12">Valider</button>
+                </form>
+                <button ng-click="deleteClue(clue)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
+        </div>
     </div>
 </div>

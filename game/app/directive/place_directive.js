@@ -8,7 +8,7 @@ angular.module("findyourway").directive("place", [
                 scope.propose = function(place){
                     $("#indication").show();
                     $("#indication").text("Où se trouve \""+place.label+"\"?");
-                    comparaisonDestinationFinale(place.latitude, place.longitude);
+                    comparaisonDestinationFinale(place.latitude, place.longitude, place.url);
                 }
             }
         };

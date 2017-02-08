@@ -7,7 +7,9 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     id: 'mapbox.streets'
 }).addTo(mymap);
 
-function comparaisonDestinationFinale(bonneLat, bonneLong) {
+function comparaisonDestinationFinale(bonneLat, bonneLong, url) {
+
+    // var villes = [];
     mymap.on('click', function(e) {
         //e.latlng.lat et e.latlng.lng représente la latitude et longitude de l'endroit cliqué
         //bonneLat et bonneLong représente la latitude et longitude de l'endroit à trouver
@@ -42,6 +44,12 @@ function comparaisonDestinationFinale(bonneLat, bonneLong) {
                 var points = 2;
 
             alert("Félicitations, vous êtes au bon endroit : " + points + "points");
+            if(localStorage.getItem("score")){
+                localStorage.setItem("score", parseInt(localStorage.getItem("score"))+points);
+            }else{
+                localStorage.setItem("score", points);
+            }
+            localStorage.setItem("score_verify", url);
             return points;
         } else {
             var marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
