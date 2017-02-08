@@ -169,6 +169,13 @@ $app->delete("/players/{id}/games/{game_id}[/]",
   }
 )->add('checkTokenPlayer');
 
+//On modifie une partie
+$app->put("/players/{id}/games/{game_id}[/]",
+    function(Request $req, Response $resp, $args){
+      return (new GameController($this))->updateGame($req, $resp, $args);
+    }
+)->add('checkTokenPlayer');
+
 // On modifie un joueur
 $app->put("/players/{id}[/]",
     function(Request $req, Response $resp, $args){
