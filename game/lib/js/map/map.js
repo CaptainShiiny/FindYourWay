@@ -12,6 +12,14 @@ function comparaisonDestinationFinale(bonneLat, bonneLong) {
         //e.latlng.lat et e.latlng.lng représente la latitude et longitude de l'endroit cliqué
         //bonneLat et bonneLong représente la latitude et longitude de l'endroit à trouver
 
+        var villes = [
+        ["Paris", 48.856578, 2.351828],
+        ["Orléans", 47.9025, 1.909],
+        ["Tours", 47.393611, 0.689167],
+        ["Poitiers", 46.581945, 0.336112],
+        ["Bordeaux", 44.837912, -0.579541]
+    ];
+
         var rlat1 = Math.PI * bonneLat / 180; // Passage de degrès à radians
         var rlat2 = Math.PI * e.latlng.lat / 180;
         var rlong1 = Math.PI * bonneLong / 180;
@@ -46,7 +54,7 @@ function comparaisonDestinationFinale(bonneLat, bonneLong) {
         } else {
             var marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
             alert("Vous êtes à : " + dist + " km de votre destination");
-        }
+    }
     });
 }
 
