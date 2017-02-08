@@ -1,0 +1,27 @@
+<div>
+    <button ng-click="showForm = !showForm">Ajouter une destination</button>
+    <form ng-show="showForm">
+        <p>
+            <label for="nom">Nom</label>
+            <input id="nom" name="name" ng-model="name" type="text" required/>
+        </p>
+        <p>
+            <label for="label">Label</label>
+            <input id="label" name="label" ng-model="label" type="text" required/>
+        </p>
+        <p>
+            <label for="latitude">Latitude</label>
+            <input id="latitude" ng-model="latitude" name="latitude" type="text" required/>
+        </p>
+        <p>
+            <label for="longitude">Longitude</label>
+            <input id="longitude" ng-model="longitude" name="longitude" type="text" required/>
+        </p>
+        <button ng-click="addDestination()">Valider</button>
+    </form>
+    <p ng-repeat="destination in destinations">
+        <a href="{{destination.url}}">{{destination.name}}</a>
+        <button ng-click="showClues()">Afficher les indices</button>
+        <button ng-click="deleteDestination(destination)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </p>
+</div>

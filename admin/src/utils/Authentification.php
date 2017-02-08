@@ -17,21 +17,21 @@ function responseJSON($status, $message_status, $data, $resp){
 
 function checkAccessManager(Request $req, Response $resp, callable $next){
 
-    $authorization = $req->getHeader('Authorization');
-
-    if(empty($authorization)){
-        return responseJSON(403, "No username or/and password.", NULL, $resp);
-    }
-
-    $authorization = base64_decode($authorization[0]);
-    $username = substr($authorization ,0,strpos($authorization, ':'));
-    $password = substr($authorization ,strpos($authorization, ':')+1);
-
-    if($username === "admin" && $password === "pass"){
+    // $authorization = $req->getHeader('Authorization');
+    //
+    // if(empty($authorization)){
+    //     return responseJSON(403, "No username or/and password.", NULL, $resp);
+    // }
+    //
+    // $authorization = base64_decode($authorization[0]);
+    // $username = substr($authorization ,0,strpos($authorization, ':'));
+    // $password = substr($authorization ,strpos($authorization, ':')+1);
+    //
+    // if($username === "admin" && $password === "pass"){
         return $next($req, $resp);
-    }
-
-    return responseJSON(403, "Access denied.", NULL, $resp);
+    // }
+    //
+    // return responseJSON(403, "Access denied.", NULL, $resp);
 }
 
 function checkTokenPlayer(Request $req, Response $resp, callable $next){

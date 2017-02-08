@@ -24,6 +24,10 @@
       <script src="app/directive/map_directive.js"></script>
       <script src="app/directive/place_directive.js"></script>
       <!-- model -->
+      <script src="app/model/game.js"></script>
+      <!-- controller -->
+      <script src="app/controller/game_controller.js"></script>
+
       <script src="app/model/player.js"></script>
       <script src="app/model/place.js"></script>
       <!-- controller -->
@@ -32,12 +36,23 @@
 
   </head>
 
-  <body class="container-fluid" ng-app="findyourway">
+  <body class="container" ng-app="findyourway">
+      <header class="row">
+          <h1>FindYourWay</h1>
+      </header>
+      <section class="row">
+          <section class="col-sm-3" ng-controller="PlayerController">
+              <div ng-if="player" class="alert alert-info">
+              <strong>Bonjour {{player.pseudo}},</strong>
+                 <ul>
+                     <li>Score: {{player.game_in_progress.score}}</li>
+                     <li>Indices trouvées: 0</li>
+                 </ul>
+              </div>
+          </section>
+      </section>
       <game></game>
       <map></map>
-      <section ng-controller="PlayerController">
-          <div ng-if="player">Bonjour {{player.pseudo}}</div>
-      </section>
 
       <section ng-controller="PlaceController">
           <place></place>
