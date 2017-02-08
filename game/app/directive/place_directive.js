@@ -1,6 +1,6 @@
 angular.module("findyourway").directive("place", [
     "Map",
-    function(Player, Place){
+    function(Map){
         return{
             restrict: "E",
             templateUrl: "app/templates/place.html",
