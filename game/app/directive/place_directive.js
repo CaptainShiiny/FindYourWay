@@ -6,9 +6,9 @@ angular.module("findyourway").directive("place",
         templateUrl: "app/templates/place.html", 
         link: function(scope, element, attrs){
             scope.randPlaces = function(){
-                //var randPlaces = scope.randPlaces;
+                var randPlaces = scope.randPlaces;
                 //Place.randPlaces();
-                console.log("gg");
+                console.log(randPlaces);
             }
             
         }

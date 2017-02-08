@@ -8,10 +8,10 @@ angular.module("findyourway").service("Place",["$http",
 
         }
         Place.randPlaces = function(){
-            Place.randPlaces;           
+            Place.randPlaces = this;           
         }
         
-
+       
         return Place;
     }
 ]);

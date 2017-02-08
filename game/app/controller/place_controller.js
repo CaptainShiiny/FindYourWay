@@ -8,7 +8,7 @@ angular.module("findyourway").controller("PlaceController",
                 
             }
 
-            $scope.watch($scope.randPlaces, function(){
+            $scope.randPlaces = function(){
                 
                 $http.get('http://localhost/Atelier_2/FindYourWay/api/api.php/places')
                 .then(function(response){
@@ -36,7 +36,7 @@ angular.module("findyourway").controller("PlaceController",
 
                     console.log(error);
                 });
-            });
+            };
                     
         }
     ]
