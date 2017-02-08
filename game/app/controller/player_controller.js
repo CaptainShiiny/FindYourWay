@@ -7,7 +7,9 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
         }
         $scope.$watch($scope.add, function(newValue, oldValue){
             if(newValue){
+
                 var url = api_url+"/players";
+
                 $http.post(url, {
                     "pseudo": newValue
                 }).then(function(response){
@@ -41,6 +43,23 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
                 url = url+"/destinations/"+destination_id+"/games";
                 console.log(token);
                 $http.post(url, {}, {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "Authorization": token
+                    }
+                }).then(function(response){
+                    $scope.getGame(response.data[1].data.links.self, token);
+                },function(error){
+                    console.log(error);
+                });
+            }
+        }
+
+        $scope.updateScore = function(url, game_id, token){
+            if(url){
+                url = url+"/games/"+ game_id;
+                console.log(token);
+                $http.put(url, {}, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                         "Authorization": token
