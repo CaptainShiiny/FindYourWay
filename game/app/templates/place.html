@@ -1,5 +1,6 @@
-<button ng-click="randPlaces()">Afficher les indications</button>
-<div ng-repeat="place in randPlaces">
-    {{place.label}}
-</div>
-
+    <div ng-if="places">
+        <h2>Indications</h2>
+        <divc class="row" ng-repeat="place in places">
+            <strong>{{place.label}}</strong>
+        </div>
+    </div>
