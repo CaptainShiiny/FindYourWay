@@ -53,6 +53,23 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
             }
         }
 
+        $scope.updateScore = function(url, game_id, token){
+            if(url){
+                url = url+"/games/"+ game_id;
+                console.log(token);
+                $http.put(url, {}, {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "Authorization": token
+                    }
+                }).then(function(response){
+                    $scope.getGame(response.data[1].data.links.self, token);
+                },function(error){
+                    console.log(error);
+                });
+            }
+        }
+
         $scope.getGame = function(url, token){
             if(url){
                 $http.get(url, {
