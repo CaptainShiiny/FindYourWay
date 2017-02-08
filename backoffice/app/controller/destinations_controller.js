@@ -32,6 +32,11 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
                     }).then(function(response){
                     $scope.refresh();
                     $scope.showForm = false;
+                    console.log($scope);
+                    $scope.name = "";
+                    $scope.label = "";
+                    $scope.latitude = "";
+                    $scope.longitude = "";
                 },function(error){
                     console.log(error);
                 });
