@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <link rel="stylesheet" type="text/css" href="../../game/lib/css/bootstrap/stylesheets/styles.css">
+</head>
+<body>
+    <h1>Liste des destinations possibles</h1>
+    <form action="{{path_for('addDestination')}}">
+        <button>Ajouter une destination</button>
+    </form>
+    <div>
+    {% for dest in destinations %}
+        <p>
+            <a href="{{base_url}}/destinations/{{dest.id}}">{{dest.name}}</a>
+            <a href="{{base_url}}/destinations/delete/{{dest.id}}">Supprimer</a>
+        </p>
+    {% endfor %}
+    </div>
+</body>
+</html>
