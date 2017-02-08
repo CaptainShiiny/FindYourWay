@@ -1,54 +1,53 @@
 <div>
-    <div>
-        <button ng-click="showForm = !showForm">Ajouter une destination</button>
-        <form ng-show="showForm">
-            <div>
-                <label for="nom">Nom</label>
-                <input id="nom" name="name" ng-model="name" type="text" required/>
-            </div>
-            <div>
-                <label for="label">Label</label>
-                <input id="label" name="label" ng-model="label" type="text" required/>
-            </div>
-            <div>
-                <label for="latitude">Latitude</label>
-                <input id="latitude" ng-model="latitude" name="latitude" type="text" required/>
-            </div>
-            <div>
-                <label for="longitude">Longitude</label>
-                <input id="longitude" ng-model="longitude" name="longitude" type="text" required/>
-            </div>
-            <button ng-click="addDestination()">Valider</button>
-        </form>
-        <div ng-repeat="destination in destinations">
-            <span>{{destination.name}}</span>
-            <button ng-click="showAllClues(destination)">Afficher les indices</button>
-            <button ng-click="showModifyForm = !showModifyForm"><i class="fa fa-cog" aria-hidden="true"></i></button>
-            <form ng-show="showModifyForm">
-                <div>
-                    <label for="nom">Nom</label>
-                    <input id="nom" name="name" ng-model="name" type="text" required/>
-                </div>
-                <div>
-                    <label for="label">Label</label>
-                    <input id="label" name="label" ng-model="label" type="text" required/>
-                </div>
-                <div>
-                    <label for="latitude">Latitude</label>
-                    <input id="latitude" ng-model="latitude" name="latitude" type="text" required/>
-                </div>
-                <div>
-                    <label for="longitude">Longitude</label>
-                    <input id="longitude" ng-model="longitude" name="longitude" type="text" required/>
-                </div>
-                <button ng-click="modifyDestination()">Valider</button>
-            </form>
-            <button ng-click="deleteDestination(destination)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    <button ng-click="showForm = !showForm" class="btn btn-success">Ajouter une destination</button>
+    <form ng-show="showForm" name="form">
+        <div class="form-group">
+            <label for="nom">Nom</label>
+            <input id="nom" class="form-control" name="name" ng-model="name" type="text" required/>
         </div>
-    </div>
-
-    <div ng-controller="CluesController" id="clues">
-        <h3>Indices</h3>
-        <clues />
+        <div class="form-group">
+            <label for="label">Label</label>
+            <input id="label" name="label" class="form-control" ng-model="label" type="text" required/>
+        </div>
+        <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <input id="latitude" class="form-control" ng-model="latitude" name="latitude" type="text" required/>
+        </div>
+        <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <input id="longitude" class="form-control" ng-model="longitude" name="longitude" type="text" required/>
+        </div>
+        <button ng-click="addDestination()" class="btn btn-success col-md-12">Valider</button>
+    </form>
+    <div class="col-md-12 destinations">
+        <div ng-repeat="destination in destinations" class="row destinations">
+            <div class="col-md-4">
+                <span>{{destination.name}}</span>
+            </div>
+            <div class="form">
+                <button ng-click="showModifyForm = !showModifyForm" class="btn btn-default"><i class="fa fa-cog" aria-hidden="true"></i></button>
+                <form ng-show="showModifyForm">
+                    <div class="form-group">
+                        <label>Nom</label>
+                        <input class="form-control" name="name" ng-model="name" type="text" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Label</label>
+                        <input name="label" class="form-control" ng-model="label" type="text" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Latitude</label>
+                        <input class="form-control" ng-model="latitude" name="latitude" type="text" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Longitude</label>
+                        <input class="form-control" ng-model="longitude" name="longitude" type="text" required/>
+                    </div>
+                    <button ng-click="modifyDestination(destination)" class="btn btn-success col-md-12">Valider</button>
+                </form>
+                <button ng-click="showAllClues(destination)" class="btn btn-default">Afficher les indices</button>
+                <button ng-click="deleteDestination(destination)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
+        </div>
     </div>
 </div>
