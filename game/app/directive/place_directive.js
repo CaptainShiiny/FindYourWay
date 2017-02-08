@@ -5,8 +5,11 @@ angular.module("findyourway").directive("place", [
             restrict: "E",
             templateUrl: "app/templates/place.html",
             link: function(scope, element, attrs){
-                scope.propose = function(propose){
-                    Map.reloadMap(propose);
+                scope.propose = function(place){
+                    localStorage.setItem("latitude", place.latitude);
+                    localStorage.setItem("longitude", place.longitude);
+                    $("#indication").show();
+                    $("#indication").text("Où se trouve \""+place.label+"\"?");
                 }
             }
         };
