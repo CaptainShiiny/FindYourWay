@@ -1,5 +1,5 @@
-angular.module("backoffice").directive("destinations", ["Destination",
-    function(Destination){
+angular.module("backoffice").directive("destinations", ["Destination", "Clue",
+    function(Destination, Clue){
         return{
             restrict: "E",
             templateUrl: "app/templates/destinations.html",
@@ -10,6 +10,10 @@ angular.module("backoffice").directive("destinations", ["Destination",
                 },
                 scope.deleteDestination = function(destination){
                     destination.deleteDestination();
+                },
+                scope.showAllClues = function(destination){
+                    Clue.showAllClues(destination);
+                    $("#addClue").show();
                 }
             }
         };

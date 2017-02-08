@@ -1,20 +1,45 @@
 <div>
-    <button ng-click="showForm = !showForm">Ajouter un indice</button>
-    <form ng-show="showForm">
-        <p><label for="label">Label</label><input id="label" ng-model="label" name="label" type="text" required/></p>
-        <label>Ordre de l'indice (1 étant l'indice le plus facile)</label>
-        <select>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
+    <button style="display:none;" id="addClue" ng-click="showAddForm = !showAddForm">Ajouter un indice</button>
+    <form ng-show="showAddForm">
+        <input type="hidden" ng-value="parent_id">
+        <div>
+            <label for="label">Label</label>
+            <input id="label" ng-model="label" name="label" type="text" required/>
+        </div>
+        <div>
+            <label>Ordre de l'indice</label>
+            <select name="position" ng-model="position">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
         <button ng-click="addClue()">Valider</button>
     </form>
-    <!-- <p ng-repeat="clue in clues">
-        <a href="{{clue.url}}">{{destination.name}}</a>
-        <button ng-click="showClues()">Afficher les indices</button>
-        <button ng-click="deleteDestination(destination)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-    </p> -->
+
+    <div ng-repeat="clue in clues">
+        <span>{{clue.label}}</span>
+        <button ng-click="showForm = !showForm"><i class="fa fa-cog" aria-hidden="true"></i></button>
+        <form ng-show="showForm">
+            <input type="hidden" value="{{clue.destination_id}}">
+            <div>
+                <label for="label">Label</label>
+                <input id="label" ng-model="label" name="label" type="text" required/>
+            </div>
+            <div>
+                <label>Ordre de l'indice</label>
+                <select name="position" ng-model="position">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <button ng-click="modifyClue()">Valider</button>
+        </form>
+        <button ng-click="deleteClue(clue)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
 </div>

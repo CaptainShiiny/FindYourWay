@@ -18,6 +18,7 @@ class FinalDestinationController extends AbstractController{
 
       foreach($destinations as $destination){
           $data = [
+                      "id" => $destination->id,
                       "name" => $destination->name,
                       "links" => ["self" => DIR."/destinations/".$destination->id]
                   ];
