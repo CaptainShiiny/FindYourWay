@@ -7,7 +7,9 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
         }
         $scope.$watch($scope.add, function(newValue, oldValue){
             if(newValue){
+
                 var url = api_url+"/players";
+
                 $http.post(url, {
                     "pseudo": newValue
                 }).then(function(response){
