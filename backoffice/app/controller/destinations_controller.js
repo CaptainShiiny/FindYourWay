@@ -32,6 +32,7 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
                         "name": newValue[0]
                     }).then(function(response){
                     $scope.refresh();
+                    $scope.showForm = false;
                 },function(error){
                     console.log(error);
                 });

@@ -40,6 +40,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
                         "position": newValue[2]
                     }).then(function(response){
                     $scope.refresh();
+                    $scope.showAddForm = false;
                 },function(error){
                     console.log(error);
                 });
