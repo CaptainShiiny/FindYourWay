@@ -2,7 +2,8 @@ angular.module("backoffice").service("Clue",["$http",
     function($http){
         var Clue = function(data){
             this.label = data.label;
-            this.postition = data.position;
+            this.position = data.position;
+            this.url = data.url;
         }
 
         Clue.showAllClues = function(destination){
@@ -10,12 +11,12 @@ angular.module("backoffice").service("Clue",["$http",
         }
 
         Clue.addClue = function(values){
-            console.log(values);
+            Clue.add = values;
         }
-        //
-        // Clue.prototype.deleteDestination = function(){
-        //     Clue.deleteDestination = this;
-        // }
+
+        Clue.prototype.deleteClue = function(){
+            Clue.deleteClue = this;
+        }
 
         return Clue;
     }

@@ -97,7 +97,7 @@ function comparaisonLieuIndince(bonneLat, bonneLong, indice){
     });
 }
 
-comparaisonDestinationFinale(48.853, 2.35);
+// comparaisonDestinationFinale(48.853, 2.35);
 //comparaisonLieuIndince(48.853, 2.35, "Balec");
 
 /*var pointA = new L.LatLng(e.latlng.lat, e.latlng.lng);
