@@ -24,8 +24,8 @@
     <div class="col-md-12 clues">
         <div ng-repeat="clue in clues" class="row clues">
             <div class="col-md-8">
-                <span class="col-md-6">{{clue.label}}</span>
-                <span class="col-md-4">Position : {{clue.position}}</span>
+                <div class="col-md-6">{{clue.label}}</div>
+                <div class="col-md-6">Position : {{clue.position}}</div>
             </div>
             <div class="form">
                 <button ng-click="showModifyFormClue = !showModifyFormClue" class="btn btn-default"><i class="fa fa-cog" aria-hidden="true"></i></button>
