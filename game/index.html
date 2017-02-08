@@ -24,15 +24,14 @@
       <script src="app/directive/map_directive.js"></script>
       <script src="app/directive/place_directive.js"></script>
       <!-- model -->
-      <script src="app/model/game.js"></script>
-      <!-- controller -->
-      <script src="app/controller/game_controller.js"></script>
-
       <script src="app/model/player.js"></script>
+      
       <script src="app/model/place.js"></script>
       <!-- controller -->
+      
       <script src="app/controller/player_controller.js"></script>
       <script src="app/controller/place_controller.js"></script>
+
 
   </head>
 
@@ -50,14 +49,13 @@
                  </ul>
               </div>
           </section>
+          <section ng-controller="PlaceController" class="col-sm-4">
+              <place />
+          </section>
       </section>
       <game></game>
       <map></map>
 
-      <section ng-controller="PlaceController">
-          
-
-      </section>
   </body>
 
 </html>

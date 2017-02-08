@@ -1,43 +1,41 @@
-angular.module("findyourway").controller("PlaceController",
-        ["$scope", "$http","Place",
+angular.module("findyourway").controller("PlaceController", ["$scope", "$http", "Place",
 
-        function($scope, $http, Place){
+    function($scope, $http, Place){
 
-            $scope.randPlaces = function(){
-                return Place.randPlaces;
-                
-            }
 
-            $scope.randPlaces = function(){
-                
-                $http.get('http://localhost/Atelier_2/FindYourWay/api/api.php/places')
-                .then(function(response){
-                    Listplaces = [];
-                    response.data[1].data.places.forEach(function(elt){
-                        place = new Place(elt);
-                        lat = place.latitude;
-                        lng = place.longitude;
-                        label = place.label;
-                        Listplaces.push(place);
-                        
-                        
-                        //console.log(place);
-                    })
-                    var number_places = response.data[1].data.places_number;
-                    
+        $scope.randPlaces = function(){
+            return Place.randPlaces;
+        }
+        $scope.$watch($scope.randPlaces, function(newValue){
+            if(newValue[1] == "true"){
+                var url = api_url+"/places";
+                $http.get(url).then(function(response){
+                    var places_tab = response.data[1].data.places;
+                    var number_places = places_tab.length;
+
                     var randPlaces = [];
-                    for(var i=0; i<5;i++){
-                        randPlaces.push(Listplaces[Math.floor(Math.random()*number_places)]);
+                    for(var i=0; i<5; i++){
+                        randPlaces.push(places_tab[Math.floor(Math.random()*(number_places-1))]);
                     }
-                    console.log(randPlaces);
-                    
-
-                }, function(error){ 
-
+                    var places = [];
+                    for(i = 0; i<randPlaces.length; i++){
+                        var info = {};
+                        info.latitude = randPlaces[i].latitude;
+                        info.longitude = randPlaces[i].longitude;
+                        info.label = randPlaces[i].label;
+                        info.url = randPlaces[i].links.self;
+                        var newPlace = new Place(info);
+                        places.push(newPlace);
+                    }
+                    $scope.places = places;
+                },function(error){
                     console.log(error);
                 });
+
             };
                     
-        }
-    ]
+        })
+    
+    }]
 );
+

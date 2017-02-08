@@ -1,6 +1,6 @@
 angular.module("backoffice").controller("DestinationsController",["$scope", "$http", "Destination",
     function($scope, $http, Destination){
-        var url_base = "http://localhost/LP/FindYourWay/api/api.php";
+        var url_base = "http://localhost/FindYourWay/api/api.php";
         var localhost = "http://localhost";
 
         //On affiche toutes les destinations
@@ -8,6 +8,7 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
             $scope.destinations = [];
             response.data[1].data.destinations.forEach(function(data){
                 var info = {};
+                info.id = data.id;
                 info.name = data.name;
                 info.url = data.links.self;
                 var newDestination = new Destination(info);

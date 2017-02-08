@@ -46,6 +46,31 @@ class GameController extends AbstractController{
         }
     }
 
+    function updateGame($req, $resp, $args){
+        try{
+            $game = Game::findOrFail($args['id']);
+            if(isset($req->getParams()['longitude'])){
+                $game->longitude = $req->getParams()['longitude'];
+            }
+            if(isset($req->getParams()['latitude'])){
+                $game->latitude = $req->getParams()['latitude'];
+            }
+            if(isset($req->getParams()['label'])){
+                $game->label = $req->getParams()['label'];
+            }
+            $game->save();
+            $destination = FinalDestination::findOrFail($game->destination_id);
+
+            $data = [
+                        "destination" => $destination->name,
+                        "links" => ["self" => DIR."/players/".$game->id]
+                    ];
+            return $this->responseJSON(200, "Success", $data);
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Game not Found.", NULL);
+        }
+    }
+
     function gameById($req, $resp, $args){
         try{
             $game = Game::findOrFail($args['game_id']);
