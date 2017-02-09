@@ -61,7 +61,6 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
         $scope.$watch($scope.modifyClue, function(newValue, oldValue){
             if (newValue) {
                 var url = url_api+"/clues/"+newValue.id;
-                console.log(url);
                 $http.put(url, {
                     "label": newValue['label'],
                     "position": newValue['position']
@@ -69,7 +68,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
                     $scope.refresh();
                     $scope.showModifyFormClue = false;
                 },function(error){
-                    console.log(error);
+                    alert(error.data[1].data.Erreur);
                 });
             }
         });
