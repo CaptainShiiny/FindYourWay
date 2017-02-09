@@ -28,11 +28,11 @@
                     <input type="hidden" ng-value="parent_id">
                     <div class="form-group">
                         <label for="label">Label</label>
-                        <input id="label" class="form-control" ng-value="clue.label" ng-model="label" name="label" type="text" required/>
+                        <input id="label" class="form-control" ng-value="clue.label" ng-model="new_label" name="label" type="text" required/>
                     </div>
                     <div class="form-group">
                         <label>Ordre de l'indice</label>
-                        <select name="position" class="form-control" ng-model="position" ng-options="option.name for option in options" required>
+                        <select name="position" class="form-control" ng-model="new_position" ng-options="option.name for option in options" required>
                         </select>
                     </div>
                     <button ng-click="modifyClue(clue)" class="btn btn-success col-md-12">Valider</button>
