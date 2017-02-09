@@ -10,6 +10,7 @@ angular.module('findyourway').directive('map', ["Player",
                     }
                     localStorage.removeItem("score_verify");
                     localStorage.removeItem("score");
+                    localStorage.removeItem("to_guess");
                 }
             }
         };

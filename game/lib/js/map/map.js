@@ -11,21 +11,15 @@ function comparaisonDestinationFinale(bonneLat, bonneLong, url) {
 
     // var villes = [];
     mymap.on('click', function(e) {
-        //e.latlng.lat et e.latlng.lng représente la latitude et longitude de l'endroit cliqué
+        //e.latlng.lat et e.latlng.lng représentent la latitude et longitude de l'endroit cliqué
         //bonneLat et bonneLong représente la latitude et longitude de l'endroit à trouver
 
         var rlat1 = Math.PI * bonneLat / 180; // Passage de degrès à radians
         var rlat2 = Math.PI * e.latlng.lat / 180;
-        var rlong1 = Math.PI * bonneLong / 180;
-        var rlong2 = Math.PI * e.latlng.lng / 180;
-
-        var theta = bonneLong - e.latlng.lng;
-        var rtheta = Math.PI * theta / 180;
+        var rtheta = Math.PI * (bonneLong - e.latlng.lng) / 180;
 
         var dist = Math.sin(rlat1) * Math.sin(rlat2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.cos(rtheta);
-        dist = Math.acos(dist);
-        dist = dist * 180 / Math.PI;
-        dist = dist * 60 * 1.1515 * 1.609344;
+        dist = Math.acos(dist) * 180 / Math.PI * 60 * 1.1515 * 1.609344;
 
 
         if (dist < 50) {
@@ -44,9 +38,9 @@ function comparaisonDestinationFinale(bonneLat, bonneLong, url) {
                 var points = 2;
 
             alert("Félicitations, vous êtes au bon endroit : " + points + "points");
-            if(localStorage.getItem("score")){
-                localStorage.setItem("score", parseInt(localStorage.getItem("score"))+points);
-            }else{
+            if (localStorage.getItem("score")) {
+                localStorage.setItem("score", parseInt(localStorage.getItem("score")) + points);
+            } else {
                 localStorage.setItem("score", points);
             }
             localStorage.setItem("score_verify", url);
@@ -58,23 +52,15 @@ function comparaisonDestinationFinale(bonneLat, bonneLong, url) {
     });
 }
 
-function comparaisonLieuIndince(bonneLat, bonneLong, indice){
+function comparaisonLieuIndince(bonneLat, bonneLong, indice) {
     mymap.on('click', function(e) {
-        //e.latlng.lat et e.latlng.lng représente la latitude et longitude de l'endroit cliqué
-        //bonneLat et bonneLong représente la latitude et longitude de l'endroit à trouver
 
         var rlat1 = Math.PI * bonneLat / 180; // Passage de degrès à radians
         var rlat2 = Math.PI * e.latlng.lat / 180;
-        var rlong1 = Math.PI * bonneLong / 180;
-        var rlong2 = Math.PI * e.latlng.lng / 180;
-
-        var theta = bonneLong - e.latlng.lng;
-        var rtheta = Math.PI * theta / 180;
+        var rtheta = Math.PI * (bonneLong - e.latlng.lng) / 180;
 
         var dist = Math.sin(rlat1) * Math.sin(rlat2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.cos(rtheta);
-        dist = Math.acos(dist);
-        dist = dist * 180 / Math.PI;
-        dist = dist * 60 * 1.1515 * 1.609344;
+        dist = Math.acos(dist) * 180 / Math.PI * 60 * 1.1515 * 1.609344;
 
 
         if (dist < 50) {
