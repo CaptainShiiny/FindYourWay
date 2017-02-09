@@ -49,14 +49,11 @@ class GameController extends AbstractController{
     function updateGame($req, $resp, $args){
         try{
             $game = Game::findOrFail($args['id']);
-            if(isset($req->getParams()['longitude'])){
-                $game->longitude = $req->getParams()['longitude'];
+            if(isset($req->getParams()['status'])){
+                $game->status = $req->getParams()['status'];
             }
-            if(isset($req->getParams()['latitude'])){
-                $game->latitude = $req->getParams()['latitude'];
-            }
-            if(isset($req->getParams()['label'])){
-                $game->label = $req->getParams()['label'];
+            if(isset($req->getParams()['score'])){
+                $game->score = $req->getParams()['score'];
             }
             $game->save();
             $destination = FinalDestination::findOrFail($game->destination_id);
