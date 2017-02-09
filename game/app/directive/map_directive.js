@@ -6,7 +6,7 @@ angular.module('findyourway').directive('map', ["Player",
             link: function(scope, element, attrs){
                 scope.clickOnMap = function(){
                     if(localStorage.getItem("score_verify")){
-                        Player.modifyScore(localStorage.getItem("score"), localStorage.getItem("score_verify"));
+                        Player.modifyScore(localStorage.getItem("score"));
                     }
                     localStorage.removeItem("score_verify");
                     localStorage.removeItem("score");
