@@ -35,18 +35,38 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
             if (newValue) {
                 var url = url_api+"/destinations/";
                 $http.post(url, {
-                        "label": newValue[1],
-                        "latitude": newValue[2],
-                        "longitude": newValue[3],
-                        "name": newValue[0]
-                    }).then(function(response){
+                    "label": newValue[1],
+                    "latitude": newValue[2],
+                    "longitude": newValue[3],
+                    "name": newValue[0]
+                }).then(function(response){
                     $scope.refresh();
                     $scope.showForm = false;
-                    console.log($scope);
                     $scope.name = "";
                     $scope.label = "";
                     $scope.latitude = "";
                     $scope.longitude = "";
+                },function(error){
+                    console.log(error);
+                });
+            }
+        });
+
+        // On modifie une destination
+        $scope.modifyDestination = function(){
+            return Destination.modifyDestination;
+        }
+        $scope.$watch($scope.modifyDestination, function(newValue, oldValue){
+            if (newValue) {
+                var url = url_api+"/destinations/"+newValue.id;
+                $http.put(url, {
+                    "label": newValue['label'],
+                    "latitude": newValue['latitude'],
+                    "longitude": newValue['longitude'],
+                    "name": newValue['name']
+                }).then(function(response){
+                    $scope.refresh();
+                    $scope.showForm = false;
                 },function(error){
                     console.log(error);
                 });
@@ -59,7 +79,7 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
         }
         $scope.$watch($scope.deleteDestination, function(newValue, oldValue){
             if (newValue) {
-                var url = url_api+"/destinations/"+newValue['id'];
+                var url = url_api+"/destinations/"+newValue.id;
                 $http.delete(url).then(function(response){
                     $scope.refresh();
                 },function(error){
@@ -77,7 +97,7 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
                     info.id = data.id;
                     info.name = data.name;
                     info.url = data.links.self;
-                    
+
                     $http.get(url_api+"/destinations/"+info.id).then(function(response){
                         data = [response.data[1].data];
                         data.forEach(function(data){
