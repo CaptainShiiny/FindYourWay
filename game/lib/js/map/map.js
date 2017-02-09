@@ -111,10 +111,5 @@ function comparaisonLieuIndince(bonneLat, bonneLong, indice){
     });
 }
 
-<<<<<<< HEAD
-
 //comparaisonDestinationFinale(48.853, 2.35);
-=======
-// comparaisonDestinationFinale(48.853, 2.35);
->>>>>>> fb10ecfbc457efee9430449435d2f9850cd84eb4
 //comparaisonLieuIndince(48.853, 2.35, "Balec");
