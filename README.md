@@ -19,12 +19,11 @@ Pour un bon fonctionnement de l'application, nous vous recommandons de le lancer
     - 002-game.conf
 7) Se connecter en ssh sur Vagrant
 8) Activer (a2ensite) 001-backoffice.conf et 002-game.conf et redémarrer Apache
-9) Aller dans le dossier "/var/www/html/FindYourWay/admin/bd", et installer la base. Le mot de passe est "root":
-    $ mysql -u root -p
-    mysql> CREATE DATABASE findyourway;
-    mysql> USE findyourway;
-    mysql> SOURCE findyourway.sql
-10) Mettre le fichier conf.ini dans le dossier "admin/conf"
-11) Dans le fichier /etc/mysql/my.cnf remplacer 127.0.0.1 par 0.0.0.0 à la ligne "bind-address"
-12) Redémarrer MySQL :
-    $ sudo /etc/init.d/mysql restart
+9) Copier le fichier adminer.php dans "www/html" et aller sur adminer puis remplir les informations suivantes :
+    server : findyourway
+    username : root
+    password : root
+    database : 
+10) Créer la base de donnée "findyourway" et importer le fichier sql se trouvant dans "admin/bd"
+
+11) Mettre le fichier conf.ini dans le dossier "admin/conf"
