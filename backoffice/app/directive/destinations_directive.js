@@ -66,7 +66,6 @@ angular.module("backoffice").directive("destinations", ["Destination", "Clue",
                         destination.longitude = this.new_longitude;
                     }
                     destination.modifyDestination();
-
                 }
             }
         };
