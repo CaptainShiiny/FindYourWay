@@ -1,10 +1,8 @@
 angular.module("backoffice").controller("DestinationsController",["$scope", "$http", "Destination",
     function($scope, $http, Destination){
-        var url_base = "http://localhost/LP/FindYourWay/api/api.php";
-        var localhost = "http://localhost";
 
         //On affiche toutes les destinations
-        $http.get(url_base+"/destinations/").then(function(response){
+        $http.get(url_api+"/destinations/").then(function(response){
             $scope.destinations = [];
             response.data[1].data.destinations.forEach(function(data){
                 var info = {};
@@ -24,7 +22,7 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
         }
         $scope.$watch($scope.add, function(newValue, oldValue){
             if (newValue) {
-                var url = url_base+"/destinations/";
+                var url = url_api+"/destinations/";
                 $http.post(url, {
                         "label": newValue[1],
                         "latitude": newValue[2],
@@ -32,6 +30,12 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
                         "name": newValue[0]
                     }).then(function(response){
                     $scope.refresh();
+                    $scope.showForm = false;
+                    console.log($scope);
+                    $scope.name = "";
+                    $scope.label = "";
+                    $scope.latitude = "";
+                    $scope.longitude = "";
                 },function(error){
                     console.log(error);
                 });
@@ -44,7 +48,7 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
         }
         $scope.$watch($scope.deleteDestination, function(newValue, oldValue){
             if (newValue) {
-                var url = localhost+newValue['url'];
+                var url = url_api+"/destinations/"+newValue['id'];
                 $http.delete(url).then(function(response){
                     $scope.refresh();
                 },function(error){
@@ -55,7 +59,7 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
 
         // On rafraîchit la page
         $scope.refresh = function(){
-            $http.get(url_base+"/destinations/").then(function(response){
+            $http.get(url_api+"/destinations/").then(function(response){
                 $scope.destinations = [];
                 response.data[1].data.destinations.forEach(function(data){
                     var info = {};
