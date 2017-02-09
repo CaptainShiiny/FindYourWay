@@ -5,6 +5,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
         $scope.options = [{name:1},{name:2},{name:3},{name:4},{name:5}];
         $scope.position = $scope.options[0];
 
+
         //On affiche tous les indices
         $scope.showClues = function(){
             return Clue.showClues;
@@ -24,6 +25,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
                         info.url = data.links.self;
                         var newClue = new Clue(info);
                         $scope.clues.push(newClue);
+                        $scope.new_position = $scope.options[info.position-1];
                     });
                 },function(error){
                     console.log(error);
@@ -104,6 +106,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
                             info.url = data.links.self;
                             var newClue = new Clue(info);
                             $scope.clues.push(newClue);
+                            $scope.new_position = $scope.options[info.position-1];
                         });
                     },function(error){
                         console.log(error);

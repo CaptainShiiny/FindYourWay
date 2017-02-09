@@ -11,4 +11,12 @@ class Game extends Model{
     protected $fillable = ['score', 'player_id', 'destination_id', 'status'];
     public $timestamps = false;
 
+    public function clue_game(){
+        return $this->belongsToMany(
+                            "\src\models\Clue",
+                            "clue_game",
+                            "game_id", "clue_id"
+                        );
+    }
+
 }

@@ -1,0 +1,45 @@
+<div>
+    <button ng-click="showFormPlaces = !showFormPlaces" class="btn btn-success">Ajouter un lieu</button>
+    <form ng-show="showFormPlaces" name="form">
+        <div class="form-group">
+            <label for="label">Label</label>
+            <input id="label" name="label" class="form-control" ng-model="label" type="text" required/>
+        </div>
+        <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <input id="latitude" class="form-control" ng-model="latitude" name="latitude" type="text" required/>
+        </div>
+        <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <input id="longitude" class="form-control" ng-model="longitude" name="longitude" type="text" required/>
+        </div>
+        <button ng-click="addPlace()" class="btn btn-success col-md-12">Valider</button>
+    </form>
+    <div class="col-md-12 destinations">
+        <div ng-repeat="place in places" class="row places">
+            <div class="col-md-4">
+                <strong class="col-md-12">{{place.label}}</strong>
+                <span class="col-md-12">({{place.latitude}}, {{place.longitude}})</span>
+            </div>
+            <div class="form">
+                <button ng-click="showModifyFormPlaces = !showModifyFormPlaces" class="btn btn-default"><i class="fa fa-cog" aria-hidden="true"></i></button>
+                <form ng-show="showModifyFormPlaces">
+                    <div class="form-group">
+                        <label>Label</label>
+                        <input name="label" class="form-control" ng-value="place.label" ng-model="new_label" type="text" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Latitude</label>
+                        <input class="form-control" ng-value="place.latitude" ng-model="new_latitude" name="latitude" type="text" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Longitude</label>
+                        <input class="form-control" ng-value="place.longitude" ng-model="new_longitude" name="longitude" type="text" required/>
+                    </div>
+                    <button ng-click="modifyPlace(place)" class="btn btn-success col-md-12">Valider</button>
+                </form>
+                <button ng-click="deletePlace(place)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

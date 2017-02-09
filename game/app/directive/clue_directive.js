@@ -1,10 +1,8 @@
 angular.module("findyourway").directive("clue", [
-    "Map",
-    function(Map){
+    function(){
         return{
             restrict: "E",
-            templateUrl: "app/templates/clue.html",
-           
+            templateUrl: "app/templates/clue.html"
         };
     }
 ]);

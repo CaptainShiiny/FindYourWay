@@ -67,7 +67,6 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
                     },
                     {
                     headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
                         "Authorization": localStorage.getItem("token")
                     }
                 }).then(function(response){

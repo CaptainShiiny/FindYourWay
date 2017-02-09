@@ -6,11 +6,10 @@ angular.module('findyourway').directive('map', ["Player","Clue",
             link: function(scope, element, attrs){
                 scope.clickOnMap = function(){
                     if(localStorage.getItem("score_verify")){
-                        Player.modifyScore(localStorage.getItem("score"));
-                        if(localStorage.getItem("clues_game_in_progress")){
-                            console.log(localStorage.getItem("clues_game_in_progress"));
-                            //Clue.showClue();
+                        if(localStorage.getItem("to_guess")){
+                            Clue.showClue(localStorage.getItem("to_guess"));
                         }
+                        Player.modifyScore(localStorage.getItem("score"));
                     }
                     localStorage.removeItem("score_verify");
                     localStorage.removeItem("score");
