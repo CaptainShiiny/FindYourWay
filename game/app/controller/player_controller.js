@@ -88,8 +88,8 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
                     info.token = token;
                     info.game_in_progress = {"score": response.data[1].data.score, "destination": response.data[1].data.destination};
                     $scope.player = new Player(info);
-                    localStorage.setItem("game_in_progress", response.data[1].data.destination);
-                    localStorage.setItem("url", url);
+                    localStorage.setItem("game_in_progress", url);
+                    localStorage.setItem("clues_game_in_progress", response.data[1].data.links.destination);
                 },function(error){
                     console.log(error);
                 });

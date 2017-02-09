@@ -1,0 +1,30 @@
+#formPseudo {
+  display: none; }
+
+#indication {
+  display: none; }
+
+html {
+  background-color: #efefef; }
+
+header {
+  background-color: #065776;
+  border-bottom: 1px solid #002a3a;
+  margin-bottom: 50px;
+  text-align: center; }
+  header h1 {
+    color: #efefef; }
+    header h1 span {
+      color: #8fe0ff; }
+
+#mapid {
+  border: 1px solid #002a3a;
+  cursor: pointer;
+  height: 800px;
+  margin-top: 30px; }
+
+.place_box {
+  margin: 5px 0;
+  padding: 10px; }
+
+/*# sourceMappingURL=style.css.map */

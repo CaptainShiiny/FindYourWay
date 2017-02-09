@@ -1,6 +1,5 @@
 angular.module("backoffice").controller("DestinationsController",["$scope", "$http", "Destination",
     function($scope, $http, Destination){
-        var url_api = "http://localhost/LP/FindYourWay/api/api.php";
 
         //On affiche toutes les destinations
         $http.get(url_api+"/destinations/").then(function(response){
@@ -32,6 +31,11 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
                     }).then(function(response){
                     $scope.refresh();
                     $scope.showForm = false;
+                    console.log($scope);
+                    $scope.name = "";
+                    $scope.label = "";
+                    $scope.latitude = "";
+                    $scope.longitude = "";
                 },function(error){
                     console.log(error);
                 });
