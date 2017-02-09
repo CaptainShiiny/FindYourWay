@@ -6,8 +6,10 @@ angular.module("findyourway").service("Clue", ["$http",
             this.destination_id = data.destination_id;
             this.position = data.position;
         }
-        /*Clue.showClue = function(verif){
-            Clue.showClue  = [this, verif];
-        }*/
+        Clue.showClue = function(){
+            //Clue.showClue = this;
+            console.log(this);
+        }
+        
         return Clue;
     }]);

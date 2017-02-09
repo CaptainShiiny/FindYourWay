@@ -1,5 +1,5 @@
-angular.module('findyourway').directive('map', ["Player",
-    function(Player) {
+angular.module('findyourway').directive('map', ["Player","Clue",
+    function(Player, Clue) {
         return {
             restrict: 'E',
             templateUrl: 'app/templates/map.html',
@@ -7,6 +7,10 @@ angular.module('findyourway').directive('map', ["Player",
                 scope.clickOnMap = function(){
                     if(localStorage.getItem("score_verify")){
                         Player.modifyScore(localStorage.getItem("score"));
+                        if(localStorage.getItem("clues_game_in_progress")){
+                            console.log(localStorage.getItem("clues_game_in_progress"));
+                            //Clue.showClue();
+                        }
                     }
                     localStorage.removeItem("score_verify");
                     localStorage.removeItem("score");

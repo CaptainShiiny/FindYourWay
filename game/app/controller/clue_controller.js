@@ -2,25 +2,22 @@ angular.module("findyourway").controller("ClueController", ["$scope", "$http","C
 
         function($scope, $http, Clue){
 
-            $scope.showClue = function(){
+          $scope.showClue = function(){
                 return Clue.showClue;
-            }
+        }
+        
+       
 
-            $scope.$watch($scope.showClue, function(){
+        $scope.$watch($scope.showClue, function(newValue){
 
-                //api_url+"/destinations/"+ id_dest + "/clues"
-                $http.get(api_url+"/destinations/4/clues")
-                .then(function(response){
-                    var clues_tab = response.data[1].data;
-                    var info ={};
-                    
-                    info.label = clues_tab.label;
-                    info.destination_id = clues_tab.destination_id;
-                    info.position = clues_tab.position;
-                    console.log(info);
-                }, function(error){
-                    console.log(error);
-                });
+              if(newValue){
+                  $http.get(localStorage.getItem("clues_game_in_progress"))
+                  .then(function(response){
+                      console.log(response);
 
-            })
+
+                  });
+              }
+
+            });
         }]);
