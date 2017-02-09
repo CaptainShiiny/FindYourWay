@@ -1,26 +1,35 @@
 angular.module("findyourway").controller("ClueController", ["$scope", "$http","Clue",
 
-        function($scope, $http, Clue){
+    function($scope, $http, Clue){
+        console.log($scope);
+        $scope.showClue = function(){
+            console.log("edsf");
+            // return Clue.showClue;
+        }
 
-            $scope.showClue = function(){
-                return Clue.showClue;
-            }
+    }
 
-            $scope.$watch($scope.showClue, function(){
+]);
 
-                //api_url+"/destinations/"+ id_dest + "/clues"
-                $http.get(api_url+"/destinations/4/clues")
-                .then(function(response){
-                    var clues_tab = response.data[1].data;
-                    var info ={};
-                    
-                    info.label = clues_tab.label;
-                    info.destination_id = clues_tab.destination_id;
-                    info.position = clues_tab.position;
-                    console.log(info);
-                }, function(error){
-                    console.log(error);
-                });
-
-            })
-        }]);
+        // function($scope, $http, Clue){
+        //
+        //   $scope.show = function(){
+        //       console.log("defres");
+        //         // return Clue.show;
+        // }
+        //
+        //
+        //
+        // $scope.$watch($scope.show, function(newValue){
+        //     console.log(newValue);
+        //       if(newValue){
+        //           $http.get(localStorage.getItem("clues_game_in_progress"))
+        //           .then(function(response){
+        //               console.log(response);
+        //           }, function(error){
+        //               console.log(error);
+        //           });
+        //       }
+        //
+        //     });
+        // }]);
