@@ -17,25 +17,38 @@ angular.module("findyourway").controller("PlaceController", ["$scope", "$http", 
                     for(var i=0; i<5; i++){
                         randPlaces.push(places_tab[Math.floor(Math.random()*(number_places-1))]);
                     }
-                    var places = [];
-                    for(i = 0; i<randPlaces.length; i++){
-                        var info = {};
-                        info.latitude = randPlaces[i].latitude;
-                        info.longitude = randPlaces[i].longitude;
-                        info.label = randPlaces[i].label;
-                        info.url = randPlaces[i].links.self;
-                        var newPlace = new Place(info);
-                        places.push(newPlace);
-                    }
-                    $scope.places = places;
+                    $scope.linkClues(randPlaces);
                 },function(error){
                     console.log(error);
                 });
 
             };
-                    
-        })
-    
+
+        });
+
+        $scope.linkClues = function(randPlaces){
+            if(randPlaces){
+                url = localStorage.getItem("clues_game_in_progress")+"/clues";
+                $http.get(url, {}).then(function(response){
+                    var places_tab = [];
+                    for(i = 0; i<randPlaces.length; i++){
+                        var info = {};
+                        var clue = response.data[1].data.clues[i].links.self;
+                        var id = randPlaces[i].links.self;
+                        info.latitude = randPlaces[i].latitude;
+                        info.longitude = randPlaces[i].longitude;
+                        info.label = randPlaces[i].label;
+                        info.url = randPlaces[i].links.self;
+                        info.clue = clue;
+                        info.id = id;
+                        var newPlace = new Place(info);
+                        places_tab.push(newPlace);
+                    }
+                    $scope.places = places_tab;
+                    console.log($scope.places);
+                });
+            }
+        }
+
     }]
 );
-
