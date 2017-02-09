@@ -8,31 +8,40 @@ angular.module("findyourway").controller("ClueController", ["$scope", "$http","C
 
         $scope.$watch($scope.showClue, function(newValue){
             if(newValue){
-                url = localStorage.getItem("game_in_progress")+"/clues";
-                $http.get(url, {
+                var clue_id = newValue[1];
+                url = localStorage.getItem("game_in_progress")+"/clues/"+clue_id;
+                token = localStorage.getItem("token");
+                $http.put(url, {}, {
                     headers: {
-                        "Authorization": localStorage.getItem("token")
+                        "Authorization": token
                     }
                 }).then(function(response){
-                    console.log(response);
+                    $scope.getClues();
                 }, function(error){
                     console.log(error);
                 });
             }
-            //   if(localStorage.getItem("to_guess")){
-            //       url = localStorage.getItem("to_guess");
-            //       $http.get(url).then(function(response){
-            //           var info = {};
-            //           info.label = response.data[1].data.label;
-            //           info.position = response.data[1].data.position;
-            //           $scope.clue = new Clue(info);
-            //       }, function(error){
-            //           console.log(error);
-            //           localStorage.removeItem("to_guess");
-            //       });
-            //   }
-
         });
+
+        $scope.getClues = function(){
+            url = localStorage.getItem("game_in_progress")+"/clues";
+            token = localStorage.getItem("token");
+            $http.get(url, {
+                headers: {
+                    "Authorization": token
+                }
+            }).then(function(response){
+                console.log(response);
+                $scope.clues = [];
+                response.data[1].data.forEach(function(data){
+                    var newClue = new Clue(data)
+                    $scope.clues.push(newClue);
+                });
+            }, function(error){
+                console.log(error);
+            });
+        }
+
     }
 
 ]);
