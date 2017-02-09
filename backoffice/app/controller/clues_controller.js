@@ -5,6 +5,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
         $scope.options = [{name:1},{name:2},{name:3},{name:4},{name:5}];
         $scope.position = $scope.options[0];
 
+
         //On affiche tous les indices
         $scope.showClues = function(){
             return Clue.showClues;
@@ -60,6 +61,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
         $scope.$watch($scope.modifyClue, function(newValue, oldValue){
             if (newValue) {
                 var url = url_api+"/clues/"+newValue.id;
+                console.log(url);
                 $http.put(url, {
                     "label": newValue['label'],
                     "position": newValue['position']
