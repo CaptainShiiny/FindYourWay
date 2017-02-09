@@ -7,7 +7,7 @@ angular.module("findyourway").service("Clue", ["$http",
             this.position = data.position;
         }
         Clue.showClue = function(){
-            //Clue.showClue = this;
+            Clue.showClue = this;
             console.log(this);
         }
         
