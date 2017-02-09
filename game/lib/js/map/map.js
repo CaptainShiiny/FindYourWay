@@ -7,7 +7,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     id: 'mapbox.streets'
 }).addTo(mymap);
 
-function comparaisonDestinationFinale(bonneLat, bonneLong, url) {
+comparaisonDestinationFinale = function(bonneLat, bonneLong, url) {
 
     // var villes = [];
     mymap.on('click', function(e) {
@@ -52,7 +52,7 @@ function comparaisonDestinationFinale(bonneLat, bonneLong, url) {
     });
 }
 
-function comparaisonLieuIndince(bonneLat, bonneLong, indice) {
+comparaisonLieuIndince = function(bonneLat, bonneLong, indice) {
     mymap.on('click', function(e) {
 
         var rlat1 = Math.PI * bonneLat / 180; // Passage de degrès à radians

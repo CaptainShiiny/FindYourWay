@@ -215,6 +215,7 @@ class FinalDestinationController extends AbstractController{
     function updateClue($req, $resp, $args){
         try{
             $clue = Clue::findOrFail($args['id']);
+
             $position = Clue::where("destination_id", $clue->destination_id)->get();
             $all_pos = [];
             if (isset($req->getParams()['position'])) {
@@ -234,15 +235,20 @@ class FinalDestinationController extends AbstractController{
                 }
             }
 
+
             if(isset($req->getParams()['label'])){
                 $clue->label = $req->getParams()['label'];
+
             }
+
             $clue->save();
 
             $data = [
-                        "name" => $clue->label,
-                        "links" => ["self" => DIR."/clues/".$clue->id]
-                    ];
+                "label" => $clue->label,
+                "links" => ["self" => DIR."/clues/".$clue->id]
+            ];
+
+
             return $this->responseJSON(200, "Success", $data);
         }catch(Exception $e){
             return $this->responseJSON(404, "Clue not found.", NULL);
