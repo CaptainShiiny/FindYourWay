@@ -23,6 +23,7 @@
         <div ng-repeat="destination in destinations" class="row destinations">
             <div class="col-md-4">
                 <strong class="col-md-12">{{destination.name}}</strong>
+                <span class="col-md-12">{{destination.label}}</span>
                 <span class="col-md-12">({{destination.latitude}}, {{destination.longitude}})</span>
             </div>
             <div class="form">
@@ -30,19 +31,19 @@
                 <form ng-show="showModifyForm">
                     <div class="form-group">
                         <label>Nom</label>
-                        <input class="form-control" name="name" ng-model="name" type="text" required/>
+                        <input class="form-control" ng-value="destination.name" name="name" ng-model="new_name" type="text" required/>
                     </div>
                     <div class="form-group">
                         <label>Label</label>
-                        <input name="label" class="form-control" ng-model="label" type="text" required/>
+                        <input name="label" class="form-control" ng-value="destination.label" ng-model="new_label" type="text" required/>
                     </div>
                     <div class="form-group">
                         <label>Latitude</label>
-                        <input class="form-control" ng-model="latitude" name="latitude" type="text" required/>
+                        <input class="form-control" ng-value="destination.latitude" ng-model="new_latitude" name="latitude" type="text" required/>
                     </div>
                     <div class="form-group">
                         <label>Longitude</label>
-                        <input class="form-control" ng-model="longitude" name="longitude" type="text" required/>
+                        <input class="form-control" ng-value="destination.longitude" ng-model="new_longitude" name="longitude" type="text" required/>
                     </div>
                     <button ng-click="modifyDestination(destination)" class="btn btn-success col-md-12">Valider</button>
                 </form>
