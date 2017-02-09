@@ -242,8 +242,6 @@ class FinalDestinationController extends AbstractController{
                }
                
 
-
-           
             return $this->responseJSON(200, "Success", $data);
         }catch(Exception $e){
             return $this->responseJSON(404, "Clue not found.", NULL);
