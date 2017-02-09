@@ -8,8 +8,8 @@ angular.module("findyourway").service("Player",["$http",
         Player.add = function(pseudo){
             Player.add = pseudo;
         }
-        Player.modifyScore = function(score, url){
-            Player.updateScore = [this, score, url];
+        Player.modifyScore = function(score){
+            Player.updateScore = [this, score];
         }
         return Player;
     }
