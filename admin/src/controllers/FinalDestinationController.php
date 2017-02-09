@@ -215,11 +215,27 @@ class FinalDestinationController extends AbstractController{
     function updateClue($req, $resp, $args){
         try{
             $clue = Clue::findOrFail($args['id']);
+            $position = Clue::where("destination_id", $clue->destination_id)->get();
+            $all_pos = [];
+            if (isset($req->getParams()['position'])) {
+                $newPosition = $req->getParams()['position'];
+            }
+
+            if ($clue->position == $newPosition) {
+                $clue->position = $newPosition;
+            }else{
+                foreach ($position as $value) {
+                    if ($value->position == $newPosition) {
+                        $data = ["Erreur" => "Position déjà utilisée"];
+                        return $this->responseJSON(400, "Bad Request", $data);
+                    }else {
+                        $clue->position = $newPosition;
+                    }
+                }
+            }
+
             if(isset($req->getParams()['label'])){
                 $clue->label = $req->getParams()['label'];
-            }
-            if(isset($req->getParams()['position'])){
-                $clue->position = $req->getParams()['position'];
             }
             $clue->save();
 

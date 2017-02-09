@@ -45,11 +45,14 @@
       <section class="row">
           <section class="col-sm-4" ng-controller="PlayerController">
               <div ng-if="player" class="alert alert-info">
-              <strong>Bonjour {{player.pseudo}},</strong>
+                 <strong>Bonjour {{player.pseudo}},</strong>
                  <ul>
                      <li>Score: {{player.game_in_progress.score}}</li>
                      <li>Indices trouvées: 0</li>
                  </ul>
+              </div>
+              <div id="displayClue" class="alert alert-info" ng-controller="ClueController">
+                  <clue />
               </div>
           </section>
           <section ng-controller="PlaceController" class="col-sm-8">
@@ -60,8 +63,6 @@
           <game></game>
       </section>
       <map></map>
-    
-      <section ng-controller="ClueController"></section>
   </body>
 
 </html>

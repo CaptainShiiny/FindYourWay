@@ -17,12 +17,15 @@
         <!-- directive -->
         <script src="app/directive/destinations_directive.js"></script>
         <script src="app/directive/clues_directive.js"></script>
+        <script src="app/directive/places_directive.js"></script>
         <!-- model -->
         <script src="app/model/destinations.js"></script>
         <script src="app/model/clues.js"></script>
+        <script src="app/model/places.js"></script>
         <!-- controller -->
         <script src="app/controller/destinations_controller.js"></script>
         <script src="app/controller/clues_controller.js"></script>
+        <script src="app/controller/places_controller.js"></script>
     </head>
     <body ng-app="backoffice" class="col-md-12">
         <h1>Backoffice</h1>
@@ -35,6 +38,10 @@
         <section ng-controller="CluesController" id="clues" class="col-md-6">
             <h3 id="clueTitle">Indices</h3>
             <clues />
+        </section>
+        <section ng-controller="PlacesController" id="places" class="col-md-12">
+            <h3>Lieux</h3>
+            <places />
         </section>
     </body>
 </html>
