@@ -21,6 +21,15 @@ $conf = ['settings' => ['displayErrorDetails' => true, 'tmpl_dir' => '..\templat
 $errorDetails = new \Slim\Container($conf);
 $app = new \Slim\App($errorDetails);
 
+$app->add(new \Tuupola\Middleware\Cors([
+    "origin" => ["*"],
+    "methods" => ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    "headers.allow" => ["Authorization", "If-Match", "If-Unmodified-Since"],
+    "headers.expose" => ["Etag"],
+    "credentials" => true,
+    "cache" => 86400
+]));
+
 // On affiche les destinations finales
 $app->get("/destinations[/]",
 function(Request $req, Response $resp, $args){
