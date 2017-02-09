@@ -14,6 +14,7 @@ angular.module('findyourway').directive('map', ["Player","Clue",
                     }
                     localStorage.removeItem("score_verify");
                     localStorage.removeItem("score");
+                    localStorage.removeItem("to_guess");
                 }
             }
         };
