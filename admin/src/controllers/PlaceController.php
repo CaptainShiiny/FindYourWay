@@ -17,6 +17,7 @@ class PlaceController extends AbstractController{
 
       foreach($places as $place){
           $data = [
+                      "id" => $place->id,
                       "label" => $place->label,
                       "latitude"=> $place->latitude,
                       "longitude"=> $place->longitude,
@@ -109,5 +110,5 @@ class PlaceController extends AbstractController{
         }
     }
 
-    
+
 }
