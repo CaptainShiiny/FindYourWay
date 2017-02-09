@@ -52,6 +52,26 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
             }
         });
 
+        // On modifie une destination
+        $scope.modifyClue = function(){
+            return Clue.modifyClue;
+        }
+        $scope.$watch($scope.modifyClue, function(newValue, oldValue){
+            if (newValue) {
+                var url = url_api+"/clues/"+newValue.id;
+                console.log(url);
+                $http.put(url, {
+                    "label": newValue['label'],
+                    "position": newValue['position']
+                }).then(function(response){
+                    $scope.refresh();
+                    $scope.showModifyFormClue = false;
+                },function(error){
+                    console.log(error);
+                });
+            }
+        });
+
         // On supprime une destination
         $scope.deleteClue = function(){
             return Clue.deleteClue;

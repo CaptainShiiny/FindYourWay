@@ -66,7 +66,7 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
                     "name": newValue['name']
                 }).then(function(response){
                     $scope.refresh();
-                    $scope.showForm = false;
+                    $scope.showModifyForm = false;
                 },function(error){
                     console.log(error);
                 });
