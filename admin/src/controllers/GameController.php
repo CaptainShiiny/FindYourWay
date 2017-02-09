@@ -136,7 +136,23 @@ class GameController extends AbstractController{
                 array_push($clues_tab, $data);
             }
 
-            return $this->responseJSON(200, "ok", $data);
+            return $this->responseJSON(200, "ok", $clues_tab);
+
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Player or Game not found.", NULL);
+        }
+    }
+
+    function modifyClue($req, $resp, $args){
+        try{
+
+            $player = Player::findOrFail($args['id']);
+            $game = Game::findOrFail($args['game_id']);
+
+            $game->clue_game()->detach($args["clue_id"]);
+            $game->clue_game()->attach($args["clue_id"], ["status" => 1]);
+
+            return $this->responseJSON(200, "ok", "Success");
 
         }catch(Exception $e){
             return $this->responseJSON(404, "Player or Game not found.", NULL);

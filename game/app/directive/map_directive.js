@@ -7,7 +7,7 @@ angular.module('findyourway').directive('map', ["Player","Clue",
                 scope.clickOnMap = function(){
                     if(localStorage.getItem("score_verify")){
                         if(localStorage.getItem("to_guess")){
-                            Clue.showClue();
+                            Clue.showClue(localStorage.getItem("to_guess"));
                         }
                         Player.modifyScore(localStorage.getItem("score"));
                     }

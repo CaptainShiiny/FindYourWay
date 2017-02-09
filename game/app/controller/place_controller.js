@@ -35,6 +35,8 @@ angular.module("findyourway").controller("PlaceController", ["$scope", "$http", 
                         var info = {};
                         var clue = response.data[1].data.clues[i].links.self;
                         var id = randPlaces[i].links.self;
+                        id = id.split("/");
+                        id = id[id.length-1];
                         info.latitude = randPlaces[i].latitude;
                         info.longitude = randPlaces[i].longitude;
                         info.label = randPlaces[i].label;

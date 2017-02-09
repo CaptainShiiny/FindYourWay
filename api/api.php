@@ -206,6 +206,13 @@ $app->get("/players/{id}/games/{game_id}/clues[/]",
     }
 )->add('checkTokenPlayer');
 
+//on modifie un indice
+$app->put("/players/{id}/games/{game_id}/clues/{clue_id}[/]",
+    function(Request $req, Response $resp, $args){
+        return (new GameController($this))->modifyClue($req, $resp, $args);
+    }
+)->add('checkTokenPlayer');
+
 
 
 
