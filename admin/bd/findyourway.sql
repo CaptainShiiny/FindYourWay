@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 07 Février 2017 à 08:12
+-- Généré le :  Jeu 09 Février 2017 à 08:16
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.4
 
@@ -38,8 +38,11 @@ CREATE TABLE `clue` (
 --
 
 INSERT INTO `clue` (`id`, `label`, `destination_id`, `position`) VALUES
-(1, 'hsdvjxvnolredkfp', 2, 7),
-(2, 'hsdvjxvnolredkfp', 2, 5);
+(1, 'Meurthe et Moselle', 1, 1),
+(2, 'Marcel Picot', 1, 2),
+(3, 'Célèbre place française', 1, 3),
+(4, 'Ville étudiante', 1, 4),
+(5, 'c\'est une ville dont le nom commence par N', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -60,8 +63,7 @@ CREATE TABLE `final_destination` (
 --
 
 INSERT INTO `final_destination` (`id`, `label`, `name`, `latitude`, `longitude`) VALUES
-(1, 'Nancy: une magnifique ville !!', 'Nancy', '48.694138', '6.183393'),
-(2, 'Nancy: une magnifique ville !!', 'Nancy', '48.694138', '6.183393');
+(1, 'Félicitation, vous avez gagné une place VIP pour le concert du chanteur que vous voulez.', 'Nancy', '48.683331', '6.2');
 
 -- --------------------------------------------------------
 
@@ -83,8 +85,18 @@ CREATE TABLE `game` (
 
 INSERT INTO `game` (`id`, `score`, `player_id`, `destination_id`, `status`) VALUES
 (1, 0, 1, 1, 'créée'),
-(2, 0, 3, 2, 'créée'),
-(4, 0, 4, 2, 'créée');
+(2, 0, 2, 1, 'créée'),
+(3, 0, 3, 1, 'créée'),
+(4, 0, 4, 1, 'créée'),
+(5, 0, 5, 1, 'créée'),
+(6, 0, 6, 1, 'créée'),
+(7, 0, 7, 1, 'créée'),
+(8, 0, 8, 1, 'créée'),
+(9, 0, 9, 1, 'créée'),
+(10, 0, 10, 1, 'créée'),
+(11, 0, 11, 1, 'créée'),
+(12, 0, 12, 1, 'créée'),
+(13, 0, 13, 1, 'créée');
 
 -- --------------------------------------------------------
 
@@ -104,7 +116,9 @@ CREATE TABLE `place` (
 --
 
 INSERT INTO `place` (`id`, `longitude`, `latitude`, `label`) VALUES
-(3, '6.183393', '48.694138', 'Place Stanislas');
+(1, '2.365097', '48.726194', 'Orly'),
+(2, '5.372178', '43.296363', 'Marseille'),
+(3, '6.183241', '48.693760', 'Place Stanislas');
 
 -- --------------------------------------------------------
 
@@ -123,9 +137,19 @@ CREATE TABLE `player` (
 --
 
 INSERT INTO `player` (`id`, `pseudo`, `token`) VALUES
-(2, ' fdjixbcortg', '0'),
-(3, ' fdjixbcortg', 'gSuKiF6dKHnBCAALyn1rGqs1pqfgqg0d'),
-(4, 'milad', 'xDoBlbvnC+8vBiAwL4z2T1YcI3Dw/jqG');
+(1, 'Dorian', 'QqqCnF0bBZ93LTCSg93NTN2eRCGAlg0m'),
+(2, 'titi', 'vHDTOtIJfWRYsDOKGmbdSaN1EizVLFS/'),
+(3, 'Dodo', 'FZ6g9o6P0CLcS+jmoaaKgxPcCJcyOhYO'),
+(4, 'Admin', '3Fs3YZwpMMEReluTmhx/75hU2QPzvDK8'),
+(5, 'LeBossDu54', 'k0U2xXKdAcigicJsyxiAvLb4fCBXzYtW'),
+(6, 'WWest', 'kKBt0wa10MrBkySg55CISN4WRgOvwt6N'),
+(7, 'John', 'GM6PafDVGFvZkmUN8ZY4wbeOZnJ5XqH+'),
+(8, 'Jesse', 'YRMP3aIBbxf1yLWOl0VaGkUPQp+HKUtr'),
+(9, 'Jordan', '4m0sNQcPTDznDR5XdypaWG0BnoGFOLnt'),
+(10, 'Michel', '/XHaxH63ArRnnh3QPHlaYyFxiea2TCyZ'),
+(11, 'Marc', 'VqYgMAQLoDW2vO+05mNi1vY4tu1Ftcg4'),
+(12, 'John DO', 'peFvgqjWa88m8XjiH+AQdbwNtlUgnVFS'),
+(13, 'Jacques', 'SUEL/0he0Pqr1cSaiNXpqVoY67PzyQHS');
 
 --
 -- Index pour les tables exportées
@@ -169,17 +193,17 @@ ALTER TABLE `player`
 -- AUTO_INCREMENT pour la table `clue`
 --
 ALTER TABLE `clue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `final_destination`
 --
 ALTER TABLE `final_destination`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `place`
 --
@@ -189,7 +213,7 @@ ALTER TABLE `place`
 -- AUTO_INCREMENT pour la table `player`
 --
 ALTER TABLE `player`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
