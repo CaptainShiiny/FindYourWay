@@ -199,6 +199,13 @@ $app->get("/players/{id}/games[/]",
     }
 )->add('checkTokenPlayer');
 
+//on liste les indices d'une partie d'un joueur
+$app->get("/players/{id}/games/{game_id}/clues[/]",
+    function(Request $req, Response $resp, $args){
+        return (new GameController($this))->cluesFromGame($req, $resp, $args);
+    }
+)->add('checkTokenPlayer');
+
 
 
 

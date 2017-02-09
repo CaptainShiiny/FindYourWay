@@ -15,4 +15,12 @@ class Clue extends Model{
         return $this->belongsTo('src\models\Destination', 'destination_id');
     }
 
+    public function clue_game(){
+        return $this->belongsToMany(
+            "\src\models\Game",
+            "clue_game",
+            "clue_id", "game_id"
+        );
+    }
+
 }
