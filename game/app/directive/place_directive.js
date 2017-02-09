@@ -11,6 +11,7 @@ angular.module("findyourway").directive("place", [
                     $("#indication").text("Où se trouve \""+place.label+"\"?");
                     comparaisonDestinationFinale(place.latitude, place.longitude, place.url);
                 }
+               
             }
         };
     }

@@ -59,21 +59,24 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
             return Player.updateScore;
         }
         $scope.$watch($scope.updateScore, function(newValue, oldValue){
-            // if(newValue){
-            //     url = localStorage.getItem("url_game_in_progress");
-            //     $http.put(url, {
-            //             "score": newValue[1]
-            //         }, {
-            //         headers: {
-            //             "Content-Type": "application/x-www-form-urlencoded",
-            //             "Authorization": token
-            //         }
-            //     }).then(function(response){
-            //         $scope.getGame(response.data[1].data.links.self, token);
-            //     },function(error){
-            //         console.log(error);
-            //     });
-            // }
+            if(newValue){
+                var url = localStorage.getItem("game_in_progress");
+                var score = newValue[1];
+                $http.put(url, {
+                        "score": score
+                    },
+                    {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "Authorization": localStorage.getItem("token")
+                    }
+                }).then(function(response){
+                    console.log(response);
+                    $scope.getGame(localStorage.getItem("game_in_progress"), localStorage.getItem("token"));
+                },function(error){
+                    console.log(error);
+                });
+            }
         });
 
         $scope.getGame = function(url, token){
@@ -83,11 +86,13 @@ angular.module("findyourway").controller("PlayerController", ["$scope", "$http",
                         "Authorization": token
                     }
                 }).then(function(response){
+                    console.log(response);
                     var info = {};
                     info.pseudo = response.data[1].data.joueur;
                     info.token = token;
                     info.game_in_progress = {"score": response.data[1].data.score, "destination": response.data[1].data.destination};
                     $scope.player = new Player(info);
+                    localStorage.setItem("token", token);
                     localStorage.setItem("game_in_progress", url);
                     localStorage.setItem("clues_game_in_progress", response.data[1].data.links.destination);
                 },function(error){

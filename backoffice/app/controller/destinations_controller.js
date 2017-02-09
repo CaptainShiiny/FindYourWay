@@ -9,8 +9,19 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
                 info.id = data.id;
                 info.name = data.name;
                 info.url = data.links.self;
-                var newDestination = new Destination(info);
-                $scope.destinations.push(newDestination);
+
+                $http.get(url_api+"/destinations/"+info.id).then(function(response){
+                    data = [response.data[1].data];
+                    data.forEach(function(data){
+                        info.label = data.label;
+                        info.latitude = data.latitude;
+                        info.longitude = data.longitude;
+                        var newDestination = new Destination(info);
+                        $scope.destinations.push(newDestination);
+                    });
+                }, function(error){
+                    console.log(error);
+                });
             });
         },function(error){
             console.log(error);
@@ -66,8 +77,19 @@ angular.module("backoffice").controller("DestinationsController",["$scope", "$ht
                     info.id = data.id;
                     info.name = data.name;
                     info.url = data.links.self;
-                    var newDestination = new Destination(info);
-                    $scope.destinations.push(newDestination);
+                    
+                    $http.get(url_api+"/destinations/"+info.id).then(function(response){
+                        data = [response.data[1].data];
+                        data.forEach(function(data){
+                            info.label = data.label;
+                            info.latitude = data.latitude;
+                            info.longitude = data.longitude;
+                            var newDestination = new Destination(info);
+                            $scope.destinations.push(newDestination);
+                        });
+                    }, function(error){
+                        console.log(error);
+                    });
                 });
             },function(error){
                 console.log(error);
