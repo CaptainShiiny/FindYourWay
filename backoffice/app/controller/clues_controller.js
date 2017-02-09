@@ -24,6 +24,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
                         info.url = data.links.self;
                         var newClue = new Clue(info);
                         $scope.clues.push(newClue);
+                        $scope.new_position = $scope.options[info.position-1];
                     });
                 },function(error){
                     console.log(error);
@@ -59,7 +60,6 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
         $scope.$watch($scope.modifyClue, function(newValue, oldValue){
             if (newValue) {
                 var url = url_api+"/clues/"+newValue.id;
-                console.log(url);
                 $http.put(url, {
                     "label": newValue['label'],
                     "position": newValue['position']
@@ -104,6 +104,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
                             info.url = data.links.self;
                             var newClue = new Clue(info);
                             $scope.clues.push(newClue);
+                            $scope.new_position = $scope.options[info.position-1];
                         });
                     },function(error){
                         console.log(error);
