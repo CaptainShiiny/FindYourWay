@@ -48,6 +48,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
                     $scope.showAddForm = false;
                     $scope.label = "";
                     $scope.position = "";
+                    $scope.position = $scope.options[0];
                 },function(error){
                     console.log(error);
                 });
