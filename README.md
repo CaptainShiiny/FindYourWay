@@ -35,7 +35,7 @@
 
 ### 10. Importer le fichier sql se trouvant dans "admin/bd"
 
-### 11. Mettre le fichier conf.ini dans le dossier "admin/conf"
+### 11. Créer le dossier "/conf" dans le dossier "admin" et y copier le fichier conf.ini se trouvant dans le dossier "installation"
 
 ### 12. Supprimer le fichier index.html présent dans "www/html"
 
