@@ -109,21 +109,17 @@ angular.module("findyourway").controller("PlayerController",
                 }
             }).then(function(response){
                 var tab = [];
-                if(clues_win_tab.length == 0){
-                    tab.push(data.id);
-                }
                 response.data[1].data.clues.forEach(function(data){
-                    a = 0;
+                    a = data.id;
                     clues_win_tab.forEach(function(t){
-                        if(t != data.label){
-                            a = data.id;
+                        if(t == data.label){
+                            a = 0;
                         }
                     });
                     if(a != 0){
                         tab.push(a);
                     }
                 });
-                console.log(tab);
                 $scope.displayClue(tab[0]);
             }, function(error){
                 console.log(error);
@@ -170,15 +166,17 @@ angular.module("findyourway").controller("PlayerController",
         }
 
         $scope.$watch($scope.destination, function(newValue, oldValue){
-            var url = api_url+"/destinations/"+$scope.game.destination_id;
-            $http.get(url).then(function(response){
-                var latitude = response.data[1].data.latitude;
-                var longitude = response.data[1].data.longitude;
-                localStorage.setItem("final_destination", response.data[1].data.id)
-                comparaisonDestinationFinale(latitude, longitude);
-            }, function(error){
-                console.log(error);
-            });
+            if(newValue){
+                var url = api_url+"/destinations/"+$scope.game.destination_id;
+                $http.get(url).then(function(response){
+                    var latitude = response.data[1].data.latitude;
+                    var longitude = response.data[1].data.longitude;
+                    localStorage.setItem("final_destination", response.data[1].data.id)
+                    comparaisonDestinationFinale(latitude, longitude);
+                }, function(error){
+                    console.log(error);
+                });
+            }
         });
 
     }
