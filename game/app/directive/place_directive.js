@@ -9,17 +9,15 @@ angular.module("findyourway").directive("place", [
                     $("#indication").show();
                     $("#indication").text("Où se trouve \""+place.label+"\"?");
                     comparaisonDestinationFinale(place.latitude, place.longitude);
-                    
                     scope.delete(place);
-                    
                 }
                 scope.delete = function(p){
-                        var tab_places = scope.places; 
+                        var tab_places = scope.places;
                         var index = tab_places.indexOf(p);
                         tab_places.splice(index,1);
 
                 }
-                
+
             }
         };
     }

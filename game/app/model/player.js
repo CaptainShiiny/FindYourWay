@@ -15,6 +15,10 @@ angular.module("findyourway").service("Player",[
             Player.newScore = score;
         }
 
+        Player.findDestination = function(){
+            Player.destination = this;
+        }
+
         return Player;
     }
 ]);

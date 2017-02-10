@@ -9,6 +9,10 @@ angular.module("findyourway").directive("player", [
                     Player.addPlayer(scope.pseudo);
                     $("#showForm").hide();
                     Place.selectPlaces();
+                },
+                scope.findDestination = function(){
+                    Player.findDestination();
+                    $("#destination_button").hide();
                 }
             }
         };
