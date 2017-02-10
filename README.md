@@ -39,7 +39,7 @@
 ### 12. Supprimer le fichier index.html présent dans "www/html"
 
 
-=================================
+
 Note
 ==================================
 
