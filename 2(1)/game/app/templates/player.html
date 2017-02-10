@@ -1,0 +1,30 @@
+<section>
+    <div id="showForm" class="alert alert-info text-center">
+        <div class="row">
+            <button ng-click="showForm = !showForm" class="btn btn-success btn-lg">Jouer</button>
+        </div>
+        <div ng-show="showForm" class="row">
+            <form>
+                <div class="row">
+                    <input type="text" ng-model="pseudo" class="text-center col-sm-offset-1 col-sm-10" placeholder="Votre pseudo">
+                </div>
+                <div class="row">
+                    <button ng-click="addPlayer()" class="col-sm-offset-1 col-sm-10 reposition btn btn-success btn-sm">Jouer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div ng-if="player">
+        <strong>Bonjour {{player.pseudo}},</strong>
+    </div>
+</section>
+<section ng-if="game">
+    <div class="alert alert-info text-center">
+        Score: {{game.score}}
+        <ul>
+            <li ng-repeat="clue in game.clues">
+                Indices trouvés: {{clue}}
+            </li>
+        </ul>
+    </div>
+</section>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+        <title>FindYourWay</title>
+
+        <!-- libraries -->
+        <link rel="stylesheet" href="lib/css/bootstrap/stylesheets/styles.css">
+        <link rel="stylesheet" href="lib/css/css/css/style.css">
+        <script src="lib/js/jquery/jquery.js"></script>
+        <script src="lib/js/angular-1.6.1/angular.min.js"></script>
+
+        <script src="app/app.js"></script>
+
+        <!-- directive -->
+        <script src="app/directive/player_directive.js"></script>
+        <script src="app/directive/game_directive.js"></script>
+
+        <!-- model -->
+        <script src="app/model/player.js"></script>
+        <script src="app/model/game.js"></script>
+
+        <!-- controller -->
+        <script src="app/controller/player_controller.js"></script>
+
+    </head>
+
+    <body class="container" ng-app="findyourway">
+
+        <header class="row">
+            <h1>Find<span>Your</span>Way</h1>
+        </header>
+
+        <section class="row content">
+            <section class="col-sm-4">
+                <player ng-controller="PlayerController" />
+            </section>
+            <section class="col-sm-4">
+                <game />
+            </section>
+        </section>
+
+    </body>
+
+</html>
