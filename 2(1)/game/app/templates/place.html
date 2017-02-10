@@ -1,0 +1,9 @@
+<div ng-if="places">
+    <h2>Pour obtenir les indices, trouver sur la carte:</h2>
+    <div class="alert-warning place_box row col-sm-11" ng-repeat="place in places">
+        <div class="col-sm-7"><strong>{{place.label}}</strong></div>
+        <div class="col-sm-5 text-right">
+            <button ng-click="propose(place)" class="btn btn-primary btn-sm">Proposer une réponse</button>
+        </div>
+    </div>
+</div>

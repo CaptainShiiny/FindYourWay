@@ -16,14 +16,18 @@
 
         <!-- directive -->
         <script src="app/directive/player_directive.js"></script>
-        <script src="app/directive/game_directive.js"></script>
+        <script src="app/directive/place_directive.js"></script>
+        <script src="app/directive/map_directive.js"></script>
 
         <!-- model -->
         <script src="app/model/player.js"></script>
         <script src="app/model/game.js"></script>
+        <script src="app/model/place.js"></script>
+        <script src="app/model/map.js"></script>
 
         <!-- controller -->
         <script src="app/controller/player_controller.js"></script>
+        <script src="app/controller/place_controller.js"></script>
 
     </head>
 
@@ -34,11 +38,16 @@
         </header>
 
         <section class="row content">
-            <section class="col-sm-4">
-                <player ng-controller="PlayerController" />
+            <section class="row">
+                <section class="col-sm-4">
+                    <player ng-controller="PlayerController" />
+                </section>
+                <section class="col-sm-8">
+                    <place ng-controller="PlaceController" />
+                </section>
             </section>
-            <section class="col-sm-4">
-                <game />
+            <section class="row">
+                <map />
             </section>
         </section>
 
