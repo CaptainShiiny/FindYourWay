@@ -3,7 +3,6 @@
 
 ## Pour un bon fonctionnement de l'application, nous vous recommandons de le lancer dans une machine virtuelle:
 
-======================================================
 ### 1. Copier dans un dossier vide les fichiers (présents dans le dossier "installation"):
     - Vagrantfile
     - init_apache.sh
