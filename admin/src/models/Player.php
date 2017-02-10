@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Player extends Model{
 	protected $table = "player";
 	protected $primaryKey = "id";
-	protected $fillable = ["pseudo"];
+	protected $fillable = ["pseudo", "token"];
 	public $timestamps = false;
 
-	public function Game(){
-		return $this->hasMany("src\models\Game", "game_id");
+	public function games(){
+		return $this->hasMany("src\models\Game", "player_id");
 	}
 
 }

@@ -15,16 +15,21 @@ class PlayerController extends AbstractController{
     function addPlayer($req, $resp, $args){
 
         try{
-
+            $players = Player::get();
             if(!isset($req->getParams()["pseudo"])){
 
                 return $this->responseJSON(400,"Il manque une valeur au champ pseudo", NULL);
             }
             $player = new Player();
             $player->pseudo = $req->getParams()["pseudo"];
+            
+            $player->token = (new \RandomLib\Factory)->getMediumStrengthGenerator()->generateString(32);
             $player->save();
 
-            $data = ["links"=>[ "self" => DIR."/players/".$player->id]];
+            $data = [
+                    "token" => $player->token,
+                    "links"=>[ "self" => DIR."/players/".$player->id]
+                    ];
 
             return $this->responseJSON(200, "OK", $data);
 
@@ -77,6 +82,8 @@ class PlayerController extends AbstractController{
                 return $this->responseJSON(400, "Une erreur est survenue.", NULL);
         }
 
+    }
+
     function deletePlayer($req, $resp, $args){
         try{
             $player = Player::findOrFail($args['id']);
@@ -87,6 +94,7 @@ class PlayerController extends AbstractController{
         }
 
     }
+
 
     function updatePlayer($req, $resp, $args){
         try{
@@ -100,7 +108,7 @@ class PlayerController extends AbstractController{
                         "pseudo" => $player->pseudo,
                         "links" => ["self" => DIR."/players/".$player->id]
                     ];
-            return $this->responseJSON(200, "Success", $data);
+            return $this->responseJSON(200, "The player has been modify", $data);
         }catch(Exception $e){
             return $this->responseJSON(404, "Player not found.", NULL);
         }

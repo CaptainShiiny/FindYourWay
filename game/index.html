@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+        <title>FindYourWay</title>
+
+        <!-- libraries -->
+        <link rel="stylesheet" href="lib/css/bootstrap/stylesheets/styles.css">
+        <link rel="stylesheet" href="lib/css/css/css/style.css">
+        <script src="lib/js/jquery/jquery.js"></script>
+        <script src="lib/js/angular-1.6.1/angular.min.js"></script>
+
+          <!-- leaflet -->
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    	  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+
+        <script src="app/app.js"></script>
+
+        <!-- directive -->
+        <script src="app/directive/player_directive.js"></script>
+        <script src="app/directive/place_directive.js"></script>
+        <script src="app/directive/map_directive.js"></script>
+
+        <!-- model -->
+        <script src="app/model/player.js"></script>
+        <script src="app/model/game.js"></script>
+        <script src="app/model/place.js"></script>
+        <script src="app/model/map.js"></script>
+
+        <!-- controller -->
+        <script src="app/controller/player_controller.js"></script>
+        <script src="app/controller/place_controller.js"></script>
+
+    </head>
+
+    <body class="container" ng-app="findyourway">
+
+        <header class="row">
+            <h1>Find<span>Your</span>Way</h1>
+        </header>
+
+        <section class="row content">
+            <section class="row">
+                <section class="col-sm-offset-1 col-sm-3">
+                    <player ng-controller="PlayerController" />
+                </section>
+                <section class="col-sm-8">
+                    <place ng-controller="PlaceController" />
+                </section>
+            </section>
+            <section class="row">
+                <map />
+            </section>
+        </section>
+
+    </body>
+
+</html>

@@ -18,6 +18,7 @@ class FinalDestinationController extends AbstractController{
 
       foreach($destinations as $destination){
           $data = [
+                      "id" => $destination->id,
                       "name" => $destination->name,
                       "links" => ["self" => DIR."/destinations/".$destination->id]
                   ];
@@ -53,7 +54,7 @@ class FinalDestinationController extends AbstractController{
 
             $data = [
                         "name" => $destination->name,
-                        "links" => ["self" => DIR."/destination/".$destination->id]
+                        "links" => ["self" => DIR."/destinations/".$destination->id]
                     ];
             return $this->responseJSON(200, "ok", $data);
         }catch(Exception $e){
@@ -64,7 +65,14 @@ class FinalDestinationController extends AbstractController{
      function afficheDestinationId($req, $resp, $args){
       try{
         $dest = FinalDestination::where('id', '=', $args['id'])->firstorfail();
-        return $this->responseJSON(200, "ok",[$dest->toArray(), "links "=>["label"=>["href"=>DIR."/destinations/".$dest->id]]]);
+        $data = [
+                    "name" => $dest->name,
+                    "label" => $dest->label,
+                    "latitude" => $dest->latitude,
+                    "longitude" => $dest->longitude,
+                    "links "=>["self"=>DIR."/destinations/".$dest->id]
+                ];
+        return $this->responseJSON(200, "ok", $data);
       }catch(\Exception $e)
       {
         return $this->responseJSON(400, "Une erreur est survenue.", NULL);
@@ -106,7 +114,7 @@ class FinalDestinationController extends AbstractController{
         }catch(Exception $e){
             return $this->responseJSON(404, "Destination not found.", NULL);
         }
-        
+
 
     }
 
@@ -119,8 +127,10 @@ class FinalDestinationController extends AbstractController{
             $clue_number = $clues->count();
             foreach ($clues as $clue) {
                 $data = [
+                    "id" => $clue->id,
                     "label" => $clue->label,
-                    "position" => $clue->position
+                    "position" => $clue->position,
+                    "links" => ["self" => DIR."/clues/".$clue->id]
                 ];
                 array_push($clues_tab, $data);
             }
@@ -139,10 +149,14 @@ class FinalDestinationController extends AbstractController{
         try {
             $id = $args['id'];
             $clue = Clue::findOrFail($id);
+            $destination = FinalDestination::findOrFail($clue->destination_id);
             $data = [
                 "label" => $clue->label,
                 "position" => $clue->position,
-                "id_destination" => $clue->destination_id
+                "destination" => [
+                                    "name" => $destination->name,
+                                    "link" => DIR."/destinations/".$destination->id
+                                 ]
             ];
             return $this->responseJSON(200, "OK", $data);
         } catch (Exception $e) {
@@ -156,6 +170,9 @@ class FinalDestinationController extends AbstractController{
             if (!isset($req->getParams()["label"]) ||
             !isset($req->getParams()["position"])) {
                 return $this->responseJSON(400, "Veuillez bien compléter les champs suivants: label, position", NULL);
+            }
+            if($req->getParams()['position'] > 5){
+                return $this->responseJSON(400, "Veuillez choisir une position entre 0 et 5.", NULL);
             }
             $id = $args['id'];
             $destination = FinalDestination::findOrFail($id);
@@ -174,7 +191,7 @@ class FinalDestinationController extends AbstractController{
                 if ($clue->save()) {
                     $status = 200;
                     $message = "OK";
-                    $data = ["Success" => "Ajout de l'indice dans la base de données"];
+                    $data = ["links" => ["self" => DIR."/clues/".$clue->id]];
                 } else {
                     $status = 400;
                     $message = "Bad Request";
@@ -195,27 +212,46 @@ class FinalDestinationController extends AbstractController{
     }
 
 
-    function updateClue($req, $resp, $args, $requestbody){
+    function updateClue($req, $resp, $args){
         try{
-            $id = $args['id'];
-            $clue = Clue::findOrfail($id);
+            $clue = Clue::findOrFail($args['id']);
 
-            foreach($requestbody as $key=>$value){
-                if(in_array($key,$clue->getFillable())){
-                    $clue->$key = filter_var($value, FILTER_SANITIZE_STRING);
-                }else{
-                    $mess[] =  ["Warning" => "Il manque une valeur à $key"];
+            $position = Clue::where("destination_id", $clue->destination_id)->get();
+            $all_pos = [];
+            if (isset($req->getParams()['position'])) {
+                $newPosition = $req->getParams()['position'];
+            }
+
+            if ($clue->position == $newPosition) {
+                $clue->position = $newPosition;
+            }else{
+                foreach ($position as $value) {
+                    if ($value->position == $newPosition) {
+                        $data = ["Erreur" => "Position déjà utilisée"];
+                        return $this->responseJSON(400, "Bad Request", $data);
+                    }else {
+                        $clue->position = $newPosition;
+                    }
                 }
             }
-            $clue->save();
-            if(!empty($mess)){
-                return $this->responseJSON(200, "succès de  la requête", $mess);
-            }else{
-                return $this->responseJSON(204,"No content", NULL);
+
+
+            if(isset($req->getParams()['label'])){
+                $clue->label = $req->getParams()['label'];
+
             }
+
+            $clue->save();
+
+            $data = [
+                "label" => $clue->label,
+                "links" => ["self" => DIR."/clues/".$clue->id]
+            ];
+
+
+            return $this->responseJSON(200, "Success", $data);
         }catch(Exception $e){
-            $mess =  ["Error" => "L'indice $id est introuvable"];
-            return $this->responseJSON(404,"Bad Request", $mess);
+            return $this->responseJSON(404, "Clue not found.", NULL);
         }
     }
 

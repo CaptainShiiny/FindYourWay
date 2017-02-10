@@ -17,7 +17,10 @@ class PlaceController extends AbstractController{
 
       foreach($places as $place){
           $data = [
-                      "name" => $place->label,
+                      "id" => $place->id,
+                      "label" => $place->label,
+                      "latitude"=> $place->latitude,
+                      "longitude"=> $place->longitude,
                       "links" => ["self" => DIR."/places/".$place->id]
                   ];
           array_push($places_tab, $data);
@@ -106,5 +109,6 @@ class PlaceController extends AbstractController{
             return $this->responseJSON(404, "Place not found.", NULL);
         }
     }
+
 
 }
