@@ -23,8 +23,8 @@ $app = new \Slim\App($errorDetails);
 
 $app->add(new \Tuupola\Middleware\Cors([
     "origin" => ["*"],
-    "methods" => ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    "headers.allow" => ["Authorization", "If-Match", "If-Unmodified-Since"],
+    "methods" => ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    "headers.allow" => ["Cache-Control", "Pragma", "Origin", "Authorization", "Content-Type", "X-Requested-With"],
     "headers.expose" => ["Etag"],
     "credentials" => true,
     "cache" => 86400
