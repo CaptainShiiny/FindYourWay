@@ -9,7 +9,8 @@ angular.module('findyourway').directive('map', [
                     if(localStorage.getItem("score") && localStorage.getItem("final_destination")){
                         alert("Félicitations, vous avez gagné !");
                         localStorage.removeItem("final_destination");
-                    }else if(localStorage.getItem("score")){
+                    }
+                    if(localStorage.getItem("score")){
                         Player.updateScore(localStorage.getItem("score"));
                         localStorage.removeItem("score");
                     }

@@ -13,6 +13,9 @@ angular.module("findyourway").directive("player", [
                 scope.findDestination = function(){
                     Player.findDestination();
                     $("#destination_button").hide();
+                },
+                scope.restartGame = function(){
+                    location.reload(true);
                 }
             }
         };

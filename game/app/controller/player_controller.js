@@ -167,7 +167,6 @@ angular.module("findyourway").controller("PlayerController",
         $scope.$watch($scope.destination, function(newValue, oldValue){
             var url = api_url+"/destinations/"+$scope.game.destination_id;
             $http.get(url).then(function(response){
-                console.log(response);
                 var latitude = response.data[1].data.latitude;
                 var longitude = response.data[1].data.longitude;
                 localStorage.setItem("final_destination", response.data[1].data.id)
@@ -176,31 +175,6 @@ angular.module("findyourway").controller("PlayerController",
                 console.log(error);
             });
         });
-
-
-                // $scope.add = function(){
-                //     return Player.add;
-                // }
-                //
-                // $scope.$watch($scope.add, function(newValue, oldValue){
-                //     if(newValue){
-                //         $http.post(api_url+"/players", {
-                //             "pseudo": newValue
-                //         }).then(function(response){
-                //             var id = response.data[1].data.links.self;
-                //             id = id.split("/");
-                //             id = id[id.length-1];
-                //             var token = response.data[1].data.token;
-                //             localStorage.setItem("score", 0);
-                //             localStorage.setItem("token", token);
-                //             var data = {"id": id,"pseudo": newValue, "token": token};
-                //             $scope.player = new Player(data);
-                //             $scope.getRandomDestination(id);
-                //         },function(error){
-                //             console.log(error);
-                //         });
-                //     }
-                // });
 
     }
 
