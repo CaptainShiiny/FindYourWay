@@ -118,7 +118,7 @@ function(Request $req, Response $resp, $args){
 }
 )->add('checkAccessManager');
 
-// On supprime l'indince
+// On supprime l'indice
 $app->delete("/clues/{id}[/]",
 function(Request $req, Response $resp, $args){
     return (new FinalDestinationController($this))->deleteClue($req, $resp, $args);
@@ -208,6 +208,7 @@ $app->get("/players/{id}/games[/]",
     }
 )->add('checkTokenPlayer');
 
+
 //on liste les indices d'une partie d'un joueur
 $app->get("/players/{id}/games/{game_id}/clues[/]",
     function(Request $req, Response $resp, $args){
@@ -221,8 +222,5 @@ $app->put("/players/{id}/games/{game_id}/clues/{clue_id}[/]",
         return (new GameController($this))->modifyClue($req, $resp, $args);
     }
 )->add('checkTokenPlayer');
-
-
-
 
 $app->run();

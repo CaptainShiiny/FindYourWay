@@ -14,6 +14,14 @@ comparaisonDestinationFinale = function(bonneLat, bonneLong, url) {
         //e.latlng.lat et e.latlng.lng représentent la latitude et longitude de l'endroit cliqué
         //bonneLat et bonneLong représente la latitude et longitude de l'endroit à trouver
 
+        /*var villes = [
+        ["Paris", 48.856578, 2.351828],
+        ["Orléans", 47.9025, 1.909],
+        ["Tours", 47.393611, 0.689167],
+        ["Poitiers", 46.581945, 0.336112],
+        ["Bordeaux", 44.837912, -0.579541]
+    ];*/
+
         var rlat1 = Math.PI * bonneLat / 180; // Passage de degrès à radians
         var rlat2 = Math.PI * e.latlng.lat / 180;
         var rtheta = Math.PI * (bonneLong - e.latlng.lng) / 180;
@@ -49,6 +57,20 @@ comparaisonDestinationFinale = function(bonneLat, bonneLong, url) {
             var marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
             alert("Vous êtes à : " + dist + " km de votre destination");
         }
+
+            /* villes.push(["Bordeaux", e.latlng.lat, e.latlng.lng]);
+
+            function pointsArray(items) {
+            	var pointsArray = new Array();
+            	for (var i = 0; i < items.length; i++) {
+            		var item = items[i];
+            		pointsArray.push(new L.LatLng(item[1],item[2]));
+            	}
+            	return pointsArray;
+            }
+            var trajet = new L.Polyline(pointsArray(villes));
+            mymap.addLayer(trajet); */
+
     });
 }
 
@@ -75,5 +97,5 @@ comparaisonLieuIndince = function(bonneLat, bonneLong, indice) {
     });
 }
 
-// comparaisonDestinationFinale(48.853, 2.35);
+//comparaisonDestinationFinale(48.853, 2.35);
 //comparaisonLieuIndince(48.853, 2.35, "Balec");
