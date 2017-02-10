@@ -2,11 +2,11 @@ angular.module("findyourway").controller("ClueController", ["$scope", "$http","C
 
     function($scope, $http, Clue){
 
-        $scope.showClue = function(){
-            return Clue.showClue;
+        $scope.show = function(){
+            return Clue.show;
         }
 
-        $scope.$watch($scope.showClue, function(newValue){
+        $scope.$watch($scope.show, function(newValue){
             if(newValue){
                 var clue_id = newValue[1];
                 url = localStorage.getItem("game_in_progress")+"/clues/"+clue_id;
@@ -17,21 +17,24 @@ angular.module("findyourway").controller("ClueController", ["$scope", "$http","C
                     }
                 }).then(function(response){
                     $scope.getClues();
+                    console.log("indice");
+                  
                 }, function(error){
                     console.log(error);
                 });
             }
         });
 
-        $scope.getClues = function(){
+       $scope.getClues = function(){
             url = localStorage.getItem("game_in_progress")+"/clues";
+            console.log(url);
             token = localStorage.getItem("token");
             $http.get(url, {
                 headers: {
                     "Authorization": token
                 }
             }).then(function(response){
-                console.log(response);
+                //console.log(response);
                 $scope.clues = [];
                 response.data[1].data.forEach(function(data){
                     var newClue = new Clue(data)
@@ -40,7 +43,7 @@ angular.module("findyourway").controller("ClueController", ["$scope", "$http","C
             }, function(error){
                 console.log(error);
             });
-        }
+    }
 
     }
 

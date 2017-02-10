@@ -4,8 +4,10 @@ angular.module("findyourway").service("Clue", ["$http",
             this.name = data.name;
         }
         Clue.showClue = function(clue){
-            Clue.showClue = [this, clue];
+            Clue.show = [this, clue];
         }
 
         return Clue;
-    }]);
+        
+
+}]);
