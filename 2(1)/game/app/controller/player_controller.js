@@ -16,6 +16,7 @@ angular.module("findyourway").controller("PlayerController",
                     id = id.split("/");
                     id = id[id.length-1];
                     var token = response.data[1].data.token;
+                    localStorage.setItem("score", 0);
                     localStorage.setItem("token", token);
                     var data = {"id": id,"pseudo": newValue, "token": token};
                     $scope.player = new Player(data);
