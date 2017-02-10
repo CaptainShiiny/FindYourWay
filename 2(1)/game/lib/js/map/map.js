@@ -7,7 +7,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     id: 'mapbox.streets'
 }).addTo(mymap);
 
-comparaisonDestinationFinale = function(bonneLat, bonneLong, url) {
+comparaisonDestinationFinale = function(bonneLat, bonneLong) {
 
     mymap.off('click');
     // var villes = [];
@@ -52,7 +52,6 @@ comparaisonDestinationFinale = function(bonneLat, bonneLong, url) {
             } else {
                 localStorage.setItem("score", points);
             }
-            localStorage.setItem("score_verify", url);
             return points;
         } else {
             var marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
