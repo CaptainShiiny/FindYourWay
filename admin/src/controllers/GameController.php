@@ -54,7 +54,7 @@ class GameController extends AbstractController{
 
     function updateGame($req, $resp, $args){
         try{
-            $game = Game::findOrFail($args['id']);
+            $game = Game::findOrFail($args['game_id']);
             if(isset($req->getParams()['status'])){
                 $game->status = $req->getParams()['status'];
             }

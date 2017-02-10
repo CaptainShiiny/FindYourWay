@@ -11,6 +11,10 @@ angular.module("findyourway").service("Player",[
             Player.add = pseudo;
         }
 
+        Player.updateScore = function(score){
+            Player.newScore = score;
+        }
+
         return Player;
     }
 ]);

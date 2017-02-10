@@ -19,11 +19,12 @@
     </div>
 </section>
 <section ng-if="game">
-    <div class="alert alert-info text-center">
-        Score: {{game.score}}
+    <div class="alert alert-info">
+        <h4>Score: {{game.score}}</h4>
+        <h4>Indices trouvés:</h4>
         <ul>
             <li ng-repeat="clue in game.clues">
-                Indices trouvés: {{clue}}
+                {{clue.name}}
             </li>
         </ul>
     </div>
