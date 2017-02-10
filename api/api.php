@@ -21,6 +21,15 @@ $conf = ['settings' => ['displayErrorDetails' => true, 'tmpl_dir' => '..\templat
 $errorDetails = new \Slim\Container($conf);
 $app = new \Slim\App($errorDetails);
 
+$app->add(new \Tuupola\Middleware\Cors([
+    "origin" => ["*"],
+    "methods" => ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    "headers.allow" => ["Cache-Control", "Pragma", "Origin", "Authorization", "Content-Type", "X-Requested-With"],
+    "headers.expose" => ["Etag"],
+    "credentials" => true,
+    "cache" => 86400
+]));
+
 // On affiche les destinations finales
 $app->get("/destinations[/]",
 function(Request $req, Response $resp, $args){
@@ -109,7 +118,7 @@ function(Request $req, Response $resp, $args){
 }
 )->add('checkAccessManager');
 
-// On supprime l'indince
+// On supprime l'indice
 $app->delete("/clues/{id}[/]",
 function(Request $req, Response $resp, $args){
     return (new FinalDestinationController($this))->deleteClue($req, $resp, $args);
@@ -199,6 +208,7 @@ $app->get("/players/{id}/games[/]",
     }
 )->add('checkTokenPlayer');
 
+
 //on liste les indices d'une partie d'un joueur
 $app->get("/players/{id}/games/{game_id}/clues[/]",
     function(Request $req, Response $resp, $args){
@@ -212,8 +222,5 @@ $app->put("/players/{id}/games/{game_id}/clues/{clue_id}[/]",
         return (new GameController($this))->modifyClue($req, $resp, $args);
     }
 )->add('checkTokenPlayer');
-
-
-
 
 $app->run();
