@@ -7,14 +7,14 @@
     - Vagrantfile
     - init_apache.sh
 
-### 2. Créer deux sous-répertoires:
+### 2. Créer deux sous-répertoires dans le dossier précédemment crée:
     - www
     - conf
 
-### 3. Editer votre fichiers "hosts" en ajoutant:
-    - 192.168.33.10 www.findyourway.local admin.findyourway.local play.findyourway.local
+### 3. Editer votre fichier "hosts" en ajoutant:
+    - 192.168.33.10 findyourway.local admin.findyourway.local play.findyourway.local
 
-### 4. Faire un "vagrant up" dans le dossier précédemment crée et prendre un café le temps de l'installation
+### 4. Faire un "vagrant up" dans le dossier précédemment crée (à la racine du dossier) et prendre un café le temps de l'installation
 
 ### 5. Dans le sous-répertoire "www/html", cloner le [dépôt git] (https://github.com/CaptainShiiny/FindYourWay.git)
 
@@ -24,9 +24,10 @@
 
 ### 7. Se connecter en ssh sur Vagrant
 
-### 8. Activer (a2ensite) 001-backoffice.conf et 002-game.conf et redémarrer Apache
+### 8. Activer (a2ensite) 001-backoffice.conf et 002-game.conf et redémarrer Apache (le reload ne suffit pas) avec la commance suivante :
+    - sudo service apache2 restart
 
-### 9. Copier le fichier adminer.php dans "www/html" et aller sur adminer (findyourway.local/adminer.php) puis remplir les informations suivantes
+### 9. Copier le fichier adminer.php dans "www/html" et aller sur Adminer (findyourway.local/adminer.php) puis remplir les informations suivantes
     - server : findyourway
     - username : root
     - password : root
