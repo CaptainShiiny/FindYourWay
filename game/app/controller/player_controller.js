@@ -113,12 +113,17 @@ angular.module("findyourway").controller("PlayerController",
                     tab.push(data.id);
                 }
                 response.data[1].data.clues.forEach(function(data){
+                    a = 0;
                     clues_win_tab.forEach(function(t){
                         if(t != data.label){
-                            tab.push(data.id);
+                            a = data.id;
                         }
                     });
+                    if(a != 0){
+                        tab.push(a);
+                    }
                 });
+                console.log(tab);
                 $scope.displayClue(tab[0]);
             }, function(error){
                 console.log(error);
