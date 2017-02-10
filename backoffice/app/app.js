@@ -1,11 +1,6 @@
 angular.module("backoffice", []);
-//var url_api = "http://localhost/LP/FindYourWay/api/api.php";
-// var url_api = "http://127.0.0.1:8080/edsa-lp_cisiie/ateliers/2/api/api.php";
 
- var url_api ="http://localhost/Atelier_2/FindYourWay/api/api.php";
-
-
-// var url_api = "http://findyourway.local/FindYourWay/api/api.php";
+var url_api = "http://findyourway.local/FindYourWay/api/api.php";
 
 // angular.module("backoffice").directive("authentification", ["$http",
 //     function($http){
