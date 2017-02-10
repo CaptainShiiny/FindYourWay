@@ -23,6 +23,7 @@ angular.module("backoffice").service("Clue",["$http",
             Clue.modifyClue = this;
         }
 
+        
         return Clue;
     }
 ]);

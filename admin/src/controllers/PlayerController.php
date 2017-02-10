@@ -15,13 +15,14 @@ class PlayerController extends AbstractController{
     function addPlayer($req, $resp, $args){
 
         try{
-
+            $players = Player::get();
             if(!isset($req->getParams()["pseudo"])){
 
                 return $this->responseJSON(400,"Il manque une valeur au champ pseudo", NULL);
             }
             $player = new Player();
             $player->pseudo = $req->getParams()["pseudo"];
+            
             $player->token = (new \RandomLib\Factory)->getMediumStrengthGenerator()->generateString(32);
             $player->save();
 
