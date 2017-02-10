@@ -107,7 +107,7 @@ class PlayerController extends AbstractController{
                         "pseudo" => $player->pseudo,
                         "links" => ["self" => DIR."/players/".$player->id]
                     ];
-            return $this->responseJSON(200, "Success", $data);
+            return $this->responseJSON(200, "The player has been modify", $data);
         }catch(Exception $e){
             return $this->responseJSON(404, "Player not found.", NULL);
         }
