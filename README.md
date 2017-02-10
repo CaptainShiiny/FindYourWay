@@ -16,7 +16,7 @@
 
 ### 4. Faire un "vagrant up" dans le dossier précédemment crée (à la racine du dossier) et prendre un café le temps de l'installation
 
-### 5. Dans le sous-répertoire "www/html", cloner le [dépôt git] (https://github.com/CaptainShiiny/FindYourWay.git)
+### 5. Dans le sous-répertoire "www/html", copier le dossier FindYourWay ou cloner le [dépôt git] (https://github.com/CaptainShiiny/FindYourWay.git)
 
 ### 6. Copier dans le répertoire "conf/sites-available" les fichiers:
     - 001-backoffice.conf
