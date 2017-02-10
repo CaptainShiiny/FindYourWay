@@ -15,6 +15,13 @@ angular.module("backoffice").directive("destinations", ["Destination", "Clue",
                     Clue.showAllClues(destination);
                     $("#addClue").show();
                     $('#clueTitle').show();
+                },
+                scope.modifyDestination = function(destination){
+                    destination.name = this.new_name || destination.name;
+                    destination.label = this.new_label || destination.label;
+                    destination.latitude = this.new_latitude || destination.latitude;
+                    destination.longitude = this.new_longitude || destination.longitude;
+                    destination.modifyDestination();
                 }
             }
         };

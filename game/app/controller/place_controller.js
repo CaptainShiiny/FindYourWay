@@ -33,13 +33,13 @@ angular.module("findyourway").controller("PlaceController", ["$scope", "$http", 
                     var places_tab = [];
                     for(i = 0; i<randPlaces.length; i++){
                         var info = {};
-                        var clue = response.data[1].data.clues[i].links.self;
                         var id = randPlaces[i].links.self;
+                        id = id.split("/");
+                        id = id[id.length-1];
                         info.latitude = randPlaces[i].latitude;
                         info.longitude = randPlaces[i].longitude;
                         info.label = randPlaces[i].label;
                         info.url = randPlaces[i].links.self;
-                        info.clue = clue;
                         info.id = id;
                         var newPlace = new Place(info);
                         places_tab.push(newPlace);

@@ -19,6 +19,10 @@ angular.module("backoffice").service("Clue",["$http",
             Clue.deleteClue = this;
         }
 
+        Clue.prototype.modifyClue = function(){
+            Clue.modifyClue = this;
+        }
+
         return Clue;
     }
 ]);

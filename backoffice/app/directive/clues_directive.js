@@ -10,6 +10,12 @@ angular.module("backoffice").directive("clues", ["Clue", "Destination",
                 },
                 scope.deleteClue = function(clue){
                     clue.deleteClue();
+                },
+                scope.modifyClue = function(clue){
+                    clue.label = this.new_label || clue.label;
+                    clue.position = this.new_position.name || clue.position;
+                    clue.modifyClue();
+
                 }
             }
         };

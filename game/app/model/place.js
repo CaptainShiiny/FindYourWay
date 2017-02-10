@@ -5,7 +5,6 @@ angular.module("findyourway").service("Place", ["$http",
             this.longitude = data.longitude;
             this.label = data.label;
             this.url = data.url;
-            this.linked_clue = data.clue;
             this.id = data.id;
         }
 

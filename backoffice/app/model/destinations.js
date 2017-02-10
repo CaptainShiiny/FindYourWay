@@ -4,6 +4,9 @@ angular.module("backoffice").service("Destination",["$http",
             this.id = data.id;
             this.name = data.name;
             this.url = data.url;
+            this.latitude = data.latitude;
+            this.longitude = data.longitude;
+            this.label = data.label;
         }
 
         Destination.addDestination = function(values){
@@ -12,6 +15,10 @@ angular.module("backoffice").service("Destination",["$http",
 
         Destination.prototype.deleteDestination = function(){
             Destination.deleteDestination = this;
+        }
+
+        Destination.prototype.modifyDestination = function(){
+            Destination.modifyDestination = this;
         }
 
         return Destination;

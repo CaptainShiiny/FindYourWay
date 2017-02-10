@@ -5,6 +5,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
         $scope.options = [{name:1},{name:2},{name:3},{name:4},{name:5}];
         $scope.position = $scope.options[0];
 
+
         //On affiche tous les indices
         $scope.showClues = function(){
             return Clue.showClues;
@@ -24,6 +25,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
                         info.url = data.links.self;
                         var newClue = new Clue(info);
                         $scope.clues.push(newClue);
+                        $scope.new_position = $scope.options[info.position-1];
                     });
                 },function(error){
                     console.log(error);
@@ -48,6 +50,25 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
                     $scope.position = "";
                 },function(error){
                     console.log(error);
+                });
+            }
+        });
+
+        // On modifie une destination
+        $scope.modifyClue = function(){
+            return Clue.modifyClue;
+        }
+        $scope.$watch($scope.modifyClue, function(newValue, oldValue){
+            if (newValue) {
+                var url = url_api+"/clues/"+newValue.id;
+                $http.put(url, {
+                    "label": newValue['label'],
+                    "position": newValue['position']
+                }).then(function(response){
+                    $scope.refresh();
+                    $scope.showModifyFormClue = false;
+                },function(error){
+                    alert(error.data[1].data.Erreur);
                 });
             }
         });
@@ -84,6 +105,7 @@ angular.module("backoffice").controller("CluesController",["$scope", "$http", "C
                             info.url = data.links.self;
                             var newClue = new Clue(info);
                             $scope.clues.push(newClue);
+                            $scope.new_position = $scope.options[info.position-1];
                         });
                     },function(error){
                         console.log(error);

@@ -4,6 +4,7 @@ namespace src\controllers;
 
 use src\models\Game as Game;
 use src\models\Player as Player;
+use src\models\Clue as Clue;
 use src\models\FinalDestination as FinalDestination;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use src\utils\Authentification ;
@@ -20,6 +21,12 @@ class GameController extends AbstractController{
             $game->score = 0;
             $game->status = "créée";
             $game->save();
+
+            $clues = Clue::where("destination_id", $args["destination_id"])->get();
+
+            foreach($clues as $clue){
+                $game->clue_game()->attach($clue->id, ["status" => 0]);
+            }
 
             $data = [
                         "links" => ["self" => DIR."/players/".$game->player_id."/games/".$game->id]
@@ -42,21 +49,17 @@ class GameController extends AbstractController{
 
             return $this->responseJSON(404, "Not found", NULL);
 
-
         }
     }
 
     function updateGame($req, $resp, $args){
         try{
             $game = Game::findOrFail($args['id']);
-            if(isset($req->getParams()['longitude'])){
-                $game->longitude = $req->getParams()['longitude'];
+            if(isset($req->getParams()['status'])){
+                $game->status = $req->getParams()['status'];
             }
-            if(isset($req->getParams()['latitude'])){
-                $game->latitude = $req->getParams()['latitude'];
-            }
-            if(isset($req->getParams()['label'])){
-                $game->label = $req->getParams()['label'];
+            if(isset($req->getParams()['score'])){
+                $game->score = $req->getParams()['score'];
             }
             $game->save();
             $destination = FinalDestination::findOrFail($game->destination_id);
@@ -115,6 +118,44 @@ class GameController extends AbstractController{
 
         }catch(Exception $e){
             return $this->responseJSON(404, "Player not found.", NULL);
+        }
+    }
+
+    function cluesFromGame($req, $resp, $args){
+        try{
+            $player = Player::findOrFail($args["id"]);
+            $game = Game::findOrFail($args["game_id"]);
+            $clues = $game->clue_game()->where("status", "1")->get();
+
+            $clues_tab = [];
+            foreach($clues as $clue){
+                $data = [
+                            "name" => $clue->label,
+                            "link" => ["self" => DIR."/clues/".$clue->id]
+                        ];
+                array_push($clues_tab, $data);
+            }
+
+            return $this->responseJSON(200, "ok", $clues_tab);
+
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Player or Game not found.", NULL);
+        }
+    }
+
+    function modifyClue($req, $resp, $args){
+        try{
+
+            $player = Player::findOrFail($args['id']);
+            $game = Game::findOrFail($args['game_id']);
+
+            $game->clue_game()->detach($args["clue_id"]);
+            $game->clue_game()->attach($args["clue_id"], ["status" => 1]);
+
+            return $this->responseJSON(200, "ok", "Success");
+
+        }catch(Exception $e){
+            return $this->responseJSON(404, "Player or Game not found.", NULL);
         }
     }
 
