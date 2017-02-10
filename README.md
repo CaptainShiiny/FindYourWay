@@ -24,12 +24,5 @@ Pour un bon fonctionnement de l'application, nous vous recommandons de le lancer
     username : root
     password : root
     database :
-10) Créer la base de donnée "findyourway" et importer le fichier sql se trouvant dans "admin/bd"
-
+10) Importer le fichier sql se trouvant dans "admin/bd"
 11) Mettre le fichier conf.ini dans le dossier "admin/conf"
-
-==========================================
-NOTE
-==========================================
-Pour que l'application marche il faut passer par le lien "http://findyourway.local/FindYourWay/game/"
-Néanmoins, la backoffice est accessible à l'adresse "admin.findyourway.local"
