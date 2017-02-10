@@ -1,16 +1,20 @@
-angular.module("findyourway").service("Player",["$http",
+angular.module("findyourway").service("Player",[
+    "$http",
     function($http){
         var Player = function(data){
+            this.id = data.id;
             this.pseudo = data.pseudo;
             this.token = data.token;
-            this.game_in_progress = data.game_in_progress;
         }
-        Player.add = function(pseudo){
+
+        Player.addPlayer = function(pseudo){
             Player.add = pseudo;
         }
-        Player.modifyScore = function(score){
-            Player.updateScore = [this, score];
+
+        Player.updateScore = function(score){
+            Player.newScore = score;
         }
+
         return Player;
     }
 ]);

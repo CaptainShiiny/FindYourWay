@@ -2,67 +2,59 @@
 
 <html lang="fr">
 
-  <head>
-      <meta charset="UTF-8">
-      <link rel="stylesheet" href="lib/js/angular-1.6.1/angular-csp.css">
-      <link rel="stylesheet" href="lib/css/css/css/style.css">
-      <link rel="stylesheet" href="lib/css/font-awesome/css/font-awesome.min.css">
-      <link rel="stylesheet" href="lib/css/bootstrap/stylesheets/styles.css">
+    <head>
+        <meta charset="utf-8">
+        <title>FindYourWay</title>
 
-      <!-- leaflet -->
-      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-	  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+        <!-- libraries -->
+        <link rel="stylesheet" href="lib/css/bootstrap/stylesheets/styles.css">
+        <link rel="stylesheet" href="lib/css/css/css/style.css">
+        <script src="lib/js/jquery/jquery.js"></script>
+        <script src="lib/js/angular-1.6.1/angular.min.js"></script>
 
-      <title>FindYourWay</title>
-      <!-- library -->
-      <script src="lib/js/jquery.js"></script>
-      <script src="lib/js/angular-1.6.1/angular.min.js"></script>
-      <!-- app repertory -->
-      <script src="app/app.js"></script>
-      <!-- directive -->
-      <script src="app/directive/game_directive.js"></script>
-      <script src="app/directive/map_directive.js"></script>
-      <script src="app/directive/place_directive.js"></script>
-      <script src="app/directive/clue_directive.js"></script>
-      <!-- model -->
-      <script src="app/model/player.js"></script>
-      <script src="app/model/place.js"></script>
-      <script src="app/model/map.js"></script>
-      <script src="app/model/clue.js"></script>
-      <!-- controller -->
-      <script src="app/controller/player_controller.js"></script>
-      <script src="app/controller/place_controller.js"></script>
-      <script src="app/controller/map_controller.js"></script>
-      <script src="app/controller/clue_controller.js"></script>
+          <!-- leaflet -->
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    	  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 
+        <script src="app/app.js"></script>
 
-  </head>
+        <!-- directive -->
+        <script src="app/directive/player_directive.js"></script>
+        <script src="app/directive/place_directive.js"></script>
+        <script src="app/directive/map_directive.js"></script>
 
-  <body class="container" ng-app="findyourway">
-      <header class="row">
-          <h1>Find<span>Your</span>Way</h1>
-      </header>
-      <section class="row">
-          <section class="col-sm-4" ng-controller="PlayerController">
-              <div ng-if="player" class="alert alert-info">
-                 <strong>Bonjour {{player.pseudo}},</strong>
-                 <ul>
-                     <li>Score: {{player.game_in_progress.score}}</li>
-                     <li>Indices trouvés: 0</li>
-                 </ul>
-              </div>
-              <div id="displayClue" class="alert alert-info" ng-controller="ClueController">
-                  <clue />
-              </div>
-          </section>
-          <section ng-controller="PlaceController" class="col-sm-8">
-              <place />
-          </section>
-      </section>
-      <section class="row" ng-controller="MapController">
-          <game></game>
-      </section>
-      <map></map>
-  </body>
+        <!-- model -->
+        <script src="app/model/player.js"></script>
+        <script src="app/model/game.js"></script>
+        <script src="app/model/place.js"></script>
+        <script src="app/model/map.js"></script>
+
+        <!-- controller -->
+        <script src="app/controller/player_controller.js"></script>
+        <script src="app/controller/place_controller.js"></script>
+
+    </head>
+
+    <body class="container" ng-app="findyourway">
+
+        <header class="row">
+            <h1>Find<span>Your</span>Way</h1>
+        </header>
+
+        <section class="row content">
+            <section class="row">
+                <section class="col-sm-4">
+                    <player ng-controller="PlayerController" />
+                </section>
+                <section class="col-sm-8">
+                    <place ng-controller="PlaceController" />
+                </section>
+            </section>
+            <section class="row">
+                <map />
+            </section>
+        </section>
+
+    </body>
 
 </html>

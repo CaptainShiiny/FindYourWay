@@ -1,13 +1,14 @@
-angular.module("findyourway").controller("PlaceController", ["$scope", "$http", "Place",
+angular.module("findyourway").controller("PlaceController",
+["$scope", "$http", "Place",
 
     function($scope, $http, Place){
 
-
-        $scope.randPlaces = function(){
-            return Place.randPlaces;
+        $scope.select = function(){
+            return Place.select;
         }
-        $scope.$watch($scope.randPlaces, function(newValue){
-            if(newValue[1] == "true"){
+
+        $scope.$watch($scope.select, function(newValue, oldValue){
+            if(newValue){
                 var url = api_url+"/places";
                 $http.get(url).then(function(response){
                     var places_tab = response.data[1].data.places;
@@ -15,40 +16,18 @@ angular.module("findyourway").controller("PlaceController", ["$scope", "$http", 
 
                     var randPlaces = [];
                     for(var i=0; i<5; i++){
-                        randPlaces.push(places_tab[Math.floor(Math.random()*(number_places-1))]);
+                        place = places_tab[Math.floor(Math.random()*(number_places-1))];
+                        data = {"id": place.id, "label": place.label, "latitude": place.latitude, "longitude": place.longitude};
+                        var newPlace = new Place(data);
+                        randPlaces.push(newPlace);
                     }
-                    $scope.linkClues(randPlaces);
+                    $scope.places = randPlaces;
                 },function(error){
                     console.log(error);
                 });
-
-            };
-
+            }
         });
 
-        $scope.linkClues = function(randPlaces){
-            if(randPlaces){
-                url = localStorage.getItem("clues_game_in_progress")+"/clues";
-                $http.get(url, {}).then(function(response){
-                    var places_tab = [];
-                    for(i = 0; i<randPlaces.length; i++){
-                        var info = {};
-                        var id = randPlaces[i].links.self;
-                        id = id.split("/");
-                        id = id[id.length-1];
-                        info.latitude = randPlaces[i].latitude;
-                        info.longitude = randPlaces[i].longitude;
-                        info.label = randPlaces[i].label;
-                        info.url = randPlaces[i].links.self;
-                        info.id = id;
-                        var newPlace = new Place(info);
-                        places_tab.push(newPlace);
-                    }
-                    $scope.places = places_tab;
-                    console.log($scope.places);
-                });
-            }
-        }
+    }
 
-    }]
-);
+]);

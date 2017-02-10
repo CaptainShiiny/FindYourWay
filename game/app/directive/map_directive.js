@@ -1,19 +1,15 @@
-angular.module('findyourway').directive('map', ["Player","Clue",
-    function(Player, Clue) {
+angular.module('findyourway').directive('map', [
+    "Player",
+    function(Player) {
         return {
             restrict: 'E',
             templateUrl: 'app/templates/map.html',
-            link: function(scope, element, attrs){
+            link: function(scope, elements, attrs){
                 scope.clickOnMap = function(){
-                    if(localStorage.getItem("score_verify")){
-                        if(localStorage.getItem("to_guess")){
-                            Clue.showClue(localStorage.getItem("to_guess"));
-                        }
-                        Player.modifyScore(localStorage.getItem("score"));
+                    if(localStorage.getItem("score")){
+                        Player.updateScore(localStorage.getItem("score"));
+                        localStorage.removeItem("score");
                     }
-                    localStorage.removeItem("score_verify");
-                    localStorage.removeItem("score");
-                    localStorage.removeItem("to_guess");
                 }
             }
         };

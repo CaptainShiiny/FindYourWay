@@ -1,16 +1,25 @@
 angular.module("findyourway").directive("place", [
-    "Map",
-    function(Map){
+    "Place",
+    function(Place){
         return{
             restrict: "E",
             templateUrl: "app/templates/place.html",
-            link: function(scope, element, attrs){
+            link: function(scope, elements, attrs){
                 scope.propose = function(place){
-                    localStorage.setItem("to_guess", $(this)[0].place.id);
                     $("#indication").show();
                     $("#indication").text("Où se trouve \""+place.label+"\"?");
-                    comparaisonDestinationFinale(place.latitude, place.longitude, place.url);
+                    comparaisonDestinationFinale(place.latitude, place.longitude);
+                    
+                    scope.delete(place);
+                    
                 }
+                scope.delete = function(p){
+                        var tab_places = scope.places; 
+                        var index = tab_places.indexOf(p);
+                        tab_places.splice(index,1);
+
+                }
+                
             }
         };
     }
