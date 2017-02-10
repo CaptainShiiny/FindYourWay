@@ -24,7 +24,7 @@
 
 ### 7. Se connecter en ssh sur Vagrant
 
-### 8. Activer (a2ensite) 001-backoffice.conf et 002-game.conf et redémarrer Apache (le reload ne suffit pas) avec la commance suivante :
+### 8. Activer (a2ensite) 001-backoffice.conf et 002-game.conf et redémarrer Apache (le reload ne suffit pas) avec la commande suivante :
     - sudo service apache2 restart
 
 ### 9. Copier le fichier adminer.php dans "www/html" et aller sur Adminer (findyourway.local/adminer.php) puis remplir les informations suivantes
