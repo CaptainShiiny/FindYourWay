@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
+-- version 4.5.5.1
 -- http://www.phpmyadmin.net
 --
--- Client :  localhost
--- Généré le :  Ven 10 Février 2017 à 15:41
--- Version du serveur :  5.7.17-0ubuntu0.16.04.1
--- Version de PHP :  7.0.13-0ubuntu0.16.04.1
+-- Client :  127.0.0.1
+-- Généré le :  Ven 10 Février 2017 à 21:43
+-- Version du serveur :  5.7.11
+-- Version de PHP :  7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `findyourway`
 --
-CREATE DATABASE IF NOT EXISTS `findyourway` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `findyourway`;
 
 -- --------------------------------------------------------
 
@@ -59,6 +57,30 @@ INSERT INTO `clue` (`id`, `label`, `destination_id`, `position`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `clue_game`
+--
+
+CREATE TABLE `clue_game` (
+  `id` int(11) NOT NULL,
+  `clue_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `clue_game`
+--
+
+INSERT INTO `clue_game` (`id`, `clue_id`, `game_id`, `status`) VALUES
+(6, 20, 17, 1),
+(7, 21, 17, 1),
+(8, 22, 17, 1),
+(9, 23, 17, 1),
+(10, 24, 17, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `final_destination`
 --
 
@@ -92,6 +114,14 @@ CREATE TABLE `game` (
   `destination_id` int(11) NOT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `game`
+--
+
+INSERT INTO `game` (`id`, `score`, `player_id`, `destination_id`, `status`) VALUES
+(16, 0, 16, 5, 'créée'),
+(17, 2, 17, 6, 'créée');
 
 -- --------------------------------------------------------
 
@@ -145,6 +175,14 @@ CREATE TABLE `player` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
+-- Contenu de la table `player`
+--
+
+INSERT INTO `player` (`id`, `pseudo`, `token`) VALUES
+(16, 'Jean', 'Gu6KmgwZA/HCG2plaAU3s9CbUV7lFvrM'),
+(17, 'Franck', 'gx2GEK5iNFRqCzW8hDvkAc41vkYH7w9E');
+
+--
 -- Index pour les tables exportées
 --
 
@@ -152,6 +190,12 @@ CREATE TABLE `player` (
 -- Index pour la table `clue`
 --
 ALTER TABLE `clue`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `clue_game`
+--
+ALTER TABLE `clue_game`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -188,6 +232,11 @@ ALTER TABLE `player`
 ALTER TABLE `clue`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
+-- AUTO_INCREMENT pour la table `clue_game`
+--
+ALTER TABLE `clue_game`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
 -- AUTO_INCREMENT pour la table `final_destination`
 --
 ALTER TABLE `final_destination`
@@ -196,7 +245,7 @@ ALTER TABLE `final_destination`
 -- AUTO_INCREMENT pour la table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT pour la table `place`
 --
@@ -206,7 +255,7 @@ ALTER TABLE `place`
 -- AUTO_INCREMENT pour la table `player`
 --
 ALTER TABLE `player`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
