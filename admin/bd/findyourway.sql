@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
+-- version 4.5.4.1deb2ubuntu2
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Ven 10 Février 2017 à 21:43
--- Version du serveur :  5.7.11
--- Version de PHP :  7.0.4
+-- Client :  localhost
+-- Généré le :  Ven 10 Février 2017 à 23:43
+-- Version du serveur :  5.7.17-0ubuntu0.16.04.1
+-- Version de PHP :  7.0.13-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `findyourway`
 --
+CREATE DATABASE IF NOT EXISTS `findyourway` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `findyourway`;
 
 -- --------------------------------------------------------
 
@@ -50,7 +52,7 @@ INSERT INTO `clue` (`id`, `label`, `destination_id`, `position`) VALUES
 (18, 'Lieu de culte', 5, 4),
 (20, 'Grand Est', 6, 1),
 (21, 'Alsace', 6, 2),
-(22, 'Conseil Régional de l\'Alsace', 6, 3),
+(22, 'Préfecture du Haut Rhin', 6, 3),
 (23, 'Aéroport', 6, 4),
 (24, 'Sa jumelle se trouve a New York', 6, 5);
 
