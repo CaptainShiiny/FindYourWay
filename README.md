@@ -48,3 +48,7 @@ Pour accèder au backoffice (admin.findyourway.local) :
 
     - login     : admin
     - password : pass
+
+Pour jouer au jeu : play.findyourway.local
+
+La documentation se trouve dans "documentation/doc/index.html"
