@@ -32,9 +32,7 @@ comparaisonDestinationFinale = function(bonneLat, bonneLong) {
 
 
         if (dist < 50) {
-            var marker = L.marker([bonneLat, bonneLong], {
-                color: 'red'
-            }).addTo(mymap);
+            var marker = L.marker([bonneLat, bonneLong]).addTo(mymap);
             if (dist < 10)
                 var points = 10;
             else if (dist < 20)

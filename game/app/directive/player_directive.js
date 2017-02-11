@@ -12,6 +12,8 @@ angular.module("findyourway").directive("player", [
                 },
                 scope.findDestination = function(){
                     Player.findDestination();
+                    $("#indication").show();
+                    $("#indication").text("Où se trouve la destination finale?");
                     $("#destination_button").hide();
                 },
                 scope.restartGame = function(){
