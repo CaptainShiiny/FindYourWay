@@ -1,7 +1,7 @@
 var mymap = L.map('mapid').setView([46.7167, 2.5167], 13);
 // var bonneLat = 48.853;  // En attendant de pouvoir générer des coordonnées aléatoires
 // var bonneLong = 2.35;   // En attendant de pouvoir générer des coordonnées aléatoires
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 6,
     minZoom: 6,
     id: 'mapbox.streets'
